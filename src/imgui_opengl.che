@@ -1,0 +1,57 @@
+
+#lib("./lib/imgui_opengl_bindings.lib")
+#lib("./lib/imgui.lib")
+
+import std.alloca
+
+use import imgui
+
+#export_scope
+
+ImGui_ImplOpenGL3_Init :: (_glsl_version: ^char8) -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplOpenGL3_Init(^result, _glsl_version)
+    return result
+}
+ImGui_ImplOpenGL3_Shutdown :: () {
+    __c__ImGui_ImplOpenGL3_Shutdown()
+}
+ImGui_ImplOpenGL3_NewFrame :: () {
+    __c__ImGui_ImplOpenGL3_NewFrame()
+}
+ImGui_ImplOpenGL3_RenderDrawData :: (_draw_data: ^mut ImDrawData) {
+    __c__ImGui_ImplOpenGL3_RenderDrawData(_draw_data)
+}
+ImGui_ImplOpenGL3_CreateFontsTexture :: () -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplOpenGL3_CreateFontsTexture(^result)
+    return result
+}
+ImGui_ImplOpenGL3_DestroyFontsTexture :: () {
+    __c__ImGui_ImplOpenGL3_DestroyFontsTexture()
+}
+ImGui_ImplOpenGL3_CreateDeviceObjects :: () -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplOpenGL3_CreateDeviceObjects(^result)
+    return result
+}
+ImGui_ImplOpenGL3_DestroyDeviceObjects :: () {
+    __c__ImGui_ImplOpenGL3_DestroyDeviceObjects()
+}
+__security_cookie : uintptr_t #extern
+EmptyString : [1]char8 #extern
+
+// ==========================================================
+// ==========================================================
+// ==========================================================
+
+#file_scope
+
+__c__ImGui_ImplOpenGL3_Init :: (ret: ^mut bool, _glsl_version: ^char8);
+__c__ImGui_ImplOpenGL3_Shutdown :: ();
+__c__ImGui_ImplOpenGL3_NewFrame :: ();
+__c__ImGui_ImplOpenGL3_RenderDrawData :: (_draw_data: ^mut ImDrawData);
+__c__ImGui_ImplOpenGL3_CreateFontsTexture :: (ret: ^mut bool);
+__c__ImGui_ImplOpenGL3_DestroyFontsTexture :: ();
+__c__ImGui_ImplOpenGL3_CreateDeviceObjects :: (ret: ^mut bool);
+__c__ImGui_ImplOpenGL3_DestroyDeviceObjects :: ();

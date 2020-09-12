@@ -6,6 +6,10 @@ param (
 
     [Parameter()]
     [bool]
+    $OpenGL = $False,
+
+    [Parameter()]
+    [bool]
     $CompileImgui = $False
 )
 
@@ -40,4 +44,11 @@ if ($Vulkan) {
     &clang++ -c "./int/imgui_vulkan.cpp" -o "./int/imgui_vulkan_bindings.o" "-I$imgui_dir" "-I$vulkan_dir"
     &llvm-lib "/out:./int/imgui_vulkan_bindings.lib" "./int/imgui_vulkan_bindings.o"
     Copy-Item "./int/imgui_vulkan_bindings.lib" "./src/lib/imgui_vulkan_bindings.lib" -Force
+}
+
+if ($OpenGL) {
+    Write-Host "Compiling imgui_opengl C wrapper"
+    &clang++ -c "./int/imgui_opengl.cpp" -o "./int/imgui_opengl_bindings.o" "-I$imgui_dir" "-I$glad_dir"
+    &llvm-lib "/out:./int/imgui_opengl_bindings.lib" "./int/imgui_opengl_bindings.o"
+    Copy-Item "./int/imgui_opengl_bindings.lib" "./src/lib/imgui_opengl_bindings.lib" -Force
 }

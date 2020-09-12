@@ -5851,36 +5851,6 @@ ImFontAtlasBuildMultiplyCalcLookupTable :: (_out_table: ^mut u8, _in_multiply_fa
 ImFontAtlasBuildMultiplyRectAlpha8 :: (_table: ^u8, _pixels: ^mut u8, _x: i32, _y: i32, _w: i32, _h: i32, _stride: i32) {
     __c__ImFontAtlasBuildMultiplyRectAlpha8(_table, _pixels, _x, _y, _w, _h, _stride)
 }
-ImGui_ImplOpenGL3_Init :: (_glsl_version: ^char8) -> bool {
-    mut result : bool = default
-    __c__ImGui_ImplOpenGL3_Init(^result, _glsl_version)
-    return result
-}
-ImGui_ImplOpenGL3_Shutdown :: () {
-    __c__ImGui_ImplOpenGL3_Shutdown()
-}
-ImGui_ImplOpenGL3_NewFrame :: () {
-    __c__ImGui_ImplOpenGL3_NewFrame()
-}
-ImGui_ImplOpenGL3_RenderDrawData :: (_draw_data: ^mut ImDrawData) {
-    __c__ImGui_ImplOpenGL3_RenderDrawData(_draw_data)
-}
-ImGui_ImplOpenGL3_CreateFontsTexture :: () -> bool {
-    mut result : bool = default
-    __c__ImGui_ImplOpenGL3_CreateFontsTexture(^result)
-    return result
-}
-ImGui_ImplOpenGL3_DestroyFontsTexture :: () {
-    __c__ImGui_ImplOpenGL3_DestroyFontsTexture()
-}
-ImGui_ImplOpenGL3_CreateDeviceObjects :: () -> bool {
-    mut result : bool = default
-    __c__ImGui_ImplOpenGL3_CreateDeviceObjects(^result)
-    return result
-}
-ImGui_ImplOpenGL3_DestroyDeviceObjects :: () {
-    __c__ImGui_ImplOpenGL3_DestroyDeviceObjects()
-}
 ImGui_ImplGlfw_InitForOpenGL :: (_window: ^mut GLFWwindow, _install_callbacks: bool) -> bool {
     mut result : bool = default
     __c__ImGui_ImplGlfw_InitForOpenGL(^result, _window, _install_callbacks)
@@ -6877,14 +6847,6 @@ __c__ImFontAtlasBuildFinish :: (_atlas: ^mut ImFontAtlas);
 __c__ImFontAtlasBuildRender1bppRectFromString :: (_atlas: ^mut ImFontAtlas, _atlas_x: i32, _atlas_y: i32, _w: i32, _h: i32, _in_str: ^char8, _in_marker_char: char8, _in_marker_pixel_value: u8);
 __c__ImFontAtlasBuildMultiplyCalcLookupTable :: (_out_table: ^mut u8, _in_multiply_factor: f32);
 __c__ImFontAtlasBuildMultiplyRectAlpha8 :: (_table: ^u8, _pixels: ^mut u8, _x: i32, _y: i32, _w: i32, _h: i32, _stride: i32);
-__c__ImGui_ImplOpenGL3_Init :: (ret: ^mut bool, _glsl_version: ^char8);
-__c__ImGui_ImplOpenGL3_Shutdown :: ();
-__c__ImGui_ImplOpenGL3_NewFrame :: ();
-__c__ImGui_ImplOpenGL3_RenderDrawData :: (_draw_data: ^mut ImDrawData);
-__c__ImGui_ImplOpenGL3_CreateFontsTexture :: (ret: ^mut bool);
-__c__ImGui_ImplOpenGL3_DestroyFontsTexture :: ();
-__c__ImGui_ImplOpenGL3_CreateDeviceObjects :: (ret: ^mut bool);
-__c__ImGui_ImplOpenGL3_DestroyDeviceObjects :: ();
 __c__ImGui_ImplGlfw_InitForOpenGL :: (ret: ^mut bool, _window: ^mut GLFWwindow, _install_callbacks: bool);
 __c__ImGui_ImplGlfw_InitForVulkan :: (ret: ^mut bool, _window: ^mut GLFWwindow, _install_callbacks: bool);
 __c__ImGui_ImplGlfw_Shutdown :: ();

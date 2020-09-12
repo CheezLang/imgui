@@ -2870,30 +2870,6 @@ extern "C" void __c__ImFontAtlasBuildMultiplyCalcLookupTable(uint8_t * _out_tabl
 extern "C" void __c__ImFontAtlasBuildMultiplyRectAlpha8(const uint8_t * _table, uint8_t * _pixels, int32_t _x, int32_t _y, int32_t _w, int32_t _h, int32_t _stride) {
     ImFontAtlasBuildMultiplyRectAlpha8(_table, _pixels, _x, _y, _w, _h, _stride);
 }
-extern "C" void __c__ImGui_ImplOpenGL3_Init(bool *ret, const char * _glsl_version) {
-    *ret = (bool )ImGui_ImplOpenGL3_Init(_glsl_version);
-}
-extern "C" void __c__ImGui_ImplOpenGL3_Shutdown() {
-    ImGui_ImplOpenGL3_Shutdown();
-}
-extern "C" void __c__ImGui_ImplOpenGL3_NewFrame() {
-    ImGui_ImplOpenGL3_NewFrame();
-}
-extern "C" void __c__ImGui_ImplOpenGL3_RenderDrawData(ImDrawData * _draw_data) {
-    ImGui_ImplOpenGL3_RenderDrawData(_draw_data);
-}
-extern "C" void __c__ImGui_ImplOpenGL3_CreateFontsTexture(bool *ret) {
-    *ret = (bool )ImGui_ImplOpenGL3_CreateFontsTexture();
-}
-extern "C" void __c__ImGui_ImplOpenGL3_DestroyFontsTexture() {
-    ImGui_ImplOpenGL3_DestroyFontsTexture();
-}
-extern "C" void __c__ImGui_ImplOpenGL3_CreateDeviceObjects(bool *ret) {
-    *ret = (bool )ImGui_ImplOpenGL3_CreateDeviceObjects();
-}
-extern "C" void __c__ImGui_ImplOpenGL3_DestroyDeviceObjects() {
-    ImGui_ImplOpenGL3_DestroyDeviceObjects();
-}
 extern "C" void __c__ImGui_ImplGlfw_InitForOpenGL(bool *ret, GLFWwindow * _window, bool _install_callbacks) {
     *ret = (bool )ImGui_ImplGlfw_InitForOpenGL(_window, _install_callbacks);
 }

@@ -410,7 +410,7 @@ create_dock_space :: () {
 
 
 begin_frame :: () {
-    ImGui.ImGui_ImplOpenGL3_NewFrame()
+    ImGui_ImplOpenGL3_NewFrame()
     ImGui.ImGui_ImplGlfw_NewFrame()
     ImGui.NewFrame()
 }
@@ -421,7 +421,7 @@ end_frame :: () {
     // rendering
     ImGui.EndFrame()
     ImGui.Render()
-    ImGui.ImGui_ImplOpenGL3_RenderDrawData(ImGui.GetDrawData())
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui.GetDrawData())
 
     if ImGui.ImGuiConfigFlags.ViewportsEnable is in io.ConfigFlags {
         backup_current_context := glfwGetCurrentContext()
@@ -453,7 +453,7 @@ init_imgui :: (window: ^GLFWwindow) -> bool {
         io.println("[ERROR] ImGui.ImGui_ImplGlfw_InitForOpenGL failed")
         return false
     }
-    if !ImGui.ImGui_ImplOpenGL3_Init("#version 130") {
+    if !ImGui_ImplOpenGL3_Init("#version 130") {
         io.println("[ERROR] ImGui.ImGui_ImplOpenGL3_Init failed")
         return false
     }
@@ -462,7 +462,7 @@ init_imgui :: (window: ^GLFWwindow) -> bool {
 }
 
 shutdown_imgui :: () {
-    ImGui.ImGui_ImplOpenGL3_Shutdown()
+    ImGui_ImplOpenGL3_Shutdown()
     ImGui.ImGui_ImplGlfw_Shutdown()
     ImGui.DestroyContext(null)
 }

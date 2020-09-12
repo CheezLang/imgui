@@ -2,7 +2,11 @@
 param (
     [Parameter()]
     [bool]
-    $Vulkan
+    $Vulkan,
+
+    [Parameter()]
+    [bool]
+    $OpenGL
 )
 
 New-Item -ItemType Directory -Path "int" -Force
@@ -17,4 +21,12 @@ if ($Vulkan) {
     Write-Host ""
     Copy-Item "./int/imgui_vulkan.che" "./src/imgui_vulkan.che" -Force
 }
-./compile.ps1 -Vulkan $Vulkan
+
+if ($OpenGL) {
+    Write-Host "generating imgui_opengl bindings"
+    &"../../../CheezLang/CheezCBindingGenerator.exe" imgui_opengl.lua "./int"
+    Write-Host ""
+    Copy-Item "./int/imgui_opengl.che" "./src/imgui_opengl.che" -Force
+}
+
+./compile.ps1 -Vulkan $Vulkan -OpenGL $OpenGL
