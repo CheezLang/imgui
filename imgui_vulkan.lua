@@ -25,6 +25,8 @@ import std.alloca
 use import imgui
 use import vulkan
 
+uint32_t :: u32
+
 #export_scope
 ]]
 end
@@ -45,6 +47,10 @@ function on_struct(decl, name)
     if name:find("ImGui_") == 1 then
         return false, nil
     end
+    return true, nil
+end
+
+function on_global_variable(decl, name)
     return true, nil
 end
 

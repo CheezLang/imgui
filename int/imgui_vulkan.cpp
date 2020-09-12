@@ -27,10 +27,10 @@ extern "C" void __c__ImGui_ImplVulkan_CreateFontsTexture(bool *ret, VkCommandBuf
 extern "C" void __c__ImGui_ImplVulkan_DestroyFontUploadObjects() {
     ImGui_ImplVulkan_DestroyFontUploadObjects();
 }
-extern "C" void __c__ImGui_ImplVulkan_SetMinImageCount(int32_t _min_image_count) {
+extern "C" void __c__ImGui_ImplVulkan_SetMinImageCount(uint32_t _min_image_count) {
     ImGui_ImplVulkan_SetMinImageCount(_min_image_count);
 }
-extern "C" void __c__ImGui_ImplVulkanH_CreateOrResizeWindow(VkInstance_T * _instance, VkPhysicalDevice_T * _physical_device, VkDevice_T * _device, ImGui_ImplVulkanH_Window * _wnd, int32_t _queue_family, VkAllocationCallbacks * _allocator, int32_t _w, int32_t _h, int32_t _min_image_count) {
+extern "C" void __c__ImGui_ImplVulkanH_CreateOrResizeWindow(VkInstance_T * _instance, VkPhysicalDevice_T * _physical_device, VkDevice_T * _device, ImGui_ImplVulkanH_Window * _wnd, uint32_t _queue_family, VkAllocationCallbacks * _allocator, int32_t _w, int32_t _h, uint32_t _min_image_count) {
     ImGui_ImplVulkanH_CreateOrResizeWindow(_instance, _physical_device, _device, _wnd, _queue_family, _allocator, _w, _h, _min_image_count);
 }
 extern "C" void __c__ImGui_ImplVulkanH_DestroyWindow(VkInstance_T * _instance, VkDevice_T * _device, ImGui_ImplVulkanH_Window * _wnd, VkAllocationCallbacks * _allocator) {

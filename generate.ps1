@@ -10,7 +10,11 @@ param (
 
     [Parameter()]
     [bool]
-    $OpenGL
+    $OpenGL,
+
+    [Parameter()]
+    [bool]
+    $CompileImgui = $False
 )
 
 New-Item -ItemType Directory -Path "int" -Force
@@ -40,4 +44,4 @@ if ($OpenGL) {
     Copy-Item "./int/imgui_opengl.che" "./src/imgui_opengl.che" -Force
 }
 
-./compile.ps1 -GLFW $GLFW -Vulkan $Vulkan -OpenGL $OpenGL
+./compile.ps1 -GLFW $GLFW -Vulkan $Vulkan -OpenGL $OpenGL -CompileImgui $CompileImgui

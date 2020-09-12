@@ -7,19 +7,21 @@ import std.alloca
 use import imgui
 use import vulkan
 
+uint32_t :: u32
+
 #export_scope
 
 ImGui_ImplVulkan_InitInfo :: struct #copy {
     Instance : VkInstance = default
     PhysicalDevice : VkPhysicalDevice = default
     Device : VkDevice = default
-    QueueFamily : i32 = default
-    Queue : i32 = default
-    PipelineCache : i32 = default
-    DescriptorPool : i32 = default
-    MinImageCount : i32 = default
-    ImageCount : i32 = default
-    MSAASamples : i32 = default
+    QueueFamily : uint32_t = default
+    Queue : VkQueue = default
+    PipelineCache : VkPipelineCache = default
+    DescriptorPool : VkDescriptorPool = default
+    MinImageCount : uint32_t = default
+    ImageCount : uint32_t = default
+    MSAASamples : VkSampleCountFlagBits = default
     Allocator : ^mut VkAllocationCallbacks = default
     CheckVkResultFn : fn(i32) -> void = default
 }
@@ -38,17 +40,17 @@ ImGui_ImplVulkanH_FrameSemaphores :: struct #copy {
 ImGui_ImplVulkanH_Window :: struct #copy {
     Width : i32 = default
     Height : i32 = default
-    Swapchain : i32 = default
+    Swapchain : VkSwapchainKHR = default
     Surface : VkSurfaceKHR = default
     SurfaceFormat : VkSurfaceFormatKHR = default
     PresentMode : VkPresentModeKHR = default
     RenderPass : VkRenderPass = default
     Pipeline : VkPipeline = default
     ClearEnable : bool = default
-    ClearValue : i32 = default
-    FrameIndex : i32 = default
-    ImageCount : i32 = default
-    SemaphoreIndex : i32 = default
+    ClearValue : VkClearValue = default
+    FrameIndex : uint32_t = default
+    ImageCount : uint32_t = default
+    SemaphoreIndex : uint32_t = default
     Frames : ^mut ImGui_ImplVulkanH_Frame = default
     FrameSemaphores : ^mut ImGui_ImplVulkanH_FrameSemaphores = default
 }
@@ -81,10 +83,10 @@ ImGui_ImplVulkan_CreateFontsTexture :: (_command_buffer: VkCommandBuffer) -> boo
 ImGui_ImplVulkan_DestroyFontUploadObjects :: () {
     __c__ImGui_ImplVulkan_DestroyFontUploadObjects()
 }
-ImGui_ImplVulkan_SetMinImageCount :: (_min_image_count: i32) {
+ImGui_ImplVulkan_SetMinImageCount :: (_min_image_count: uint32_t) {
     __c__ImGui_ImplVulkan_SetMinImageCount(_min_image_count)
 }
-ImGui_ImplVulkanH_CreateOrResizeWindow :: (_instance: VkInstance, _physical_device: VkPhysicalDevice, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _queue_family: i32, _allocator: ^mut VkAllocationCallbacks, _w: i32, _h: i32, _min_image_count: i32) {
+ImGui_ImplVulkanH_CreateOrResizeWindow :: (_instance: VkInstance, _physical_device: VkPhysicalDevice, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _queue_family: uint32_t, _allocator: ^mut VkAllocationCallbacks, _w: i32, _h: i32, _min_image_count: uint32_t) {
     __c__ImGui_ImplVulkanH_CreateOrResizeWindow(_instance, _physical_device, _device, _wnd, _queue_family, _allocator, _w, _h, _min_image_count)
 }
 ImGui_ImplVulkanH_DestroyWindow :: (_instance: VkInstance, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _allocator: ^mut VkAllocationCallbacks) {
@@ -119,8 +121,8 @@ __c__ImGui_ImplVulkan_NewFrame :: ();
 __c__ImGui_ImplVulkan_RenderDrawData :: (_draw_data: ^mut ImDrawData, _command_buffer: VkCommandBuffer, _pipeline: VkPipeline);
 __c__ImGui_ImplVulkan_CreateFontsTexture :: (ret: ^mut bool, _command_buffer: VkCommandBuffer);
 __c__ImGui_ImplVulkan_DestroyFontUploadObjects :: ();
-__c__ImGui_ImplVulkan_SetMinImageCount :: (_min_image_count: i32);
-__c__ImGui_ImplVulkanH_CreateOrResizeWindow :: (_instance: VkInstance, _physical_device: VkPhysicalDevice, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _queue_family: i32, _allocator: ^mut VkAllocationCallbacks, _w: i32, _h: i32, _min_image_count: i32);
+__c__ImGui_ImplVulkan_SetMinImageCount :: (_min_image_count: uint32_t);
+__c__ImGui_ImplVulkanH_CreateOrResizeWindow :: (_instance: VkInstance, _physical_device: VkPhysicalDevice, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _queue_family: uint32_t, _allocator: ^mut VkAllocationCallbacks, _w: i32, _h: i32, _min_image_count: uint32_t);
 __c__ImGui_ImplVulkanH_DestroyWindow :: (_instance: VkInstance, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _allocator: ^mut VkAllocationCallbacks);
 __c__ImGui_ImplVulkanH_SelectSurfaceFormat :: (ret: ^mut VkSurfaceFormatKHR, _physical_device: VkPhysicalDevice, _surface: VkSurfaceKHR, _request_formats: ^mut VkFormat, _request_formats_count: i32, _request_color_space: VkColorSpaceKHR);
 __c__ImGui_ImplVulkanH_SelectPresentMode :: (ret: ^mut VkPresentModeKHR, _physical_device: VkPhysicalDevice, _surface: VkSurfaceKHR, _request_modes: ^mut VkPresentModeKHR, _request_modes_count: i32);

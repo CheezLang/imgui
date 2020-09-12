@@ -22,7 +22,6 @@ $vulkan_dir = "D:\VulkanSDK\1.2.148.1\Include"
 $glfw_dir = "D:\dev\libs\glfw-3.3.2.bin.WIN64\include"
 $glad_dir = "F:\Programming\CppLibs\glad\include"
 
-
 if ($CompileImgui) {
     Write-Host "Compiling ImGui"
     Push-Location $imgui_dir
@@ -36,6 +35,7 @@ if ($CompileImgui) {
     &clang++ -c "examples/imgui_impl_vulkan.cpp" -o "./int/imgui_impl_vulkan.o" -I. "-I$vulkan_dir" "-I$glfw_dir" "-I$glad_dir"
     &llvm-lib "/out:./int/imgui.lib" "./int/imgui_impl_glfw.o" "./int/imgui_impl_opengl3.o" "./int/imgui_impl_vulkan.o" "./int/imgui_widgets.o" "./int/imgui.o" "./int/imgui_demo.o" "./int/imgui_draw.o"
     Pop-Location
+    Copy-Item "$imgui_dir/int/imgui.lib" "./src/lib/imgui.lib"
 }
 
 Write-Host "Compiling imgui C wrapper"
