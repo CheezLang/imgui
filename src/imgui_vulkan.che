@@ -1,0 +1,127 @@
+
+#lib("./lib/imgui_vulkan_bindings.lib")
+#lib("./lib/imgui.lib")
+
+import std.alloca
+
+use import imgui
+use import vulkan
+
+#export_scope
+
+ImGui_ImplVulkan_InitInfo :: struct #copy {
+    Instance : VkInstance = default
+    PhysicalDevice : VkPhysicalDevice = default
+    Device : VkDevice = default
+    QueueFamily : i32 = default
+    Queue : i32 = default
+    PipelineCache : i32 = default
+    DescriptorPool : i32 = default
+    MinImageCount : i32 = default
+    ImageCount : i32 = default
+    MSAASamples : i32 = default
+    Allocator : ^mut VkAllocationCallbacks = default
+    CheckVkResultFn : fn(i32) -> void = default
+}
+ImGui_ImplVulkanH_Frame :: struct #copy {
+    CommandPool : i32 = default
+    CommandBuffer : VkCommandBuffer = default
+    Fence : i32 = default
+    Backbuffer : i32 = default
+    BackbufferView : i32 = default
+    Framebuffer : i32 = default
+}
+ImGui_ImplVulkanH_FrameSemaphores :: struct #copy {
+    ImageAcquiredSemaphore : i32 = default
+    RenderCompleteSemaphore : i32 = default
+}
+ImGui_ImplVulkanH_Window :: struct #copy {
+    Width : i32 = default
+    Height : i32 = default
+    Swapchain : i32 = default
+    Surface : VkSurfaceKHR = default
+    SurfaceFormat : VkSurfaceFormatKHR = default
+    PresentMode : VkPresentModeKHR = default
+    RenderPass : VkRenderPass = default
+    Pipeline : VkPipeline = default
+    ClearEnable : bool = default
+    ClearValue : i32 = default
+    FrameIndex : i32 = default
+    ImageCount : i32 = default
+    SemaphoreIndex : i32 = default
+    Frames : ^mut ImGui_ImplVulkanH_Frame = default
+    FrameSemaphores : ^mut ImGui_ImplVulkanH_FrameSemaphores = default
+}
+impl ImGui_ImplVulkanH_Window {
+    new :: () -> ImGui_ImplVulkanH_Window {
+        result : ImGui_ImplVulkanH_Window = default
+        __c__ImGui_ImplVulkanH_Window_new_15(^mut result)
+        return result
+    }
+}
+ImGui_ImplVulkan_Init :: (_info: ^mut ImGui_ImplVulkan_InitInfo, _render_pass: VkRenderPass) -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplVulkan_Init(^result, _info, _render_pass)
+    return result
+}
+ImGui_ImplVulkan_Shutdown :: () {
+    __c__ImGui_ImplVulkan_Shutdown()
+}
+ImGui_ImplVulkan_NewFrame :: () {
+    __c__ImGui_ImplVulkan_NewFrame()
+}
+ImGui_ImplVulkan_RenderDrawData :: (_draw_data: ^mut ImDrawData, _command_buffer: VkCommandBuffer, _pipeline: VkPipeline) {
+    __c__ImGui_ImplVulkan_RenderDrawData(_draw_data, _command_buffer, _pipeline)
+}
+ImGui_ImplVulkan_CreateFontsTexture :: (_command_buffer: VkCommandBuffer) -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplVulkan_CreateFontsTexture(^result, _command_buffer)
+    return result
+}
+ImGui_ImplVulkan_DestroyFontUploadObjects :: () {
+    __c__ImGui_ImplVulkan_DestroyFontUploadObjects()
+}
+ImGui_ImplVulkan_SetMinImageCount :: (_min_image_count: i32) {
+    __c__ImGui_ImplVulkan_SetMinImageCount(_min_image_count)
+}
+ImGui_ImplVulkanH_CreateOrResizeWindow :: (_instance: VkInstance, _physical_device: VkPhysicalDevice, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _queue_family: i32, _allocator: ^mut VkAllocationCallbacks, _w: i32, _h: i32, _min_image_count: i32) {
+    __c__ImGui_ImplVulkanH_CreateOrResizeWindow(_instance, _physical_device, _device, _wnd, _queue_family, _allocator, _w, _h, _min_image_count)
+}
+ImGui_ImplVulkanH_DestroyWindow :: (_instance: VkInstance, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _allocator: ^mut VkAllocationCallbacks) {
+    __c__ImGui_ImplVulkanH_DestroyWindow(_instance, _device, _wnd, _allocator)
+}
+ImGui_ImplVulkanH_SelectSurfaceFormat :: (_physical_device: VkPhysicalDevice, _surface: VkSurfaceKHR, _request_formats: ^mut VkFormat, _request_formats_count: i32, _request_color_space: VkColorSpaceKHR) -> VkSurfaceFormatKHR {
+    mut result : VkSurfaceFormatKHR = default
+    __c__ImGui_ImplVulkanH_SelectSurfaceFormat(^result, _physical_device, _surface, _request_formats, _request_formats_count, _request_color_space)
+    return result
+}
+ImGui_ImplVulkanH_SelectPresentMode :: (_physical_device: VkPhysicalDevice, _surface: VkSurfaceKHR, _request_modes: ^mut VkPresentModeKHR, _request_modes_count: i32) -> VkPresentModeKHR {
+    mut result : VkPresentModeKHR = default
+    __c__ImGui_ImplVulkanH_SelectPresentMode(^result, _physical_device, _surface, _request_modes, _request_modes_count)
+    return result
+}
+ImGui_ImplVulkanH_GetMinImageCountFromPresentMode :: (_present_mode: VkPresentModeKHR) -> i32 {
+    mut result : i32 = default
+    __c__ImGui_ImplVulkanH_GetMinImageCountFromPresentMode(^result, _present_mode)
+    return result
+}
+
+// ==========================================================
+// ==========================================================
+// ==========================================================
+
+#file_scope
+
+__c__ImGui_ImplVulkanH_Window_new_15 :: (self: ^mut ImGui_ImplVulkanH_Window);
+__c__ImGui_ImplVulkan_Init :: (ret: ^mut bool, _info: ^mut ImGui_ImplVulkan_InitInfo, _render_pass: VkRenderPass);
+__c__ImGui_ImplVulkan_Shutdown :: ();
+__c__ImGui_ImplVulkan_NewFrame :: ();
+__c__ImGui_ImplVulkan_RenderDrawData :: (_draw_data: ^mut ImDrawData, _command_buffer: VkCommandBuffer, _pipeline: VkPipeline);
+__c__ImGui_ImplVulkan_CreateFontsTexture :: (ret: ^mut bool, _command_buffer: VkCommandBuffer);
+__c__ImGui_ImplVulkan_DestroyFontUploadObjects :: ();
+__c__ImGui_ImplVulkan_SetMinImageCount :: (_min_image_count: i32);
+__c__ImGui_ImplVulkanH_CreateOrResizeWindow :: (_instance: VkInstance, _physical_device: VkPhysicalDevice, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _queue_family: i32, _allocator: ^mut VkAllocationCallbacks, _w: i32, _h: i32, _min_image_count: i32);
+__c__ImGui_ImplVulkanH_DestroyWindow :: (_instance: VkInstance, _device: VkDevice, _wnd: ^mut ImGui_ImplVulkanH_Window, _allocator: ^mut VkAllocationCallbacks);
+__c__ImGui_ImplVulkanH_SelectSurfaceFormat :: (ret: ^mut VkSurfaceFormatKHR, _physical_device: VkPhysicalDevice, _surface: VkSurfaceKHR, _request_formats: ^mut VkFormat, _request_formats_count: i32, _request_color_space: VkColorSpaceKHR);
+__c__ImGui_ImplVulkanH_SelectPresentMode :: (ret: ^mut VkPresentModeKHR, _physical_device: VkPhysicalDevice, _surface: VkSurfaceKHR, _request_modes: ^mut VkPresentModeKHR, _request_modes_count: i32);
+__c__ImGui_ImplVulkanH_GetMinImageCountFromPresentMode :: (ret: ^mut i32, _present_mode: VkPresentModeKHR);

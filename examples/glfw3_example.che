@@ -10,6 +10,8 @@ C   :: import std.c
 use import glfw
 use import opengl.glad_binding
 ImGui :: import imgui
+use import imgui_vulkan
+use import imgui_opengl
 
 #export_scope
 
