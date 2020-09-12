@@ -1,0 +1,57 @@
+
+#lib("./lib/imgui_glfw_bindings.lib")
+#lib("./lib/imgui.lib")
+
+import std.alloca
+
+use import glfw
+
+#export_scope
+
+ImGui_ImplGlfw_InitForOpenGL :: (_window: ^mut GLFWwindow, _install_callbacks: bool) -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplGlfw_InitForOpenGL(^result, _window, _install_callbacks)
+    return result
+}
+ImGui_ImplGlfw_InitForVulkan :: (_window: ^mut GLFWwindow, _install_callbacks: bool) -> bool {
+    mut result : bool = default
+    __c__ImGui_ImplGlfw_InitForVulkan(^result, _window, _install_callbacks)
+    return result
+}
+ImGui_ImplGlfw_Shutdown :: () {
+    __c__ImGui_ImplGlfw_Shutdown()
+}
+ImGui_ImplGlfw_NewFrame :: () {
+    __c__ImGui_ImplGlfw_NewFrame()
+}
+ImGui_ImplGlfw_MouseButtonCallback :: (_window: ^mut GLFWwindow, _button: i32, _action: i32, _mods: i32) {
+    __c__ImGui_ImplGlfw_MouseButtonCallback(_window, _button, _action, _mods)
+}
+ImGui_ImplGlfw_ScrollCallback :: (_window: ^mut GLFWwindow, _xoffset: f64, _yoffset: f64) {
+    __c__ImGui_ImplGlfw_ScrollCallback(_window, _xoffset, _yoffset)
+}
+ImGui_ImplGlfw_KeyCallback :: (_window: ^mut GLFWwindow, _key: i32, _scancode: i32, _action: i32, _mods: i32) {
+    __c__ImGui_ImplGlfw_KeyCallback(_window, _key, _scancode, _action, _mods)
+}
+ImGui_ImplGlfw_CharCallback :: (_window: ^mut GLFWwindow, _c: u32) {
+    __c__ImGui_ImplGlfw_CharCallback(_window, _c)
+}
+ImGui_ImplGlfw_MonitorCallback :: (_monitor: ^mut GLFWmonitor, _event: i32) {
+    __c__ImGui_ImplGlfw_MonitorCallback(_monitor, _event)
+}
+
+// ==========================================================
+// ==========================================================
+// ==========================================================
+
+#file_scope
+
+__c__ImGui_ImplGlfw_InitForOpenGL :: (ret: ^mut bool, _window: ^mut GLFWwindow, _install_callbacks: bool);
+__c__ImGui_ImplGlfw_InitForVulkan :: (ret: ^mut bool, _window: ^mut GLFWwindow, _install_callbacks: bool);
+__c__ImGui_ImplGlfw_Shutdown :: ();
+__c__ImGui_ImplGlfw_NewFrame :: ();
+__c__ImGui_ImplGlfw_MouseButtonCallback :: (_window: ^mut GLFWwindow, _button: i32, _action: i32, _mods: i32);
+__c__ImGui_ImplGlfw_ScrollCallback :: (_window: ^mut GLFWwindow, _xoffset: f64, _yoffset: f64);
+__c__ImGui_ImplGlfw_KeyCallback :: (_window: ^mut GLFWwindow, _key: i32, _scancode: i32, _action: i32, _mods: i32);
+__c__ImGui_ImplGlfw_CharCallback :: (_window: ^mut GLFWwindow, _c: u32);
+__c__ImGui_ImplGlfw_MonitorCallback :: (_monitor: ^mut GLFWmonitor, _event: i32);

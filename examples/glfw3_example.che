@@ -12,6 +12,7 @@ use import opengl.glad_binding
 ImGui :: import imgui
 use import imgui_vulkan
 use import imgui_opengl
+use import imgui_glfw
 
 #export_scope
 
@@ -411,7 +412,7 @@ create_dock_space :: () {
 
 begin_frame :: () {
     ImGui_ImplOpenGL3_NewFrame()
-    ImGui.ImGui_ImplGlfw_NewFrame()
+    ImGui_ImplGlfw_NewFrame()
     ImGui.NewFrame()
 }
 
@@ -449,7 +450,7 @@ init_imgui :: (window: ^GLFWwindow) -> bool {
     style.WindowRounding = 0.0
 
     //
-    if !ImGui.ImGui_ImplGlfw_InitForOpenGL(cast window, true) {
+    if !ImGui_ImplGlfw_InitForOpenGL(cast window, true) {
         io.println("[ERROR] ImGui.ImGui_ImplGlfw_InitForOpenGL failed")
         return false
     }
@@ -463,6 +464,6 @@ init_imgui :: (window: ^GLFWwindow) -> bool {
 
 shutdown_imgui :: () {
     ImGui_ImplOpenGL3_Shutdown()
-    ImGui.ImGui_ImplGlfw_Shutdown()
+    ImGui_ImplGlfw_Shutdown()
     ImGui.DestroyContext(null)
 }

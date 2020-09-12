@@ -1,5 +1,5 @@
-loadfile("D:\\dev\\Cheez\\Examples\\libraries\\imgui\\config")
--- require("config")
+-- loadfile("D:\\dev\\Cheez\\Examples\\libraries\\imgui\\config")
+require("config")
 
 source_file = "imgui_vulkan_binding_source.cpp"
 
@@ -49,14 +49,8 @@ function on_struct(decl, name)
 end
 
 function on_function(decl, name)
-    if name:find("_") == 1 then
-        -- doesn't start with glfw*, so don't emit anything
-        return true, nil
+    if name:find("ImGui_") == 1 then
+        return false, nil
     end
-
-    -- if exclude_functions[name] then
-    --     return true, nil
-    -- end
-    
-    return false, nil
+    return true, nil
 end

@@ -5851,37 +5851,6 @@ ImFontAtlasBuildMultiplyCalcLookupTable :: (_out_table: ^mut u8, _in_multiply_fa
 ImFontAtlasBuildMultiplyRectAlpha8 :: (_table: ^u8, _pixels: ^mut u8, _x: i32, _y: i32, _w: i32, _h: i32, _stride: i32) {
     __c__ImFontAtlasBuildMultiplyRectAlpha8(_table, _pixels, _x, _y, _w, _h, _stride)
 }
-ImGui_ImplGlfw_InitForOpenGL :: (_window: ^mut GLFWwindow, _install_callbacks: bool) -> bool {
-    mut result : bool = default
-    __c__ImGui_ImplGlfw_InitForOpenGL(^result, _window, _install_callbacks)
-    return result
-}
-ImGui_ImplGlfw_InitForVulkan :: (_window: ^mut GLFWwindow, _install_callbacks: bool) -> bool {
-    mut result : bool = default
-    __c__ImGui_ImplGlfw_InitForVulkan(^result, _window, _install_callbacks)
-    return result
-}
-ImGui_ImplGlfw_Shutdown :: () {
-    __c__ImGui_ImplGlfw_Shutdown()
-}
-ImGui_ImplGlfw_NewFrame :: () {
-    __c__ImGui_ImplGlfw_NewFrame()
-}
-ImGui_ImplGlfw_MouseButtonCallback :: (_window: ^mut GLFWwindow, _button: i32, _action: i32, _mods: i32) {
-    __c__ImGui_ImplGlfw_MouseButtonCallback(_window, _button, _action, _mods)
-}
-ImGui_ImplGlfw_ScrollCallback :: (_window: ^mut GLFWwindow, _xoffset: f64, _yoffset: f64) {
-    __c__ImGui_ImplGlfw_ScrollCallback(_window, _xoffset, _yoffset)
-}
-ImGui_ImplGlfw_KeyCallback :: (_window: ^mut GLFWwindow, _key: i32, _scancode: i32, _action: i32, _mods: i32) {
-    __c__ImGui_ImplGlfw_KeyCallback(_window, _key, _scancode, _action, _mods)
-}
-ImGui_ImplGlfw_CharCallback :: (_window: ^mut GLFWwindow, _c: u32) {
-    __c__ImGui_ImplGlfw_CharCallback(_window, _c)
-}
-ImGui_ImplGlfw_MonitorCallback :: (_monitor: ^mut GLFWmonitor, _event: i32) {
-    __c__ImGui_ImplGlfw_MonitorCallback(_monitor, _event)
-}
 __security_cookie : uintptr_t #extern
 EmptyString : [1]char8 #extern
 GImGui : ^mut ImGuiContext #extern
@@ -6847,12 +6816,3 @@ __c__ImFontAtlasBuildFinish :: (_atlas: ^mut ImFontAtlas);
 __c__ImFontAtlasBuildRender1bppRectFromString :: (_atlas: ^mut ImFontAtlas, _atlas_x: i32, _atlas_y: i32, _w: i32, _h: i32, _in_str: ^char8, _in_marker_char: char8, _in_marker_pixel_value: u8);
 __c__ImFontAtlasBuildMultiplyCalcLookupTable :: (_out_table: ^mut u8, _in_multiply_factor: f32);
 __c__ImFontAtlasBuildMultiplyRectAlpha8 :: (_table: ^u8, _pixels: ^mut u8, _x: i32, _y: i32, _w: i32, _h: i32, _stride: i32);
-__c__ImGui_ImplGlfw_InitForOpenGL :: (ret: ^mut bool, _window: ^mut GLFWwindow, _install_callbacks: bool);
-__c__ImGui_ImplGlfw_InitForVulkan :: (ret: ^mut bool, _window: ^mut GLFWwindow, _install_callbacks: bool);
-__c__ImGui_ImplGlfw_Shutdown :: ();
-__c__ImGui_ImplGlfw_NewFrame :: ();
-__c__ImGui_ImplGlfw_MouseButtonCallback :: (_window: ^mut GLFWwindow, _button: i32, _action: i32, _mods: i32);
-__c__ImGui_ImplGlfw_ScrollCallback :: (_window: ^mut GLFWwindow, _xoffset: f64, _yoffset: f64);
-__c__ImGui_ImplGlfw_KeyCallback :: (_window: ^mut GLFWwindow, _key: i32, _scancode: i32, _action: i32, _mods: i32);
-__c__ImGui_ImplGlfw_CharCallback :: (_window: ^mut GLFWwindow, _c: u32);
-__c__ImGui_ImplGlfw_MonitorCallback :: (_monitor: ^mut GLFWmonitor, _event: i32);

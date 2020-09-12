@@ -2,6 +2,10 @@
 param (
     [Parameter()]
     [bool]
+    $GLFW,
+    
+    [Parameter()]
+    [bool]
     $Vulkan,
 
     [Parameter()]
@@ -14,6 +18,13 @@ New-Item -ItemType Directory -Path "int" -Force
 &"../../../CheezLang/CheezCBindingGenerator.exe" imgui.lua "./int"
 Write-Host ""
 Copy-Item "./int/imgui.che" "./src/imgui.che" -Force
+
+if ($GLFW) {
+    Write-Host "generating imgui_glfw bindings"
+    &"../../../CheezLang/CheezCBindingGenerator.exe" imgui_glfw.lua "./int"
+    Write-Host ""
+    Copy-Item "./int/imgui_glfw.che" "./src/imgui_glfw.che" -Force
+}
 
 if ($Vulkan) {
     Write-Host "generating imgui_vulkan bindings"
@@ -29,4 +40,4 @@ if ($OpenGL) {
     Copy-Item "./int/imgui_opengl.che" "./src/imgui_opengl.che" -Force
 }
 
-./compile.ps1 -Vulkan $Vulkan -OpenGL $OpenGL
+./compile.ps1 -GLFW $GLFW -Vulkan $Vulkan -OpenGL $OpenGL

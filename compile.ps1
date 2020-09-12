@@ -2,6 +2,10 @@
 param (
     [Parameter()]
     [bool]
+    $GLFW,
+
+    [Parameter()]
+    [bool]
     $Vulkan = $False,
 
     [Parameter()]
@@ -38,6 +42,13 @@ Write-Host "Compiling imgui C wrapper"
 &clang++ -c "./int/imgui.cpp" -o "./int/imgui_bindings.o" "-I$imgui_dir" "-I$vulkan_dir" "-I$glfw_dir" "-I$glad_dir"
 &llvm-lib "/out:./int/imgui_bindings.lib" "./int/imgui_bindings.o"
 Copy-Item "./int/imgui_bindings.lib" "./src/lib/imgui_bindings.lib" -Force
+
+if ($GLFW) {
+    Write-Host "Compiling imgui_glfw C wrapper"
+    &clang++ -c "./int/imgui_glfw.cpp" -o "./int/imgui_glfw_bindings.o" "-I$imgui_dir" "-I$glfw_dir"
+    &llvm-lib "/out:./int/imgui_glfw_bindings.lib" "./int/imgui_glfw_bindings.o"
+    Copy-Item "./int/imgui_glfw_bindings.lib" "./src/lib/imgui_glfw_bindings.lib" -Force
+}
 
 if ($Vulkan) {
     Write-Host "Compiling imgui_vulkan C wrapper"

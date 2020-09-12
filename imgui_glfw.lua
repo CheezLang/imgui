@@ -1,7 +1,7 @@
 -- loadfile("D:\\dev\\Cheez\\Examples\\libraries\\imgui\\config")
 require("config")
 
-source_file = "imgui_opengl_binding_source.cpp"
+source_file = "imgui_glfw_binding_source.cpp"
 
 function prepend_to_cpp()
     return [[
@@ -9,7 +9,7 @@ function prepend_to_cpp()
 #pragma GCC diagnostic ignored "-Wformat-security"
 
 #define DONT_DEFINE_TYPES
-#include "../imgui_opengl_binding_source.cpp"
+#include "../imgui_glfw_binding_source.cpp"
 
 
 ]]
@@ -17,12 +17,12 @@ end
 
 function prepend_to_cheez()
     return [[
-#lib("./lib/imgui_opengl_bindings.lib")
+#lib("./lib/imgui_glfw_bindings.lib")
 #lib("./lib/imgui.lib")
 
 import std.alloca
 
-use import imgui
+use import glfw
 
 #export_scope
 ]]
