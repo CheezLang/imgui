@@ -1,5 +1,9 @@
 #include <memory>
-#include "imgui_binding_all.cpp"
+#include "../imgui_binding_source.cpp"
+#pragma GCC diagnostic ignored "-Wformat-security"
+
+using ImGuiTextRange = ImGuiTextFilter::ImGuiTextRange;
+using ImGuiStoragePair = ImGuiStorage::ImGuiStoragePair;
 
 extern "C" void __c__ImVec2_new_2(ImVec2* self) {
     new (self) ImVec2();
@@ -13,22 +17,25 @@ extern "C" void __c__ImVec4_new_4(ImVec4* self) {
 extern "C" void __c__ImVec4_new_5(ImVec4* self, float __x, float __y, float __z, float __w) {
     new (self) ImVec4(__x, __y, __z, __w);
 }
-extern "C" void __c__ImGuiStyle_new_35(ImGuiStyle* self) {
+extern "C" void __c__ImGuiStyle_new_39(ImGuiStyle* self) {
     new (self) ImGuiStyle();
 }
-extern "C" void __c__ImGuiStyle_ScaleAllSizes_36(ImGuiStyle* self, float _scale_factor) {
+extern "C" void __c__ImGuiStyle_ScaleAllSizes_40(ImGuiStyle* self, float _scale_factor) {
     self->ScaleAllSizes(_scale_factor);
 }
-extern "C" void __c__ImGuiIO_AddInputCharacter_46(ImGuiIO* self, uint32_t _c) {
+extern "C" void __c__ImGuiIO_AddInputCharacter_53(ImGuiIO* self, uint32_t _c) {
     self->AddInputCharacter(_c);
 }
-extern "C" void __c__ImGuiIO_AddInputCharactersUTF8_47(ImGuiIO* self, char * _str) {
+extern "C" void __c__ImGuiIO_AddInputCharacterUTF16_54(ImGuiIO* self, uint16_t _c) {
+    self->AddInputCharacterUTF16(_c);
+}
+extern "C" void __c__ImGuiIO_AddInputCharactersUTF8_55(ImGuiIO* self, const char * _str) {
     self->AddInputCharactersUTF8(_str);
 }
-extern "C" void __c__ImGuiIO_ClearInputCharacters_48(ImGuiIO* self) {
+extern "C" void __c__ImGuiIO_ClearInputCharacters_56(ImGuiIO* self) {
     self->ClearInputCharacters();
 }
-extern "C" void __c__ImGuiIO_new_80(ImGuiIO* self) {
+extern "C" void __c__ImGuiIO_new_91(ImGuiIO* self) {
     new (self) ImGuiIO();
 }
 extern "C" void __c__ImGuiInputTextCallbackData_new_12(ImGuiInputTextCallbackData* self) {
@@ -37,11 +44,20 @@ extern "C" void __c__ImGuiInputTextCallbackData_new_12(ImGuiInputTextCallbackDat
 extern "C" void __c__ImGuiInputTextCallbackData_DeleteChars_13(ImGuiInputTextCallbackData* self, int32_t _pos, int32_t _bytes_count) {
     self->DeleteChars(_pos, _bytes_count);
 }
-extern "C" void __c__ImGuiInputTextCallbackData_InsertChars_14(ImGuiInputTextCallbackData* self, int32_t _pos, char * _text, char * _text_end) {
+extern "C" void __c__ImGuiInputTextCallbackData_InsertChars_14(ImGuiInputTextCallbackData* self, int32_t _pos, const char * _text, const char * _text_end) {
     self->InsertChars(_pos, _text, _text_end);
 }
-extern "C" void __c__ImGuiInputTextCallbackData_HasSelection_15(ImGuiInputTextCallbackData* self, bool *ret) {
+extern "C" void __c__ImGuiInputTextCallbackData_SelectAll_15(ImGuiInputTextCallbackData* self) {
+    self->SelectAll();
+}
+extern "C" void __c__ImGuiInputTextCallbackData_ClearSelection_16(ImGuiInputTextCallbackData* self) {
+    self->ClearSelection();
+}
+extern "C" void __c__ImGuiInputTextCallbackData_HasSelection_17(ImGuiInputTextCallbackData* self, bool *ret) {
     *ret = (bool )self->HasSelection();
+}
+extern "C" void __c__ImGuiWindowClass_new_8(ImGuiWindowClass* self) {
+    new (self) ImGuiWindowClass();
 }
 extern "C" void __c__ImGuiPayload_new_8(ImGuiPayload* self) {
     new (self) ImGuiPayload();
@@ -49,7 +65,7 @@ extern "C" void __c__ImGuiPayload_new_8(ImGuiPayload* self) {
 extern "C" void __c__ImGuiPayload_Clear_9(ImGuiPayload* self) {
     self->Clear();
 }
-extern "C" void __c__ImGuiPayload_IsDataType_10(ImGuiPayload* self, bool *ret, char * _type) {
+extern "C" void __c__ImGuiPayload_IsDataType_10(ImGuiPayload* self, bool *ret, const char * _type) {
     *ret = (bool )self->IsDataType(_type);
 }
 extern "C" void __c__ImGuiPayload_IsPreview_11(ImGuiPayload* self, bool *ret) {
@@ -61,13 +77,13 @@ extern "C" void __c__ImGuiPayload_IsDelivery_12(ImGuiPayload* self, bool *ret) {
 extern "C" void __c__ImGuiOnceUponAFrame_new_0(ImGuiOnceUponAFrame* self) {
     new (self) ImGuiOnceUponAFrame();
 }
-extern "C" void __c__ImGuiTextFilter_new_0(ImGuiTextFilter* self, char * _default_filter) {
+extern "C" void __c__ImGuiTextFilter_new_0(ImGuiTextFilter* self, const char * _default_filter) {
     new (self) ImGuiTextFilter(_default_filter);
 }
-extern "C" void __c__ImGuiTextFilter_Draw_1(ImGuiTextFilter* self, bool *ret, char * _label, float _width) {
+extern "C" void __c__ImGuiTextFilter_Draw_1(ImGuiTextFilter* self, bool *ret, const char * _label, float _width) {
     *ret = (bool )self->Draw(_label, _width);
 }
-extern "C" void __c__ImGuiTextFilter_PassFilter_2(ImGuiTextFilter* self, bool *ret, char * _text, char * _text_end) {
+extern "C" void __c__ImGuiTextFilter_PassFilter_2(ImGuiTextFilter* self, bool *ret, const char * _text, const char * _text_end) {
     *ret = (bool )self->PassFilter(_text, _text_end);
 }
 extern "C" void __c__ImGuiTextFilter_Build_3(ImGuiTextFilter* self) {
@@ -79,26 +95,26 @@ extern "C" void __c__ImGuiTextFilter_Clear_4(ImGuiTextFilter* self) {
 extern "C" void __c__ImGuiTextFilter_IsActive_5(ImGuiTextFilter* self, bool *ret) {
     *ret = (bool )self->IsActive();
 }
-extern "C" void __c__ImGuiTextRange_new_2(ImGuiTextFilter::ImGuiTextRange * self) {
+extern "C" void __c__ImGuiTextRange_new_2(ImGuiTextRange* self) {
     new (self) ImGuiTextFilter::ImGuiTextRange();
 }
-extern "C" void __c__ImGuiTextRange_new_3(ImGuiTextFilter::ImGuiTextRange * self, char * __b, char * __e) {
+extern "C" void __c__ImGuiTextRange_new_3(ImGuiTextRange* self, const char * __b, const char * __e) {
     new (self) ImGuiTextFilter::ImGuiTextRange(__b, __e);
 }
-extern "C" void __c__ImGuiTextRange_empty_4(ImGuiTextFilter::ImGuiTextRange * self, bool *ret) {
+extern "C" void __c__ImGuiTextRange_empty_4(ImGuiTextRange* self, bool *ret) {
     *ret = (bool )self->empty();
 }
-extern "C" void __c__ImGuiTextRange_split_5(ImGuiTextFilter::ImGuiTextRange * self, char _separator, ImVector<ImGuiTextFilter::ImGuiTextRange> * _out) {
+extern "C" void __c__ImGuiTextRange_split_5(ImGuiTextRange* self, char _separator, ImVector<ImGuiTextFilter::ImGuiTextRange> * _out) {
     self->split(_separator, _out);
 }
 extern "C" void __c__ImGuiTextBuffer_new_2(ImGuiTextBuffer* self) {
     new (self) ImGuiTextBuffer();
 }
-extern "C" void __c__ImGuiTextBuffer_begin_4(ImGuiTextBuffer* self, char * *ret) {
-    *ret = (char * )self->begin();
+extern "C" void __c__ImGuiTextBuffer_begin_4(ImGuiTextBuffer* self, const char * *ret) {
+    *ret = (const char * )self->begin();
 }
-extern "C" void __c__ImGuiTextBuffer_end_5(ImGuiTextBuffer* self, char * *ret) {
-    *ret = (char * )self->end();
+extern "C" void __c__ImGuiTextBuffer_end_5(ImGuiTextBuffer* self, const char * *ret) {
+    *ret = (const char * )self->end();
 }
 extern "C" void __c__ImGuiTextBuffer_size_6(ImGuiTextBuffer* self, int32_t *ret) {
     *ret = (int32_t )self->size();
@@ -112,16 +128,16 @@ extern "C" void __c__ImGuiTextBuffer_clear_8(ImGuiTextBuffer* self) {
 extern "C" void __c__ImGuiTextBuffer_reserve_9(ImGuiTextBuffer* self, int32_t _capacity) {
     self->reserve(_capacity);
 }
-extern "C" void __c__ImGuiTextBuffer_c_str_10(ImGuiTextBuffer* self, char * *ret) {
-    *ret = (char * )self->c_str();
+extern "C" void __c__ImGuiTextBuffer_c_str_10(ImGuiTextBuffer* self, const char * *ret) {
+    *ret = (const char * )self->c_str();
 }
-extern "C" void __c__ImGuiTextBuffer_append_11(ImGuiTextBuffer* self, char * _str, char * _str_end) {
+extern "C" void __c__ImGuiTextBuffer_append_11(ImGuiTextBuffer* self, const char * _str, const char * _str_end) {
     self->append(_str, _str_end);
 }
-extern "C" void __c__ImGuiTextBuffer_appendf_12(ImGuiTextBuffer* self, char * _fmt) {
+extern "C" void __c__ImGuiTextBuffer_appendf_12(ImGuiTextBuffer* self, const char * _fmt) {
     self->appendf(_fmt);
 }
-extern "C" void __c__ImGuiTextBuffer_appendfv_13(ImGuiTextBuffer* self, char * _fmt, char * _args) {
+extern "C" void __c__ImGuiTextBuffer_appendfv_13(ImGuiTextBuffer* self, const char * _fmt, char * _args) {
     self->appendfv(_fmt, _args);
 }
 extern "C" void __c__ImGuiStorage_Clear_2(ImGuiStorage* self) {
@@ -169,13 +185,13 @@ extern "C" void __c__ImGuiStorage_SetAllInt_15(ImGuiStorage* self, int32_t _val)
 extern "C" void __c__ImGuiStorage_BuildSortByKey_16(ImGuiStorage* self) {
     self->BuildSortByKey();
 }
-extern "C" void __c__ImGuiStoragePair_new_2(ImGuiStorage::ImGuiStoragePair * self, uint32_t __key, int32_t __val_i) {
+extern "C" void __c__ImGuiStoragePair_new_2(ImGuiStoragePair* self, uint32_t __key, int32_t __val_i) {
     new (self) ImGuiStorage::ImGuiStoragePair(__key, __val_i);
 }
-extern "C" void __c__ImGuiStoragePair_new_3(ImGuiStorage::ImGuiStoragePair * self, uint32_t __key, float __val_f) {
+extern "C" void __c__ImGuiStoragePair_new_3(ImGuiStoragePair* self, uint32_t __key, float __val_f) {
     new (self) ImGuiStorage::ImGuiStoragePair(__key, __val_f);
 }
-extern "C" void __c__ImGuiStoragePair_new_4(ImGuiStorage::ImGuiStoragePair * self, uint32_t __key, void * __val_p) {
+extern "C" void __c__ImGuiStoragePair_new_4(ImGuiStoragePair* self, uint32_t __key, void * __val_p) {
     new (self) ImGuiStorage::ImGuiStoragePair(__key, __val_p);
 }
 extern "C" void __c__ImGuiListClipper_new_6(ImGuiListClipper* self, int32_t _items_count, float _items_height) {
@@ -301,10 +317,10 @@ extern "C" void __c__ImDrawList_AddNgon_33(ImDrawList* self, ImVec2 * _center, f
 extern "C" void __c__ImDrawList_AddNgonFilled_34(ImDrawList* self, ImVec2 * _center, float _radius, uint32_t _col, int32_t _num_segments) {
     self->AddNgonFilled(*_center, _radius, _col, _num_segments);
 }
-extern "C" void __c__ImDrawList_AddText_35(ImDrawList* self, ImVec2 * _pos, uint32_t _col, char * _text_begin, char * _text_end) {
+extern "C" void __c__ImDrawList_AddText_35(ImDrawList* self, ImVec2 * _pos, uint32_t _col, const char * _text_begin, const char * _text_end) {
     self->AddText(*_pos, _col, _text_begin, _text_end);
 }
-extern "C" void __c__ImDrawList_AddText_36(ImDrawList* self, ImFont * _font, float _font_size, ImVec2 * _pos, uint32_t _col, char * _text_begin, char * _text_end, float _wrap_width, ImVec4 * _cpu_fine_clip_rect) {
+extern "C" void __c__ImDrawList_AddText_36(ImDrawList* self, ImFont * _font, float _font_size, ImVec2 * _pos, uint32_t _col, const char * _text_begin, const char * _text_end, float _wrap_width, ImVec4 * _cpu_fine_clip_rect) {
     self->AddText(_font, _font_size, *_pos, _col, _text_begin, _text_end, _wrap_width, _cpu_fine_clip_rect);
 }
 extern "C" void __c__ImDrawList_AddPolyline_37(ImDrawList* self, ImVec2 * _points, int32_t _num_points, uint32_t _col, bool _closed, float _thickness) {
@@ -370,55 +386,61 @@ extern "C" void __c__ImDrawList_ChannelsMerge_56(ImDrawList* self) {
 extern "C" void __c__ImDrawList_ChannelsSetCurrent_57(ImDrawList* self, int32_t _n) {
     self->ChannelsSetCurrent(_n);
 }
-extern "C" void __c__ImDrawList_Clear_58(ImDrawList* self) {
-    self->Clear();
-}
-extern "C" void __c__ImDrawList_ClearFreeMemory_59(ImDrawList* self) {
-    self->ClearFreeMemory();
-}
-extern "C" void __c__ImDrawList_PrimReserve_60(ImDrawList* self, int32_t _idx_count, int32_t _vtx_count) {
+extern "C" void __c__ImDrawList_PrimReserve_58(ImDrawList* self, int32_t _idx_count, int32_t _vtx_count) {
     self->PrimReserve(_idx_count, _vtx_count);
 }
-extern "C" void __c__ImDrawList_PrimUnreserve_61(ImDrawList* self, int32_t _idx_count, int32_t _vtx_count) {
+extern "C" void __c__ImDrawList_PrimUnreserve_59(ImDrawList* self, int32_t _idx_count, int32_t _vtx_count) {
     self->PrimUnreserve(_idx_count, _vtx_count);
 }
-extern "C" void __c__ImDrawList_PrimRect_62(ImDrawList* self, ImVec2 * _a, ImVec2 * _b, uint32_t _col) {
+extern "C" void __c__ImDrawList_PrimRect_60(ImDrawList* self, ImVec2 * _a, ImVec2 * _b, uint32_t _col) {
     self->PrimRect(*_a, *_b, _col);
 }
-extern "C" void __c__ImDrawList_PrimRectUV_63(ImDrawList* self, ImVec2 * _a, ImVec2 * _b, ImVec2 * _uv_a, ImVec2 * _uv_b, uint32_t _col) {
+extern "C" void __c__ImDrawList_PrimRectUV_61(ImDrawList* self, ImVec2 * _a, ImVec2 * _b, ImVec2 * _uv_a, ImVec2 * _uv_b, uint32_t _col) {
     self->PrimRectUV(*_a, *_b, *_uv_a, *_uv_b, _col);
 }
-extern "C" void __c__ImDrawList_PrimQuadUV_64(ImDrawList* self, ImVec2 * _a, ImVec2 * _b, ImVec2 * _c, ImVec2 * _d, ImVec2 * _uv_a, ImVec2 * _uv_b, ImVec2 * _uv_c, ImVec2 * _uv_d, uint32_t _col) {
+extern "C" void __c__ImDrawList_PrimQuadUV_62(ImDrawList* self, ImVec2 * _a, ImVec2 * _b, ImVec2 * _c, ImVec2 * _d, ImVec2 * _uv_a, ImVec2 * _uv_b, ImVec2 * _uv_c, ImVec2 * _uv_d, uint32_t _col) {
     self->PrimQuadUV(*_a, *_b, *_c, *_d, *_uv_a, *_uv_b, *_uv_c, *_uv_d, _col);
 }
-extern "C" void __c__ImDrawList_PrimWriteVtx_65(ImDrawList* self, ImVec2 * _pos, ImVec2 * _uv, uint32_t _col) {
+extern "C" void __c__ImDrawList_PrimWriteVtx_63(ImDrawList* self, ImVec2 * _pos, ImVec2 * _uv, uint32_t _col) {
     self->PrimWriteVtx(*_pos, *_uv, _col);
 }
-extern "C" void __c__ImDrawList_PrimWriteIdx_66(ImDrawList* self, uint16_t _idx) {
+extern "C" void __c__ImDrawList_PrimWriteIdx_64(ImDrawList* self, uint16_t _idx) {
     self->PrimWriteIdx(_idx);
 }
-extern "C" void __c__ImDrawList_PrimVtx_67(ImDrawList* self, ImVec2 * _pos, ImVec2 * _uv, uint32_t _col) {
+extern "C" void __c__ImDrawList_PrimVtx_65(ImDrawList* self, ImVec2 * _pos, ImVec2 * _uv, uint32_t _col) {
     self->PrimVtx(*_pos, *_uv, _col);
 }
-extern "C" void __c__ImDrawList_UpdateClipRect_68(ImDrawList* self) {
-    self->UpdateClipRect();
+extern "C" void __c__ImDrawList__ResetForNewFrame_66(ImDrawList* self) {
+    self->_ResetForNewFrame();
 }
-extern "C" void __c__ImDrawList_UpdateTextureID_69(ImDrawList* self) {
-    self->UpdateTextureID();
+extern "C" void __c__ImDrawList__ClearFreeMemory_67(ImDrawList* self) {
+    self->_ClearFreeMemory();
 }
-extern "C" void __c__ImDrawData_new_8(ImDrawData* self) {
+extern "C" void __c__ImDrawList__PopUnusedDrawCmd_68(ImDrawList* self) {
+    self->_PopUnusedDrawCmd();
+}
+extern "C" void __c__ImDrawList__OnChangedClipRect_69(ImDrawList* self) {
+    self->_OnChangedClipRect();
+}
+extern "C" void __c__ImDrawList__OnChangedTextureID_70(ImDrawList* self) {
+    self->_OnChangedTextureID();
+}
+extern "C" void __c__ImDrawList__OnChangedVtxOffset_71(ImDrawList* self) {
+    self->_OnChangedVtxOffset();
+}
+extern "C" void __c__ImDrawData_new_9(ImDrawData* self) {
     new (self) ImDrawData();
 }
 extern "C" void __c__ImDrawData_dtor(ImDrawData* self) {
     self->~ImDrawData();
 }
-extern "C" void __c__ImDrawData_Clear_10(ImDrawData* self) {
+extern "C" void __c__ImDrawData_Clear_11(ImDrawData* self) {
     self->Clear();
 }
-extern "C" void __c__ImDrawData_DeIndexAllBuffers_11(ImDrawData* self) {
+extern "C" void __c__ImDrawData_DeIndexAllBuffers_12(ImDrawData* self) {
     self->DeIndexAllBuffers();
 }
-extern "C" void __c__ImDrawData_ScaleClipRects_12(ImDrawData* self, ImVec2 * _fb_scale) {
+extern "C" void __c__ImDrawData_ScaleClipRects_13(ImDrawData* self, ImVec2 * _fb_scale) {
     self->ScaleClipRects(*_fb_scale);
 }
 extern "C" void __c__ImFontConfig_new_19(ImFontConfig* self) {
@@ -430,16 +452,16 @@ extern "C" void __c__ImFontGlyphRangesBuilder_new_1(ImFontGlyphRangesBuilder* se
 extern "C" void __c__ImFontGlyphRangesBuilder_Clear_2(ImFontGlyphRangesBuilder* self) {
     self->Clear();
 }
-extern "C" void __c__ImFontGlyphRangesBuilder_GetBit_3(ImFontGlyphRangesBuilder* self, bool *ret, int32_t _n) {
+extern "C" void __c__ImFontGlyphRangesBuilder_GetBit_3(ImFontGlyphRangesBuilder* self, bool *ret, uint64_t _n) {
     *ret = (bool )self->GetBit(_n);
 }
-extern "C" void __c__ImFontGlyphRangesBuilder_SetBit_4(ImFontGlyphRangesBuilder* self, int32_t _n) {
+extern "C" void __c__ImFontGlyphRangesBuilder_SetBit_4(ImFontGlyphRangesBuilder* self, uint64_t _n) {
     self->SetBit(_n);
 }
 extern "C" void __c__ImFontGlyphRangesBuilder_AddChar_5(ImFontGlyphRangesBuilder* self, uint16_t _c) {
     self->AddChar(_c);
 }
-extern "C" void __c__ImFontGlyphRangesBuilder_AddText_6(ImFontGlyphRangesBuilder* self, char * _text, char * _text_end) {
+extern "C" void __c__ImFontGlyphRangesBuilder_AddText_6(ImFontGlyphRangesBuilder* self, const char * _text, const char * _text_end) {
     self->AddText(_text, _text_end);
 }
 extern "C" void __c__ImFontGlyphRangesBuilder_AddRanges_7(ImFontGlyphRangesBuilder* self, const ImWchar * _ranges) {
@@ -466,7 +488,7 @@ extern "C" void __c__ImFontAtlas_AddFont_2(ImFontAtlas* self, ImFont * *ret, ImF
 extern "C" void __c__ImFontAtlas_AddFontDefault_3(ImFontAtlas* self, ImFont * *ret, ImFontConfig * _font_cfg) {
     *ret = (ImFont * )self->AddFontDefault(_font_cfg);
 }
-extern "C" void __c__ImFontAtlas_AddFontFromFileTTF_4(ImFontAtlas* self, ImFont * *ret, char * _filename, float _size_pixels, ImFontConfig * _font_cfg, const ImWchar * _glyph_ranges) {
+extern "C" void __c__ImFontAtlas_AddFontFromFileTTF_4(ImFontAtlas* self, ImFont * *ret, const char * _filename, float _size_pixels, ImFontConfig * _font_cfg, const ImWchar * _glyph_ranges) {
     *ret = (ImFont * )self->AddFontFromFileTTF(_filename, _size_pixels, _font_cfg, _glyph_ranges);
 }
 extern "C" void __c__ImFontAtlas_AddFontFromMemoryTTF_5(ImFontAtlas* self, ImFont * *ret, void * _font_data, int32_t _font_size, float _size_pixels, ImFontConfig * _font_cfg, const ImWchar * _glyph_ranges) {
@@ -475,7 +497,7 @@ extern "C" void __c__ImFontAtlas_AddFontFromMemoryTTF_5(ImFontAtlas* self, ImFon
 extern "C" void __c__ImFontAtlas_AddFontFromMemoryCompressedTTF_6(ImFontAtlas* self, ImFont * *ret, void * _compressed_font_data, int32_t _compressed_font_size, float _size_pixels, ImFontConfig * _font_cfg, const ImWchar * _glyph_ranges) {
     *ret = (ImFont * )self->AddFontFromMemoryCompressedTTF(_compressed_font_data, _compressed_font_size, _size_pixels, _font_cfg, _glyph_ranges);
 }
-extern "C" void __c__ImFontAtlas_AddFontFromMemoryCompressedBase85TTF_7(ImFontAtlas* self, ImFont * *ret, char * _compressed_font_data_base85, float _size_pixels, ImFontConfig * _font_cfg, const ImWchar * _glyph_ranges) {
+extern "C" void __c__ImFontAtlas_AddFontFromMemoryCompressedBase85TTF_7(ImFontAtlas* self, ImFont * *ret, const char * _compressed_font_data_base85, float _size_pixels, ImFontConfig * _font_cfg, const ImWchar * _glyph_ranges) {
     *ret = (ImFont * )self->AddFontFromMemoryCompressedBase85TTF(_compressed_font_data_base85, _size_pixels, _font_cfg, _glyph_ranges);
 }
 extern "C" void __c__ImFontAtlas_ClearInputData_8(ImFontAtlas* self) {
@@ -529,8 +551,8 @@ extern "C" void __c__ImFontAtlas_GetGlyphRangesThai_23(ImFontAtlas* self, const 
 extern "C" void __c__ImFontAtlas_GetGlyphRangesVietnamese_24(ImFontAtlas* self, const ImWchar * *ret) {
     *ret = (const ImWchar * )self->GetGlyphRangesVietnamese();
 }
-extern "C" void __c__ImFontAtlas_AddCustomRectRegular_25(ImFontAtlas* self, int32_t *ret, uint32_t _id, int32_t _width, int32_t _height) {
-    *ret = (int32_t )self->AddCustomRectRegular(_id, _width, _height);
+extern "C" void __c__ImFontAtlas_AddCustomRectRegular_25(ImFontAtlas* self, int32_t *ret, int32_t _width, int32_t _height) {
+    *ret = (int32_t )self->AddCustomRectRegular(_width, _height);
 }
 extern "C" void __c__ImFontAtlas_AddCustomRectFontGlyph_26(ImFontAtlas* self, int32_t *ret, ImFont * _font, uint16_t _id, int32_t _width, int32_t _height, float _advance_x, ImVec2 * _offset) {
     *ret = (int32_t )self->AddCustomRectFontGlyph(_font, _id, _width, _height, _advance_x, *_offset);
@@ -544,71 +566,83 @@ extern "C" void __c__ImFontAtlas_CalcCustomRectUV_28(ImFontAtlas* self, ImFontAt
 extern "C" void __c__ImFontAtlas_GetMouseCursorTexData_29(ImFontAtlas* self, bool *ret, int32_t _cursor, ImVec2 * _out_offset, ImVec2 * _out_size, ImVec2 * _out_uv_border, ImVec2 * _out_uv_fill) {
     *ret = (bool )self->GetMouseCursorTexData(_cursor, _out_offset, _out_size, _out_uv_border, _out_uv_fill);
 }
-extern "C" void __c__ImFont_new_17(ImFont* self) {
+extern "C" void __c__ImFont_new_18(ImFont* self) {
     new (self) ImFont();
 }
 extern "C" void __c__ImFont_dtor(ImFont* self) {
     self->~ImFont();
 }
-extern "C" void __c__ImFont_FindGlyph_19(ImFont* self, ImFontGlyph * *ret, uint16_t _c) {
+extern "C" void __c__ImFont_FindGlyph_20(ImFont* self, ImFontGlyph * *ret, uint16_t _c) {
     *ret = (ImFontGlyph * )self->FindGlyph(_c);
 }
-extern "C" void __c__ImFont_FindGlyphNoFallback_20(ImFont* self, ImFontGlyph * *ret, uint16_t _c) {
+extern "C" void __c__ImFont_FindGlyphNoFallback_21(ImFont* self, ImFontGlyph * *ret, uint16_t _c) {
     *ret = (ImFontGlyph * )self->FindGlyphNoFallback(_c);
 }
-extern "C" void __c__ImFont_GetCharAdvance_21(ImFont* self, float *ret, uint16_t _c) {
+extern "C" void __c__ImFont_GetCharAdvance_22(ImFont* self, float *ret, uint16_t _c) {
     *ret = (float )self->GetCharAdvance(_c);
 }
-extern "C" void __c__ImFont_IsLoaded_22(ImFont* self, bool *ret) {
+extern "C" void __c__ImFont_IsLoaded_23(ImFont* self, bool *ret) {
     *ret = (bool )self->IsLoaded();
 }
-extern "C" void __c__ImFont_GetDebugName_23(ImFont* self, char * *ret) {
-    *ret = (char * )self->GetDebugName();
+extern "C" void __c__ImFont_GetDebugName_24(ImFont* self, const char * *ret) {
+    *ret = (const char * )self->GetDebugName();
 }
-extern "C" void __c__ImFont_CalcTextSizeA_24(ImFont* self, ImVec2 *ret, float _size, float _max_width, float _wrap_width, char * _text_begin, char * _text_end, const char * * _remaining) {
+extern "C" void __c__ImFont_CalcTextSizeA_25(ImFont* self, ImVec2 *ret, float _size, float _max_width, float _wrap_width, const char * _text_begin, const char * _text_end, const char * * _remaining) {
     *ret = (ImVec2 )self->CalcTextSizeA(_size, _max_width, _wrap_width, _text_begin, _text_end, _remaining);
 }
-extern "C" void __c__ImFont_CalcWordWrapPositionA_25(ImFont* self, char * *ret, float _scale, char * _text, char * _text_end, float _wrap_width) {
-    *ret = (char * )self->CalcWordWrapPositionA(_scale, _text, _text_end, _wrap_width);
+extern "C" void __c__ImFont_CalcWordWrapPositionA_26(ImFont* self, const char * *ret, float _scale, const char * _text, const char * _text_end, float _wrap_width) {
+    *ret = (const char * )self->CalcWordWrapPositionA(_scale, _text, _text_end, _wrap_width);
 }
-extern "C" void __c__ImFont_RenderChar_26(ImFont* self, ImDrawList * _draw_list, float _size, ImVec2* _pos, uint32_t _col, uint16_t _c) {
+extern "C" void __c__ImFont_RenderChar_27(ImFont* self, ImDrawList * _draw_list, float _size, ImVec2* _pos, uint32_t _col, uint16_t _c) {
     self->RenderChar(_draw_list, _size, *_pos, _col, _c);
 }
-extern "C" void __c__ImFont_RenderText_27(ImFont* self, ImDrawList * _draw_list, float _size, ImVec2* _pos, uint32_t _col, ImVec4 * _clip_rect, char * _text_begin, char * _text_end, float _wrap_width, bool _cpu_fine_clip) {
+extern "C" void __c__ImFont_RenderText_28(ImFont* self, ImDrawList * _draw_list, float _size, ImVec2* _pos, uint32_t _col, ImVec4 * _clip_rect, const char * _text_begin, const char * _text_end, float _wrap_width, bool _cpu_fine_clip) {
     self->RenderText(_draw_list, _size, *_pos, _col, *_clip_rect, _text_begin, _text_end, _wrap_width, _cpu_fine_clip);
 }
-extern "C" void __c__ImFont_BuildLookupTable_28(ImFont* self) {
+extern "C" void __c__ImFont_BuildLookupTable_29(ImFont* self) {
     self->BuildLookupTable();
 }
-extern "C" void __c__ImFont_ClearOutputData_29(ImFont* self) {
+extern "C" void __c__ImFont_ClearOutputData_30(ImFont* self) {
     self->ClearOutputData();
 }
-extern "C" void __c__ImFont_GrowIndex_30(ImFont* self, int32_t _new_size) {
+extern "C" void __c__ImFont_GrowIndex_31(ImFont* self, int32_t _new_size) {
     self->GrowIndex(_new_size);
 }
-extern "C" void __c__ImFont_AddGlyph_31(ImFont* self, uint16_t _c, float _x0, float _y0, float _x1, float _y1, float _u0, float _v0, float _u1, float _v1, float _advance_x) {
-    self->AddGlyph(_c, _x0, _y0, _x1, _y1, _u0, _v0, _u1, _v1, _advance_x);
+extern "C" void __c__ImFont_AddGlyph_32(ImFont* self, ImFontConfig * _src_cfg, uint16_t _c, float _x0, float _y0, float _x1, float _y1, float _u0, float _v0, float _u1, float _v1, float _advance_x) {
+    self->AddGlyph(_src_cfg, _c, _x0, _y0, _x1, _y1, _u0, _v0, _u1, _v1, _advance_x);
 }
-extern "C" void __c__ImFont_AddRemapChar_32(ImFont* self, uint16_t _dst, uint16_t _src, bool _overwrite_dst) {
+extern "C" void __c__ImFont_AddRemapChar_33(ImFont* self, uint16_t _dst, uint16_t _src, bool _overwrite_dst) {
     self->AddRemapChar(_dst, _src, _overwrite_dst);
 }
-extern "C" void __c__ImFont_SetFallbackChar_33(ImFont* self, uint16_t _c) {
+extern "C" void __c__ImFont_SetGlyphVisible_34(ImFont* self, uint16_t _c, bool _visible) {
+    self->SetGlyphVisible(_c, _visible);
+}
+extern "C" void __c__ImFont_SetFallbackChar_35(ImFont* self, uint16_t _c) {
     self->SetFallbackChar(_c);
 }
-extern "C" void __c__ImBoolVector_new_1(ImBoolVector* self) {
-    new (self) ImBoolVector();
+extern "C" void __c__ImFont_IsGlyphRangeUnused_36(ImFont* self, bool *ret, uint32_t _c_begin, uint32_t _c_last) {
+    *ret = (bool )self->IsGlyphRangeUnused(_c_begin, _c_last);
 }
-extern "C" void __c__ImBoolVector_Resize_2(ImBoolVector* self, int32_t _sz) {
-    self->Resize(_sz);
+extern "C" void __c__ImGuiPlatformIO_new_27(ImGuiPlatformIO* self) {
+    new (self) ImGuiPlatformIO();
 }
-extern "C" void __c__ImBoolVector_Clear_3(ImBoolVector* self) {
-    self->Clear();
+extern "C" void __c__ImGuiPlatformMonitor_new_5(ImGuiPlatformMonitor* self) {
+    new (self) ImGuiPlatformMonitor();
 }
-extern "C" void __c__ImBoolVector_GetBit_4(ImBoolVector* self, bool *ret, int32_t _n) {
-    *ret = (bool )self->GetBit(_n);
+extern "C" void __c__ImGuiViewport_new_16(ImGuiViewport* self) {
+    new (self) ImGuiViewport();
 }
-extern "C" void __c__ImBoolVector_SetBit_5(ImBoolVector* self, int32_t _n, bool _v) {
-    self->SetBit(_n, _v);
+extern "C" void __c__ImGuiViewport_dtor(ImGuiViewport* self) {
+    self->~ImGuiViewport();
+}
+extern "C" void __c__ImGuiViewport_GetCenter_18(ImGuiViewport* self, ImVec2 *ret) {
+    *ret = (ImVec2 )self->GetCenter();
+}
+extern "C" void __c__ImGuiViewport_GetWorkPos_19(ImGuiViewport* self, ImVec2 *ret) {
+    *ret = (ImVec2 )self->GetWorkPos();
+}
+extern "C" void __c__ImGuiViewport_GetWorkSize_20(ImGuiViewport* self, ImVec2 *ret) {
+    *ret = (ImVec2 )self->GetWorkSize();
 }
 extern "C" void __c__ImVec1_new_1(ImVec1* self) {
     new (self) ImVec1();
@@ -621,6 +655,9 @@ extern "C" void __c__ImVec2ih_new_2(ImVec2ih* self) {
 }
 extern "C" void __c__ImVec2ih_new_3(ImVec2ih* self, int16_t __x, int16_t __y) {
     new (self) ImVec2ih(__x, __y);
+}
+extern "C" void __c__ImVec2ih_new_4(ImVec2ih* self, ImVec2 * _rhs) {
+    new (self) ImVec2ih(*_rhs);
 }
 extern "C" void __c__ImRect_new_2(ImRect* self) {
     new (self) ImRect();
@@ -673,7 +710,7 @@ extern "C" void __c__ImRect_Add_17(ImRect* self, ImVec2 * _p) {
 extern "C" void __c__ImRect_Add_18(ImRect* self, ImRect * _r) {
     self->Add(*_r);
 }
-extern "C" void __c__ImRect_Expand_19(ImRect* self, float _amount) {
+extern "C" void __c__ImRect_Expand_19(ImRect* self, const float _amount) {
     self->Expand(_amount);
 }
 extern "C" void __c__ImRect_Expand_20(ImRect* self, ImVec2 * _amount) {
@@ -700,6 +737,39 @@ extern "C" void __c__ImRect_Floor_26(ImRect* self) {
 extern "C" void __c__ImRect_IsInverted_27(ImRect* self, bool *ret) {
     *ret = (bool )self->IsInverted();
 }
+extern "C" void __c__ImRect_ToVec4_28(ImRect* self, ImVec4 *ret) {
+    *ret = (ImVec4 )self->ToVec4();
+}
+extern "C" void __c__ImBitVector_Create_1(ImBitVector* self, int32_t _sz) {
+    self->Create(_sz);
+}
+extern "C" void __c__ImBitVector_Clear_2(ImBitVector* self) {
+    self->Clear();
+}
+extern "C" void __c__ImBitVector_TestBit_3(ImBitVector* self, bool *ret, int32_t _n) {
+    *ret = (bool )self->TestBit(_n);
+}
+extern "C" void __c__ImBitVector_SetBit_4(ImBitVector* self, int32_t _n) {
+    self->SetBit(_n);
+}
+extern "C" void __c__ImBitVector_ClearBit_5(ImBitVector* self, int32_t _n) {
+    self->ClearBit(_n);
+}
+extern "C" void __c__ImDrawListSharedData_new_10(ImDrawListSharedData* self) {
+    new (self) ImDrawListSharedData();
+}
+extern "C" void __c__ImDrawListSharedData_SetCircleSegmentMaxError_11(ImDrawListSharedData* self, float _max_error) {
+    self->SetCircleSegmentMaxError(_max_error);
+}
+extern "C" void __c__ImDrawDataBuilder_Clear_1(ImDrawDataBuilder* self) {
+    self->Clear();
+}
+extern "C" void __c__ImDrawDataBuilder_ClearFreeMemory_2(ImDrawDataBuilder* self) {
+    self->ClearFreeMemory();
+}
+extern "C" void __c__ImDrawDataBuilder_FlattenIntoSingleLayer_3(ImDrawDataBuilder* self) {
+    self->FlattenIntoSingleLayer();
+}
 extern "C" void __c__ImGuiStyleMod_new_2(ImGuiStyleMod* self, int32_t _idx, int32_t _v) {
     new (self) ImGuiStyleMod(_idx, _v);
 }
@@ -721,71 +791,41 @@ extern "C" void __c__ImGuiMenuColumns_DeclColumns_7(ImGuiMenuColumns* self, floa
 extern "C" void __c__ImGuiMenuColumns_CalcExtraSpace_8(ImGuiMenuColumns* self, float *ret, float _avail_w) {
     *ret = (float )self->CalcExtraSpace(_avail_w);
 }
-extern "C" void __c__ImGuiInputTextState_new_16(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_new_17(ImGuiInputTextState* self) {
     new (self) ImGuiInputTextState();
 }
-extern "C" void __c__ImGuiInputTextState_ClearText_17(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_ClearText_18(ImGuiInputTextState* self) {
     self->ClearText();
 }
-extern "C" void __c__ImGuiInputTextState_ClearFreeMemory_18(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_ClearFreeMemory_19(ImGuiInputTextState* self) {
     self->ClearFreeMemory();
 }
-extern "C" void __c__ImGuiInputTextState_GetUndoAvailCount_19(ImGuiInputTextState* self, int32_t *ret) {
+extern "C" void __c__ImGuiInputTextState_GetUndoAvailCount_20(ImGuiInputTextState* self, int32_t *ret) {
     *ret = (int32_t )self->GetUndoAvailCount();
 }
-extern "C" void __c__ImGuiInputTextState_GetRedoAvailCount_20(ImGuiInputTextState* self, int32_t *ret) {
+extern "C" void __c__ImGuiInputTextState_GetRedoAvailCount_21(ImGuiInputTextState* self, int32_t *ret) {
     *ret = (int32_t )self->GetRedoAvailCount();
 }
-extern "C" void __c__ImGuiInputTextState_OnKeyPressed_21(ImGuiInputTextState* self, int32_t _key) {
+extern "C" void __c__ImGuiInputTextState_OnKeyPressed_22(ImGuiInputTextState* self, int32_t _key) {
     self->OnKeyPressed(_key);
 }
-extern "C" void __c__ImGuiInputTextState_CursorAnimReset_22(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_CursorAnimReset_23(ImGuiInputTextState* self) {
     self->CursorAnimReset();
 }
-extern "C" void __c__ImGuiInputTextState_CursorClamp_23(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_CursorClamp_24(ImGuiInputTextState* self) {
     self->CursorClamp();
 }
-extern "C" void __c__ImGuiInputTextState_HasSelection_24(ImGuiInputTextState* self, bool *ret) {
+extern "C" void __c__ImGuiInputTextState_HasSelection_25(ImGuiInputTextState* self, bool *ret) {
     *ret = (bool )self->HasSelection();
 }
-extern "C" void __c__ImGuiInputTextState_ClearSelection_25(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_ClearSelection_26(ImGuiInputTextState* self) {
     self->ClearSelection();
 }
-extern "C" void __c__ImGuiInputTextState_SelectAll_26(ImGuiInputTextState* self) {
+extern "C" void __c__ImGuiInputTextState_SelectAll_27(ImGuiInputTextState* self) {
     self->SelectAll();
-}
-extern "C" void __c__ImGuiWindowSettings_new_4(ImGuiWindowSettings* self) {
-    new (self) ImGuiWindowSettings();
-}
-extern "C" void __c__ImGuiWindowSettings_GetName_5(ImGuiWindowSettings* self, char * *ret) {
-    *ret = (char * )self->GetName();
-}
-extern "C" void __c__ImGuiSettingsHandler_new_6(ImGuiSettingsHandler* self) {
-    new (self) ImGuiSettingsHandler();
 }
 extern "C" void __c__ImGuiPopupData_new_7(ImGuiPopupData* self) {
     new (self) ImGuiPopupData();
-}
-extern "C" void __c__ImGuiColumnData_new_4(ImGuiColumnData* self) {
-    new (self) ImGuiColumnData();
-}
-extern "C" void __c__ImGuiColumns_new_15(ImGuiColumns* self) {
-    new (self) ImGuiColumns();
-}
-extern "C" void __c__ImGuiColumns_Clear_16(ImGuiColumns* self) {
-    self->Clear();
-}
-extern "C" void __c__ImDrawListSharedData_new_7(ImDrawListSharedData* self) {
-    new (self) ImDrawListSharedData();
-}
-extern "C" void __c__ImDrawDataBuilder_Clear_1(ImDrawDataBuilder* self) {
-    self->Clear();
-}
-extern "C" void __c__ImDrawDataBuilder_ClearFreeMemory_2(ImDrawDataBuilder* self) {
-    self->ClearFreeMemory();
-}
-extern "C" void __c__ImDrawDataBuilder_FlattenIntoSingleLayer_3(ImDrawDataBuilder* self) {
-    self->FlattenIntoSingleLayer();
 }
 extern "C" void __c__ImGuiNavMoveResult_new_7(ImGuiNavMoveResult* self) {
     new (self) ImGuiNavMoveResult();
@@ -793,16 +833,16 @@ extern "C" void __c__ImGuiNavMoveResult_new_7(ImGuiNavMoveResult* self) {
 extern "C" void __c__ImGuiNavMoveResult_Clear_8(ImGuiNavMoveResult* self) {
     self->Clear();
 }
-extern "C" void __c__ImGuiNextWindowData_new_14(ImGuiNextWindowData* self) {
+extern "C" void __c__ImGuiNextWindowData_new_20(ImGuiNextWindowData* self) {
     new (self) ImGuiNextWindowData();
 }
-extern "C" void __c__ImGuiNextWindowData_ClearFlags_15(ImGuiNextWindowData* self) {
+extern "C" void __c__ImGuiNextWindowData_ClearFlags_21(ImGuiNextWindowData* self) {
     self->ClearFlags();
 }
-extern "C" void __c__ImGuiNextItemData_new_4(ImGuiNextItemData* self) {
+extern "C" void __c__ImGuiNextItemData_new_5(ImGuiNextItemData* self) {
     new (self) ImGuiNextItemData();
 }
-extern "C" void __c__ImGuiNextItemData_ClearFlags_5(ImGuiNextItemData* self) {
+extern "C" void __c__ImGuiNextItemData_ClearFlags_6(ImGuiNextItemData* self) {
     self->ClearFlags();
 }
 extern "C" void __c__ImGuiPtrOrIndex_new_2(ImGuiPtrOrIndex* self, void * _ptr) {
@@ -811,80 +851,152 @@ extern "C" void __c__ImGuiPtrOrIndex_new_2(ImGuiPtrOrIndex* self, void * _ptr) {
 extern "C" void __c__ImGuiPtrOrIndex_new_3(ImGuiPtrOrIndex* self, int32_t _index) {
     new (self) ImGuiPtrOrIndex(_index);
 }
-extern "C" void __c__ImGuiContext_new_172(ImGuiContext* self, ImFontAtlas * _shared_font_atlas) {
+extern "C" void __c__ImGuiColumnData_new_4(ImGuiColumnData* self) {
+    new (self) ImGuiColumnData();
+}
+extern "C" void __c__ImGuiColumns_new_17(ImGuiColumns* self) {
+    new (self) ImGuiColumns();
+}
+extern "C" void __c__ImGuiColumns_Clear_18(ImGuiColumns* self) {
+    self->Clear();
+}
+extern "C" void __c__ImGuiDockNode_new_37(ImGuiDockNode* self, uint32_t _id) {
+    new (self) ImGuiDockNode(_id);
+}
+extern "C" void __c__ImGuiDockNode_dtor(ImGuiDockNode* self) {
+    self->~ImGuiDockNode();
+}
+extern "C" void __c__ImGuiDockNode_IsRootNode_39(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsRootNode();
+}
+extern "C" void __c__ImGuiDockNode_IsDockSpace_40(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsDockSpace();
+}
+extern "C" void __c__ImGuiDockNode_IsFloatingNode_41(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsFloatingNode();
+}
+extern "C" void __c__ImGuiDockNode_IsCentralNode_42(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsCentralNode();
+}
+extern "C" void __c__ImGuiDockNode_IsHiddenTabBar_43(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsHiddenTabBar();
+}
+extern "C" void __c__ImGuiDockNode_IsNoTabBar_44(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsNoTabBar();
+}
+extern "C" void __c__ImGuiDockNode_IsSplitNode_45(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsSplitNode();
+}
+extern "C" void __c__ImGuiDockNode_IsLeafNode_46(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsLeafNode();
+}
+extern "C" void __c__ImGuiDockNode_IsEmpty_47(ImGuiDockNode* self, bool *ret) {
+    *ret = (bool )self->IsEmpty();
+}
+extern "C" void __c__ImGuiDockNode_GetMergedFlags_48(ImGuiDockNode* self, ImGuiDockNodeFlags *ret) {
+    *ret = (int32_t )self->GetMergedFlags();
+}
+extern "C" void __c__ImGuiDockNode_Rect_49(ImGuiDockNode* self, ImRect *ret) {
+    *ret = (ImRect )self->Rect();
+}
+extern "C" void __c__ImGuiDockContext_new_4(ImGuiDockContext* self) {
+    new (self) ImGuiDockContext();
+}
+extern "C" void __c__ImGuiViewportP_new_20(ImGuiViewportP* self) {
+    new (self) ImGuiViewportP();
+}
+extern "C" void __c__ImGuiViewportP_dtor(ImGuiViewportP* self) {
+    self->~ImGuiViewportP();
+}
+extern "C" void __c__ImGuiViewportP_GetMainRect_22(ImGuiViewportP* self, ImRect *ret) {
+    *ret = (ImRect )self->GetMainRect();
+}
+extern "C" void __c__ImGuiViewportP_GetWorkRect_23(ImGuiViewportP* self, ImRect *ret) {
+    *ret = (ImRect )self->GetWorkRect();
+}
+extern "C" void __c__ImGuiViewportP_ClearRequestFlags_24(ImGuiViewportP* self) {
+    self->ClearRequestFlags();
+}
+extern "C" void __c__ImGuiWindowSettings_new_10(ImGuiWindowSettings* self) {
+    new (self) ImGuiWindowSettings();
+}
+extern "C" void __c__ImGuiWindowSettings_GetName_11(ImGuiWindowSettings* self, char * *ret) {
+    *ret = (char * )self->GetName();
+}
+extern "C" void __c__ImGuiSettingsHandler_new_9(ImGuiSettingsHandler* self) {
+    new (self) ImGuiSettingsHandler();
+}
+extern "C" void __c__ImGuiContext_new_199(ImGuiContext* self, ImFontAtlas * _shared_font_atlas) {
     new (self) ImGuiContext(_shared_font_atlas);
 }
-extern "C" void __c__ImGuiWindowTempData_new_40(ImGuiWindowTempData* self) {
+extern "C" void __c__ImGuiWindowTempData_new_42(ImGuiWindowTempData* self) {
     new (self) ImGuiWindowTempData();
 }
-extern "C" void __c__ImGuiWindow_new_76(ImGuiWindow* self, ImGuiContext * _context, char * _name) {
+extern "C" void __c__ImGuiWindow_new_100(ImGuiWindow* self, ImGuiContext * _context, const char * _name) {
     new (self) ImGuiWindow(_context, _name);
 }
 extern "C" void __c__ImGuiWindow_dtor(ImGuiWindow* self) {
     self->~ImGuiWindow();
 }
-extern "C" void __c__ImGuiWindow_GetID_78(ImGuiWindow* self, ImGuiID *ret, char * _str, char * _str_end) {
+extern "C" void __c__ImGuiWindow_GetID_102(ImGuiWindow* self, ImGuiID *ret, const char * _str, const char * _str_end) {
     *ret = (uint32_t )self->GetID(_str, _str_end);
 }
-extern "C" void __c__ImGuiWindow_GetID_79(ImGuiWindow* self, ImGuiID *ret, void * _ptr) {
+extern "C" void __c__ImGuiWindow_GetID_103(ImGuiWindow* self, ImGuiID *ret, void * _ptr) {
     *ret = (uint32_t )self->GetID(_ptr);
 }
-extern "C" void __c__ImGuiWindow_GetID_80(ImGuiWindow* self, ImGuiID *ret, int32_t _n) {
+extern "C" void __c__ImGuiWindow_GetID_104(ImGuiWindow* self, ImGuiID *ret, int32_t _n) {
     *ret = (uint32_t )self->GetID(_n);
 }
-extern "C" void __c__ImGuiWindow_GetIDNoKeepAlive_81(ImGuiWindow* self, ImGuiID *ret, char * _str, char * _str_end) {
+extern "C" void __c__ImGuiWindow_GetIDNoKeepAlive_105(ImGuiWindow* self, ImGuiID *ret, const char * _str, const char * _str_end) {
     *ret = (uint32_t )self->GetIDNoKeepAlive(_str, _str_end);
 }
-extern "C" void __c__ImGuiWindow_GetIDNoKeepAlive_82(ImGuiWindow* self, ImGuiID *ret, void * _ptr) {
+extern "C" void __c__ImGuiWindow_GetIDNoKeepAlive_106(ImGuiWindow* self, ImGuiID *ret, void * _ptr) {
     *ret = (uint32_t )self->GetIDNoKeepAlive(_ptr);
 }
-extern "C" void __c__ImGuiWindow_GetIDNoKeepAlive_83(ImGuiWindow* self, ImGuiID *ret, int32_t _n) {
+extern "C" void __c__ImGuiWindow_GetIDNoKeepAlive_107(ImGuiWindow* self, ImGuiID *ret, int32_t _n) {
     *ret = (uint32_t )self->GetIDNoKeepAlive(_n);
 }
-extern "C" void __c__ImGuiWindow_GetIDFromRectangle_84(ImGuiWindow* self, ImGuiID *ret, ImRect * _r_abs) {
+extern "C" void __c__ImGuiWindow_GetIDFromRectangle_108(ImGuiWindow* self, ImGuiID *ret, ImRect * _r_abs) {
     *ret = (uint32_t )self->GetIDFromRectangle(*_r_abs);
 }
-extern "C" void __c__ImGuiWindow_Rect_85(ImGuiWindow* self, ImRect *ret) {
+extern "C" void __c__ImGuiWindow_Rect_109(ImGuiWindow* self, ImRect *ret) {
     *ret = (ImRect )self->Rect();
 }
-extern "C" void __c__ImGuiWindow_CalcFontSize_86(ImGuiWindow* self, float *ret) {
+extern "C" void __c__ImGuiWindow_CalcFontSize_110(ImGuiWindow* self, float *ret) {
     *ret = (float )self->CalcFontSize();
 }
-extern "C" void __c__ImGuiWindow_TitleBarHeight_87(ImGuiWindow* self, float *ret) {
+extern "C" void __c__ImGuiWindow_TitleBarHeight_111(ImGuiWindow* self, float *ret) {
     *ret = (float )self->TitleBarHeight();
 }
-extern "C" void __c__ImGuiWindow_TitleBarRect_88(ImGuiWindow* self, ImRect *ret) {
+extern "C" void __c__ImGuiWindow_TitleBarRect_112(ImGuiWindow* self, ImRect *ret) {
     *ret = (ImRect )self->TitleBarRect();
 }
-extern "C" void __c__ImGuiWindow_MenuBarHeight_89(ImGuiWindow* self, float *ret) {
+extern "C" void __c__ImGuiWindow_MenuBarHeight_113(ImGuiWindow* self, float *ret) {
     *ret = (float )self->MenuBarHeight();
 }
-extern "C" void __c__ImGuiWindow_MenuBarRect_90(ImGuiWindow* self, ImRect *ret) {
+extern "C" void __c__ImGuiWindow_MenuBarRect_114(ImGuiWindow* self, ImRect *ret) {
     *ret = (ImRect )self->MenuBarRect();
 }
-extern "C" void __c__ImGuiItemHoveredDataBackup_new_4(ImGuiItemHoveredDataBackup* self) {
-    new (self) ImGuiItemHoveredDataBackup();
+extern "C" void __c__ImGuiLastItemDataBackup_new_4(ImGuiLastItemDataBackup* self) {
+    new (self) ImGuiLastItemDataBackup();
 }
-extern "C" void __c__ImGuiItemHoveredDataBackup_Backup_5(ImGuiItemHoveredDataBackup* self) {
+extern "C" void __c__ImGuiLastItemDataBackup_Backup_5(ImGuiLastItemDataBackup* self) {
     self->Backup();
 }
-extern "C" void __c__ImGuiItemHoveredDataBackup_Restore_6(ImGuiItemHoveredDataBackup* self) {
+extern "C" void __c__ImGuiLastItemDataBackup_Restore_6(ImGuiLastItemDataBackup* self) {
     self->Restore();
 }
-extern "C" void __c__ImGuiTabItem_new_8(ImGuiTabItem* self) {
+extern "C" void __c__ImGuiTabItem_new_11(ImGuiTabItem* self) {
     new (self) ImGuiTabItem();
 }
-extern "C" void __c__ImGuiTabBar_new_24(ImGuiTabBar* self) {
+extern "C" void __c__ImGuiTabBar_new_25(ImGuiTabBar* self) {
     new (self) ImGuiTabBar();
 }
-extern "C" void __c__ImGuiTabBar_GetTabOrder_25(ImGuiTabBar* self, int32_t *ret, ImGuiTabItem * _tab) {
+extern "C" void __c__ImGuiTabBar_GetTabOrder_26(ImGuiTabBar* self, int32_t *ret, ImGuiTabItem * _tab) {
     *ret = (int32_t )self->GetTabOrder(_tab);
 }
-extern "C" void __c__ImGuiTabBar_GetTabName_26(ImGuiTabBar* self, char * *ret, ImGuiTabItem * _tab) {
-    *ret = (char * )self->GetTabName(_tab);
-}
-extern "C" void __c__ImGuiStyleVarInfo_GetVarPtr_3(ImGuiStyleVarInfo* self, void * *ret, ImGuiStyle * _style) {
-    *ret = (void * )self->GetVarPtr(_style);
+extern "C" void __c__ImGuiTabBar_GetTabName_27(ImGuiTabBar* self, const char * *ret, ImGuiTabItem * _tab) {
+    *ret = (const char * )self->GetTabName(_tab);
 }
 extern "C" void __c__CreateContext(ImGuiContext * *ret, ImFontAtlas * _shared_font_atlas) {
     *ret = (ImGuiContext * )ImGui::CreateContext(_shared_font_atlas);
@@ -897,9 +1009,6 @@ extern "C" void __c__GetCurrentContext(ImGuiContext * *ret) {
 }
 extern "C" void __c__SetCurrentContext(ImGuiContext * _ctx) {
     ImGui::SetCurrentContext(_ctx);
-}
-extern "C" void __c__DebugCheckVersionAndDataLayout(bool *ret, char * _version_str, uint64_t _sz_io, uint64_t _sz_style, uint64_t _sz_vec2, uint64_t _sz_vec4, uint64_t _sz_drawvert, uint64_t _sz_drawidx) {
-    *ret = (bool )ImGui::DebugCheckVersionAndDataLayout(_version_str, _sz_io, _sz_style, _sz_vec2, _sz_vec4, _sz_drawvert, _sz_drawidx);
 }
 extern "C" void __c__GetIO(ImGuiIO * *ret) {
     *ret = (ImGuiIO * )&ImGui::GetIO();
@@ -931,17 +1040,17 @@ extern "C" void __c__ShowMetricsWindow(bool * _p_open) {
 extern "C" void __c__ShowStyleEditor(ImGuiStyle * _ref) {
     ImGui::ShowStyleEditor(_ref);
 }
-extern "C" void __c__ShowStyleSelector(bool *ret, char * _label) {
+extern "C" void __c__ShowStyleSelector(bool *ret, const char * _label) {
     *ret = (bool )ImGui::ShowStyleSelector(_label);
 }
-extern "C" void __c__ShowFontSelector(char * _label) {
+extern "C" void __c__ShowFontSelector(const char * _label) {
     ImGui::ShowFontSelector(_label);
 }
 extern "C" void __c__ShowUserGuide() {
     ImGui::ShowUserGuide();
 }
-extern "C" void __c__GetVersion(char * *ret) {
-    *ret = (char * )ImGui::GetVersion();
+extern "C" void __c__GetVersion(const char * *ret) {
+    *ret = (const char * )ImGui::GetVersion();
 }
 extern "C" void __c__StyleColorsDark(ImGuiStyle * _dst) {
     ImGui::StyleColorsDark(_dst);
@@ -952,13 +1061,13 @@ extern "C" void __c__StyleColorsClassic(ImGuiStyle * _dst) {
 extern "C" void __c__StyleColorsLight(ImGuiStyle * _dst) {
     ImGui::StyleColorsLight(_dst);
 }
-extern "C" void __c__Begin(bool *ret, char * _name, bool * _p_open, int32_t _flags) {
+extern "C" void __c__Begin(bool *ret, const char * _name, bool * _p_open, int32_t _flags) {
     *ret = (bool )ImGui::Begin(_name, _p_open, _flags);
 }
 extern "C" void __c__End() {
     ImGui::End();
 }
-extern "C" void __c__BeginChild(bool *ret, char * _str_id, ImVec2 * _size, bool _border, int32_t _flags) {
+extern "C" void __c__BeginChild(bool *ret, const char * _str_id, ImVec2 * _size, bool _border, int32_t _flags) {
     *ret = (bool )ImGui::BeginChild(_str_id, *_size, _border, _flags);
 }
 extern "C" void __c__BeginChild_2(bool *ret, uint32_t _id, ImVec2 * _size, bool _border, int32_t _flags) {
@@ -981,6 +1090,12 @@ extern "C" void __c__IsWindowHovered(bool *ret, int32_t _flags) {
 }
 extern "C" void __c__GetWindowDrawList(ImDrawList * *ret) {
     *ret = (ImDrawList * )ImGui::GetWindowDrawList();
+}
+extern "C" void __c__GetWindowDpiScale(float *ret) {
+    *ret = (float )ImGui::GetWindowDpiScale();
+}
+extern "C" void __c__GetWindowViewport(ImGuiViewport * *ret) {
+    *ret = (ImGuiViewport * )ImGui::GetWindowViewport();
 }
 extern "C" void __c__GetWindowPos(ImVec2 *ret) {
     *ret = (ImVec2 )ImGui::GetWindowPos();
@@ -1015,6 +1130,9 @@ extern "C" void __c__SetNextWindowFocus() {
 extern "C" void __c__SetNextWindowBgAlpha(float _alpha) {
     ImGui::SetNextWindowBgAlpha(_alpha);
 }
+extern "C" void __c__SetNextWindowViewport(uint32_t _viewport_id) {
+    ImGui::SetNextWindowViewport(_viewport_id);
+}
 extern "C" void __c__SetWindowPos(ImVec2 * _pos, int32_t _cond) {
     ImGui::SetWindowPos(*_pos, _cond);
 }
@@ -1030,16 +1148,16 @@ extern "C" void __c__SetWindowFocus() {
 extern "C" void __c__SetWindowFontScale(float _scale) {
     ImGui::SetWindowFontScale(_scale);
 }
-extern "C" void __c__SetWindowPos_2(char * _name, ImVec2 * _pos, int32_t _cond) {
+extern "C" void __c__SetWindowPos_2(const char * _name, ImVec2 * _pos, int32_t _cond) {
     ImGui::SetWindowPos(_name, *_pos, _cond);
 }
-extern "C" void __c__SetWindowSize_2(char * _name, ImVec2 * _size, int32_t _cond) {
+extern "C" void __c__SetWindowSize_2(const char * _name, ImVec2 * _size, int32_t _cond) {
     ImGui::SetWindowSize(_name, *_size, _cond);
 }
-extern "C" void __c__SetWindowCollapsed_2(char * _name, bool _collapsed, int32_t _cond) {
+extern "C" void __c__SetWindowCollapsed_2(const char * _name, bool _collapsed, int32_t _cond) {
     ImGui::SetWindowCollapsed(_name, _collapsed, _cond);
 }
-extern "C" void __c__SetWindowFocus_2(char * _name) {
+extern "C" void __c__SetWindowFocus_2(const char * _name) {
     ImGui::SetWindowFocus(_name);
 }
 extern "C" void __c__GetContentRegionMax(ImVec2 *ret) {
@@ -1231,10 +1349,10 @@ extern "C" void __c__GetFrameHeight(float *ret) {
 extern "C" void __c__GetFrameHeightWithSpacing(float *ret) {
     *ret = (float )ImGui::GetFrameHeightWithSpacing();
 }
-extern "C" void __c__PushID(char * _str_id) {
+extern "C" void __c__PushID(const char * _str_id) {
     ImGui::PushID(_str_id);
 }
-extern "C" void __c__PushID_2(char * _str_id_begin, char * _str_id_end) {
+extern "C" void __c__PushID_2(const char * _str_id_begin, const char * _str_id_end) {
     ImGui::PushID(_str_id_begin, _str_id_end);
 }
 extern "C" void __c__PushID_3(void * _ptr_id) {
@@ -1246,64 +1364,64 @@ extern "C" void __c__PushID_4(int32_t _int_id) {
 extern "C" void __c__PopID() {
     ImGui::PopID();
 }
-extern "C" void __c__GetID(ImGuiID *ret, char * _str_id) {
+extern "C" void __c__GetID(ImGuiID *ret, const char * _str_id) {
     *ret = (uint32_t )ImGui::GetID(_str_id);
 }
-extern "C" void __c__GetID_2(ImGuiID *ret, char * _str_id_begin, char * _str_id_end) {
+extern "C" void __c__GetID_2(ImGuiID *ret, const char * _str_id_begin, const char * _str_id_end) {
     *ret = (uint32_t )ImGui::GetID(_str_id_begin, _str_id_end);
 }
 extern "C" void __c__GetID_3(ImGuiID *ret, void * _ptr_id) {
     *ret = (uint32_t )ImGui::GetID(_ptr_id);
 }
-extern "C" void __c__TextUnformatted(char * _text, char * _text_end) {
+extern "C" void __c__TextUnformatted(const char * _text, const char * _text_end) {
     ImGui::TextUnformatted(_text, _text_end);
 }
-extern "C" void __c__Text(char * _fmt) {
+extern "C" void __c__Text(const char * _fmt) {
     ImGui::Text(_fmt);
 }
-extern "C" void __c__TextV(char * _fmt, char * _args) {
+extern "C" void __c__TextV(const char * _fmt, char * _args) {
     ImGui::TextV(_fmt, _args);
 }
-extern "C" void __c__TextColored(ImVec4 * _col, char * _fmt) {
+extern "C" void __c__TextColored(ImVec4 * _col, const char * _fmt) {
     ImGui::TextColored(*_col, _fmt);
 }
-extern "C" void __c__TextColoredV(ImVec4 * _col, char * _fmt, char * _args) {
+extern "C" void __c__TextColoredV(ImVec4 * _col, const char * _fmt, char * _args) {
     ImGui::TextColoredV(*_col, _fmt, _args);
 }
-extern "C" void __c__TextDisabled(char * _fmt) {
+extern "C" void __c__TextDisabled(const char * _fmt) {
     ImGui::TextDisabled(_fmt);
 }
-extern "C" void __c__TextDisabledV(char * _fmt, char * _args) {
+extern "C" void __c__TextDisabledV(const char * _fmt, char * _args) {
     ImGui::TextDisabledV(_fmt, _args);
 }
-extern "C" void __c__TextWrapped(char * _fmt) {
+extern "C" void __c__TextWrapped(const char * _fmt) {
     ImGui::TextWrapped(_fmt);
 }
-extern "C" void __c__TextWrappedV(char * _fmt, char * _args) {
+extern "C" void __c__TextWrappedV(const char * _fmt, char * _args) {
     ImGui::TextWrappedV(_fmt, _args);
 }
-extern "C" void __c__LabelText(char * _label, char * _fmt) {
+extern "C" void __c__LabelText(const char * _label, const char * _fmt) {
     ImGui::LabelText(_label, _fmt);
 }
-extern "C" void __c__LabelTextV(char * _label, char * _fmt, char * _args) {
+extern "C" void __c__LabelTextV(const char * _label, const char * _fmt, char * _args) {
     ImGui::LabelTextV(_label, _fmt, _args);
 }
-extern "C" void __c__BulletText(char * _fmt) {
+extern "C" void __c__BulletText(const char * _fmt) {
     ImGui::BulletText(_fmt);
 }
-extern "C" void __c__BulletTextV(char * _fmt, char * _args) {
+extern "C" void __c__BulletTextV(const char * _fmt, char * _args) {
     ImGui::BulletTextV(_fmt, _args);
 }
-extern "C" void __c__Button(bool *ret, char * _label, ImVec2 * _size) {
+extern "C" void __c__Button(bool *ret, const char * _label, ImVec2 * _size) {
     *ret = (bool )ImGui::Button(_label, *_size);
 }
-extern "C" void __c__SmallButton(bool *ret, char * _label) {
+extern "C" void __c__SmallButton(bool *ret, const char * _label) {
     *ret = (bool )ImGui::SmallButton(_label);
 }
-extern "C" void __c__InvisibleButton(bool *ret, char * _str_id, ImVec2 * _size) {
-    *ret = (bool )ImGui::InvisibleButton(_str_id, *_size);
+extern "C" void __c__InvisibleButton(bool *ret, const char * _str_id, ImVec2 * _size, int32_t _flags) {
+    *ret = (bool )ImGui::InvisibleButton(_str_id, *_size, _flags);
 }
-extern "C" void __c__ArrowButton(bool *ret, char * _str_id, int32_t _dir) {
+extern "C" void __c__ArrowButton(bool *ret, const char * _str_id, int32_t _dir) {
     *ret = (bool )ImGui::ArrowButton(_str_id, _dir);
 }
 extern "C" void __c__Image(void * _user_texture_id, ImVec2 * _size, ImVec2 * _uv0, ImVec2 * _uv1, ImVec4 * _tint_col, ImVec4 * _border_col) {
@@ -1312,208 +1430,208 @@ extern "C" void __c__Image(void * _user_texture_id, ImVec2 * _size, ImVec2 * _uv
 extern "C" void __c__ImageButton(bool *ret, void * _user_texture_id, ImVec2 * _size, ImVec2 * _uv0, ImVec2 * _uv1, int32_t _frame_padding, ImVec4 * _bg_col, ImVec4 * _tint_col) {
     *ret = (bool )ImGui::ImageButton(_user_texture_id, *_size, *_uv0, *_uv1, _frame_padding, *_bg_col, *_tint_col);
 }
-extern "C" void __c__Checkbox(bool *ret, char * _label, bool * _v) {
+extern "C" void __c__Checkbox(bool *ret, const char * _label, bool * _v) {
     *ret = (bool )ImGui::Checkbox(_label, _v);
 }
-extern "C" void __c__CheckboxFlags(bool *ret, char * _label, uint32_t * _flags, uint32_t _flags_value) {
+extern "C" void __c__CheckboxFlags(bool *ret, const char * _label, uint32_t * _flags, uint32_t _flags_value) {
     *ret = (bool )ImGui::CheckboxFlags(_label, _flags, _flags_value);
 }
-extern "C" void __c__RadioButton(bool *ret, char * _label, bool _active) {
+extern "C" void __c__RadioButton(bool *ret, const char * _label, bool _active) {
     *ret = (bool )ImGui::RadioButton(_label, _active);
 }
-extern "C" void __c__RadioButton_2(bool *ret, char * _label, int32_t * _v, int32_t _v_button) {
+extern "C" void __c__RadioButton_2(bool *ret, const char * _label, int32_t * _v, int32_t _v_button) {
     *ret = (bool )ImGui::RadioButton(_label, _v, _v_button);
 }
-extern "C" void __c__ProgressBar(float _fraction, ImVec2 * _size_arg, char * _overlay) {
+extern "C" void __c__ProgressBar(float _fraction, ImVec2 * _size_arg, const char * _overlay) {
     ImGui::ProgressBar(_fraction, *_size_arg, _overlay);
 }
 extern "C" void __c__Bullet() {
     ImGui::Bullet();
 }
-extern "C" void __c__BeginCombo(bool *ret, char * _label, char * _preview_value, int32_t _flags) {
+extern "C" void __c__BeginCombo(bool *ret, const char * _label, const char * _preview_value, int32_t _flags) {
     *ret = (bool )ImGui::BeginCombo(_label, _preview_value, _flags);
 }
 extern "C" void __c__EndCombo() {
     ImGui::EndCombo();
 }
-extern "C" void __c__Combo(bool *ret, char * _label, int32_t * _current_item, char * * _items, int32_t _items_count, int32_t _popup_max_height_in_items) {
+extern "C" void __c__Combo(bool *ret, const char * _label, int32_t * _current_item, const char * * _items, int32_t _items_count, int32_t _popup_max_height_in_items) {
     *ret = (bool )ImGui::Combo(_label, _current_item, _items, _items_count, _popup_max_height_in_items);
 }
-extern "C" void __c__Combo_2(bool *ret, char * _label, int32_t * _current_item, char * _items_separated_by_zeros, int32_t _popup_max_height_in_items) {
+extern "C" void __c__Combo_2(bool *ret, const char * _label, int32_t * _current_item, const char * _items_separated_by_zeros, int32_t _popup_max_height_in_items) {
     *ret = (bool )ImGui::Combo(_label, _current_item, _items_separated_by_zeros, _popup_max_height_in_items);
 }
-extern "C" void __c__Combo_3(bool *ret, char * _label, int32_t * _current_item, bool (*_items_getter)(void * , int32_t , const char * * ), void * _data, int32_t _items_count, int32_t _popup_max_height_in_items) {
+extern "C" void __c__Combo_3(bool *ret, const char * _label, int32_t * _current_item, bool (*_items_getter)(void * , int32_t , const char * * ), void * _data, int32_t _items_count, int32_t _popup_max_height_in_items) {
     *ret = (bool )ImGui::Combo(_label, _current_item, _items_getter, _data, _items_count, _popup_max_height_in_items);
 }
-extern "C" void __c__DragFloat(bool *ret, char * _label, float * _v, float _v_speed, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::DragFloat(_label, _v, _v_speed, _v_min, _v_max, _format, _power);
+extern "C" void __c__DragFloat(bool *ret, const char * _label, float * _v, float _v_speed, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragFloat(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragFloat2(bool *ret, char * _label, float * _v, float _v_speed, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::DragFloat2(_label, _v, _v_speed, _v_min, _v_max, _format, _power);
+extern "C" void __c__DragFloat2(bool *ret, const char * _label, float * _v, float _v_speed, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragFloat2(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragFloat3(bool *ret, char * _label, float * _v, float _v_speed, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::DragFloat3(_label, _v, _v_speed, _v_min, _v_max, _format, _power);
+extern "C" void __c__DragFloat3(bool *ret, const char * _label, float * _v, float _v_speed, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragFloat3(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragFloat4(bool *ret, char * _label, float * _v, float _v_speed, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::DragFloat4(_label, _v, _v_speed, _v_min, _v_max, _format, _power);
+extern "C" void __c__DragFloat4(bool *ret, const char * _label, float * _v, float _v_speed, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragFloat4(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragFloatRange2(bool *ret, char * _label, float * _v_current_min, float * _v_current_max, float _v_speed, float _v_min, float _v_max, char * _format, char * _format_max, float _power) {
-    *ret = (bool )ImGui::DragFloatRange2(_label, _v_current_min, _v_current_max, _v_speed, _v_min, _v_max, _format, _format_max, _power);
+extern "C" void __c__DragFloatRange2(bool *ret, const char * _label, float * _v_current_min, float * _v_current_max, float _v_speed, float _v_min, float _v_max, const char * _format, const char * _format_max, int32_t _flags) {
+    *ret = (bool )ImGui::DragFloatRange2(_label, _v_current_min, _v_current_max, _v_speed, _v_min, _v_max, _format, _format_max, _flags);
 }
-extern "C" void __c__DragInt(bool *ret, char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::DragInt(_label, _v, _v_speed, _v_min, _v_max, _format);
+extern "C" void __c__DragInt(bool *ret, const char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragInt(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragInt2(bool *ret, char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::DragInt2(_label, _v, _v_speed, _v_min, _v_max, _format);
+extern "C" void __c__DragInt2(bool *ret, const char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragInt2(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragInt3(bool *ret, char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::DragInt3(_label, _v, _v_speed, _v_min, _v_max, _format);
+extern "C" void __c__DragInt3(bool *ret, const char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragInt3(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragInt4(bool *ret, char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::DragInt4(_label, _v, _v_speed, _v_min, _v_max, _format);
+extern "C" void __c__DragInt4(bool *ret, const char * _label, int32_t * _v, float _v_speed, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragInt4(_label, _v, _v_speed, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__DragIntRange2(bool *ret, char * _label, int32_t * _v_current_min, int32_t * _v_current_max, float _v_speed, int32_t _v_min, int32_t _v_max, char * _format, char * _format_max) {
-    *ret = (bool )ImGui::DragIntRange2(_label, _v_current_min, _v_current_max, _v_speed, _v_min, _v_max, _format, _format_max);
+extern "C" void __c__DragIntRange2(bool *ret, const char * _label, int32_t * _v_current_min, int32_t * _v_current_max, float _v_speed, int32_t _v_min, int32_t _v_max, const char * _format, const char * _format_max, int32_t _flags) {
+    *ret = (bool )ImGui::DragIntRange2(_label, _v_current_min, _v_current_max, _v_speed, _v_min, _v_max, _format, _format_max, _flags);
 }
-extern "C" void __c__DragScalar(bool *ret, char * _label, int32_t _data_type, void * _p_data, float _v_speed, void * _p_min, void * _p_max, char * _format, float _power) {
-    *ret = (bool )ImGui::DragScalar(_label, _data_type, _p_data, _v_speed, _p_min, _p_max, _format, _power);
+extern "C" void __c__DragScalar(bool *ret, const char * _label, int32_t _data_type, void * _p_data, float _v_speed, void * _p_min, void * _p_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragScalar(_label, _data_type, _p_data, _v_speed, _p_min, _p_max, _format, _flags);
 }
-extern "C" void __c__DragScalarN(bool *ret, char * _label, int32_t _data_type, void * _p_data, int32_t _components, float _v_speed, void * _p_min, void * _p_max, char * _format, float _power) {
-    *ret = (bool )ImGui::DragScalarN(_label, _data_type, _p_data, _components, _v_speed, _p_min, _p_max, _format, _power);
+extern "C" void __c__DragScalarN(bool *ret, const char * _label, int32_t _data_type, void * _p_data, int32_t _components, float _v_speed, void * _p_min, void * _p_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragScalarN(_label, _data_type, _p_data, _components, _v_speed, _p_min, _p_max, _format, _flags);
 }
-extern "C" void __c__SliderFloat(bool *ret, char * _label, float * _v, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::SliderFloat(_label, _v, _v_min, _v_max, _format, _power);
+extern "C" void __c__SliderFloat(bool *ret, const char * _label, float * _v, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderFloat(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderFloat2(bool *ret, char * _label, float * _v, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::SliderFloat2(_label, _v, _v_min, _v_max, _format, _power);
+extern "C" void __c__SliderFloat2(bool *ret, const char * _label, float * _v, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderFloat2(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderFloat3(bool *ret, char * _label, float * _v, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::SliderFloat3(_label, _v, _v_min, _v_max, _format, _power);
+extern "C" void __c__SliderFloat3(bool *ret, const char * _label, float * _v, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderFloat3(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderFloat4(bool *ret, char * _label, float * _v, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::SliderFloat4(_label, _v, _v_min, _v_max, _format, _power);
+extern "C" void __c__SliderFloat4(bool *ret, const char * _label, float * _v, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderFloat4(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderAngle(bool *ret, char * _label, float * _v_rad, float _v_degrees_min, float _v_degrees_max, char * _format) {
-    *ret = (bool )ImGui::SliderAngle(_label, _v_rad, _v_degrees_min, _v_degrees_max, _format);
+extern "C" void __c__SliderAngle(bool *ret, const char * _label, float * _v_rad, float _v_degrees_min, float _v_degrees_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderAngle(_label, _v_rad, _v_degrees_min, _v_degrees_max, _format, _flags);
 }
-extern "C" void __c__SliderInt(bool *ret, char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::SliderInt(_label, _v, _v_min, _v_max, _format);
+extern "C" void __c__SliderInt(bool *ret, const char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderInt(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderInt2(bool *ret, char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::SliderInt2(_label, _v, _v_min, _v_max, _format);
+extern "C" void __c__SliderInt2(bool *ret, const char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderInt2(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderInt3(bool *ret, char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::SliderInt3(_label, _v, _v_min, _v_max, _format);
+extern "C" void __c__SliderInt3(bool *ret, const char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderInt3(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderInt4(bool *ret, char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::SliderInt4(_label, _v, _v_min, _v_max, _format);
+extern "C" void __c__SliderInt4(bool *ret, const char * _label, int32_t * _v, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderInt4(_label, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__SliderScalar(bool *ret, char * _label, int32_t _data_type, void * _p_data, void * _p_min, void * _p_max, char * _format, float _power) {
-    *ret = (bool )ImGui::SliderScalar(_label, _data_type, _p_data, _p_min, _p_max, _format, _power);
+extern "C" void __c__SliderScalar(bool *ret, const char * _label, int32_t _data_type, void * _p_data, void * _p_min, void * _p_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderScalar(_label, _data_type, _p_data, _p_min, _p_max, _format, _flags);
 }
-extern "C" void __c__SliderScalarN(bool *ret, char * _label, int32_t _data_type, void * _p_data, int32_t _components, void * _p_min, void * _p_max, char * _format, float _power) {
-    *ret = (bool )ImGui::SliderScalarN(_label, _data_type, _p_data, _components, _p_min, _p_max, _format, _power);
+extern "C" void __c__SliderScalarN(bool *ret, const char * _label, int32_t _data_type, void * _p_data, int32_t _components, void * _p_min, void * _p_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::SliderScalarN(_label, _data_type, _p_data, _components, _p_min, _p_max, _format, _flags);
 }
-extern "C" void __c__VSliderFloat(bool *ret, char * _label, ImVec2 * _size, float * _v, float _v_min, float _v_max, char * _format, float _power) {
-    *ret = (bool )ImGui::VSliderFloat(_label, *_size, _v, _v_min, _v_max, _format, _power);
+extern "C" void __c__VSliderFloat(bool *ret, const char * _label, ImVec2 * _size, float * _v, float _v_min, float _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::VSliderFloat(_label, *_size, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__VSliderInt(bool *ret, char * _label, ImVec2 * _size, int32_t * _v, int32_t _v_min, int32_t _v_max, char * _format) {
-    *ret = (bool )ImGui::VSliderInt(_label, *_size, _v, _v_min, _v_max, _format);
+extern "C" void __c__VSliderInt(bool *ret, const char * _label, ImVec2 * _size, int32_t * _v, int32_t _v_min, int32_t _v_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::VSliderInt(_label, *_size, _v, _v_min, _v_max, _format, _flags);
 }
-extern "C" void __c__VSliderScalar(bool *ret, char * _label, ImVec2 * _size, int32_t _data_type, void * _p_data, void * _p_min, void * _p_max, char * _format, float _power) {
-    *ret = (bool )ImGui::VSliderScalar(_label, *_size, _data_type, _p_data, _p_min, _p_max, _format, _power);
+extern "C" void __c__VSliderScalar(bool *ret, const char * _label, ImVec2 * _size, int32_t _data_type, void * _p_data, void * _p_min, void * _p_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::VSliderScalar(_label, *_size, _data_type, _p_data, _p_min, _p_max, _format, _flags);
 }
-extern "C" void __c__InputText(bool *ret, char * _label, char * _buf, uint64_t _buf_size, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
+extern "C" void __c__InputText(bool *ret, const char * _label, char * _buf, uint64_t _buf_size, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
     *ret = (bool )ImGui::InputText(_label, _buf, _buf_size, _flags, _callback, _user_data);
 }
-extern "C" void __c__InputTextMultiline(bool *ret, char * _label, char * _buf, uint64_t _buf_size, ImVec2 * _size, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
+extern "C" void __c__InputTextMultiline(bool *ret, const char * _label, char * _buf, uint64_t _buf_size, ImVec2 * _size, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
     *ret = (bool )ImGui::InputTextMultiline(_label, _buf, _buf_size, *_size, _flags, _callback, _user_data);
 }
-extern "C" void __c__InputTextWithHint(bool *ret, char * _label, char * _hint, char * _buf, uint64_t _buf_size, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
+extern "C" void __c__InputTextWithHint(bool *ret, const char * _label, const char * _hint, char * _buf, uint64_t _buf_size, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
     *ret = (bool )ImGui::InputTextWithHint(_label, _hint, _buf, _buf_size, _flags, _callback, _user_data);
 }
-extern "C" void __c__InputFloat(bool *ret, char * _label, float * _v, float _step, float _step_fast, char * _format, int32_t _flags) {
+extern "C" void __c__InputFloat(bool *ret, const char * _label, float * _v, float _step, float _step_fast, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat(_label, _v, _step, _step_fast, _format, _flags);
 }
-extern "C" void __c__InputFloat2(bool *ret, char * _label, float * _v, char * _format, int32_t _flags) {
+extern "C" void __c__InputFloat2(bool *ret, const char * _label, float * _v, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat2(_label, _v, _format, _flags);
 }
-extern "C" void __c__InputFloat3(bool *ret, char * _label, float * _v, char * _format, int32_t _flags) {
+extern "C" void __c__InputFloat3(bool *ret, const char * _label, float * _v, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat3(_label, _v, _format, _flags);
 }
-extern "C" void __c__InputFloat4(bool *ret, char * _label, float * _v, char * _format, int32_t _flags) {
+extern "C" void __c__InputFloat4(bool *ret, const char * _label, float * _v, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat4(_label, _v, _format, _flags);
 }
-extern "C" void __c__InputInt(bool *ret, char * _label, int32_t * _v, int32_t _step, int32_t _step_fast, int32_t _flags) {
+extern "C" void __c__InputInt(bool *ret, const char * _label, int32_t * _v, int32_t _step, int32_t _step_fast, int32_t _flags) {
     *ret = (bool )ImGui::InputInt(_label, _v, _step, _step_fast, _flags);
 }
-extern "C" void __c__InputInt2(bool *ret, char * _label, int32_t * _v, int32_t _flags) {
+extern "C" void __c__InputInt2(bool *ret, const char * _label, int32_t * _v, int32_t _flags) {
     *ret = (bool )ImGui::InputInt2(_label, _v, _flags);
 }
-extern "C" void __c__InputInt3(bool *ret, char * _label, int32_t * _v, int32_t _flags) {
+extern "C" void __c__InputInt3(bool *ret, const char * _label, int32_t * _v, int32_t _flags) {
     *ret = (bool )ImGui::InputInt3(_label, _v, _flags);
 }
-extern "C" void __c__InputInt4(bool *ret, char * _label, int32_t * _v, int32_t _flags) {
+extern "C" void __c__InputInt4(bool *ret, const char * _label, int32_t * _v, int32_t _flags) {
     *ret = (bool )ImGui::InputInt4(_label, _v, _flags);
 }
-extern "C" void __c__InputDouble(bool *ret, char * _label, double * _v, double _step, double _step_fast, char * _format, int32_t _flags) {
+extern "C" void __c__InputDouble(bool *ret, const char * _label, double * _v, double _step, double _step_fast, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputDouble(_label, _v, _step, _step_fast, _format, _flags);
 }
-extern "C" void __c__InputScalar(bool *ret, char * _label, int32_t _data_type, void * _p_data, void * _p_step, void * _p_step_fast, char * _format, int32_t _flags) {
+extern "C" void __c__InputScalar(bool *ret, const char * _label, int32_t _data_type, void * _p_data, void * _p_step, void * _p_step_fast, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputScalar(_label, _data_type, _p_data, _p_step, _p_step_fast, _format, _flags);
 }
-extern "C" void __c__InputScalarN(bool *ret, char * _label, int32_t _data_type, void * _p_data, int32_t _components, void * _p_step, void * _p_step_fast, char * _format, int32_t _flags) {
+extern "C" void __c__InputScalarN(bool *ret, const char * _label, int32_t _data_type, void * _p_data, int32_t _components, void * _p_step, void * _p_step_fast, const char * _format, int32_t _flags) {
     *ret = (bool )ImGui::InputScalarN(_label, _data_type, _p_data, _components, _p_step, _p_step_fast, _format, _flags);
 }
-extern "C" void __c__ColorEdit3(bool *ret, char * _label, float * _col, int32_t _flags) {
+extern "C" void __c__ColorEdit3(bool *ret, const char * _label, float * _col, int32_t _flags) {
     *ret = (bool )ImGui::ColorEdit3(_label, _col, _flags);
 }
-extern "C" void __c__ColorEdit4(bool *ret, char * _label, float * _col, int32_t _flags) {
+extern "C" void __c__ColorEdit4(bool *ret, const char * _label, float * _col, int32_t _flags) {
     *ret = (bool )ImGui::ColorEdit4(_label, _col, _flags);
 }
-extern "C" void __c__ColorPicker3(bool *ret, char * _label, float * _col, int32_t _flags) {
+extern "C" void __c__ColorPicker3(bool *ret, const char * _label, float * _col, int32_t _flags) {
     *ret = (bool )ImGui::ColorPicker3(_label, _col, _flags);
 }
-extern "C" void __c__ColorPicker4(bool *ret, char * _label, float * _col, int32_t _flags, float * _ref_col) {
+extern "C" void __c__ColorPicker4(bool *ret, const char * _label, float * _col, int32_t _flags, const float * _ref_col) {
     *ret = (bool )ImGui::ColorPicker4(_label, _col, _flags, _ref_col);
 }
-extern "C" void __c__ColorButton(bool *ret, char * _desc_id, ImVec4 * _col, int32_t _flags, ImVec2* _size) {
+extern "C" void __c__ColorButton(bool *ret, const char * _desc_id, ImVec4 * _col, int32_t _flags, ImVec2* _size) {
     *ret = (bool )ImGui::ColorButton(_desc_id, *_col, _flags, *_size);
 }
 extern "C" void __c__SetColorEditOptions(int32_t _flags) {
     ImGui::SetColorEditOptions(_flags);
 }
-extern "C" void __c__TreeNode(bool *ret, char * _label) {
+extern "C" void __c__TreeNode(bool *ret, const char * _label) {
     *ret = (bool )ImGui::TreeNode(_label);
 }
-extern "C" void __c__TreeNode_2(bool *ret, char * _str_id, char * _fmt) {
+extern "C" void __c__TreeNode_2(bool *ret, const char * _str_id, const char * _fmt) {
     *ret = (bool )ImGui::TreeNode(_str_id, _fmt);
 }
-extern "C" void __c__TreeNode_3(bool *ret, void * _ptr_id, char * _fmt) {
+extern "C" void __c__TreeNode_3(bool *ret, void * _ptr_id, const char * _fmt) {
     *ret = (bool )ImGui::TreeNode(_ptr_id, _fmt);
 }
-extern "C" void __c__TreeNodeV(bool *ret, char * _str_id, char * _fmt, char * _args) {
+extern "C" void __c__TreeNodeV(bool *ret, const char * _str_id, const char * _fmt, char * _args) {
     *ret = (bool )ImGui::TreeNodeV(_str_id, _fmt, _args);
 }
-extern "C" void __c__TreeNodeV_2(bool *ret, void * _ptr_id, char * _fmt, char * _args) {
+extern "C" void __c__TreeNodeV_2(bool *ret, void * _ptr_id, const char * _fmt, char * _args) {
     *ret = (bool )ImGui::TreeNodeV(_ptr_id, _fmt, _args);
 }
-extern "C" void __c__TreeNodeEx(bool *ret, char * _label, int32_t _flags) {
+extern "C" void __c__TreeNodeEx(bool *ret, const char * _label, int32_t _flags) {
     *ret = (bool )ImGui::TreeNodeEx(_label, _flags);
 }
-extern "C" void __c__TreeNodeEx_2(bool *ret, char * _str_id, int32_t _flags, char * _fmt) {
+extern "C" void __c__TreeNodeEx_2(bool *ret, const char * _str_id, int32_t _flags, const char * _fmt) {
     *ret = (bool )ImGui::TreeNodeEx(_str_id, _flags, _fmt);
 }
-extern "C" void __c__TreeNodeEx_3(bool *ret, void * _ptr_id, int32_t _flags, char * _fmt) {
+extern "C" void __c__TreeNodeEx_3(bool *ret, void * _ptr_id, int32_t _flags, const char * _fmt) {
     *ret = (bool )ImGui::TreeNodeEx(_ptr_id, _flags, _fmt);
 }
-extern "C" void __c__TreeNodeExV(bool *ret, char * _str_id, int32_t _flags, char * _fmt, char * _args) {
+extern "C" void __c__TreeNodeExV(bool *ret, const char * _str_id, int32_t _flags, const char * _fmt, char * _args) {
     *ret = (bool )ImGui::TreeNodeExV(_str_id, _flags, _fmt, _args);
 }
-extern "C" void __c__TreeNodeExV_2(bool *ret, void * _ptr_id, int32_t _flags, char * _fmt, char * _args) {
+extern "C" void __c__TreeNodeExV_2(bool *ret, void * _ptr_id, int32_t _flags, const char * _fmt, char * _args) {
     *ret = (bool )ImGui::TreeNodeExV(_ptr_id, _flags, _fmt, _args);
 }
-extern "C" void __c__TreePush(char * _str_id) {
+extern "C" void __c__TreePush(const char * _str_id) {
     ImGui::TreePush(_str_id);
 }
 extern "C" void __c__TreePush_2(void * _ptr_id) {
@@ -1525,58 +1643,58 @@ extern "C" void __c__TreePop() {
 extern "C" void __c__GetTreeNodeToLabelSpacing(float *ret) {
     *ret = (float )ImGui::GetTreeNodeToLabelSpacing();
 }
-extern "C" void __c__CollapsingHeader(bool *ret, char * _label, int32_t _flags) {
+extern "C" void __c__CollapsingHeader(bool *ret, const char * _label, int32_t _flags) {
     *ret = (bool )ImGui::CollapsingHeader(_label, _flags);
 }
-extern "C" void __c__CollapsingHeader_2(bool *ret, char * _label, bool * _p_open, int32_t _flags) {
+extern "C" void __c__CollapsingHeader_2(bool *ret, const char * _label, bool * _p_open, int32_t _flags) {
     *ret = (bool )ImGui::CollapsingHeader(_label, _p_open, _flags);
 }
 extern "C" void __c__SetNextItemOpen(bool _is_open, int32_t _cond) {
     ImGui::SetNextItemOpen(_is_open, _cond);
 }
-extern "C" void __c__Selectable(bool *ret, char * _label, bool _selected, int32_t _flags, ImVec2 * _size) {
+extern "C" void __c__Selectable(bool *ret, const char * _label, bool _selected, int32_t _flags, ImVec2 * _size) {
     *ret = (bool )ImGui::Selectable(_label, _selected, _flags, *_size);
 }
-extern "C" void __c__Selectable_2(bool *ret, char * _label, bool * _p_selected, int32_t _flags, ImVec2 * _size) {
+extern "C" void __c__Selectable_2(bool *ret, const char * _label, bool * _p_selected, int32_t _flags, ImVec2 * _size) {
     *ret = (bool )ImGui::Selectable(_label, _p_selected, _flags, *_size);
 }
-extern "C" void __c__ListBox(bool *ret, char * _label, int32_t * _current_item, char * * _items, int32_t _items_count, int32_t _height_in_items) {
+extern "C" void __c__ListBox(bool *ret, const char * _label, int32_t * _current_item, const char * * _items, int32_t _items_count, int32_t _height_in_items) {
     *ret = (bool )ImGui::ListBox(_label, _current_item, _items, _items_count, _height_in_items);
 }
-extern "C" void __c__ListBox_2(bool *ret, char * _label, int32_t * _current_item, bool (*_items_getter)(void * , int32_t , const char * * ), void * _data, int32_t _items_count, int32_t _height_in_items) {
+extern "C" void __c__ListBox_2(bool *ret, const char * _label, int32_t * _current_item, bool (*_items_getter)(void * , int32_t , const char * * ), void * _data, int32_t _items_count, int32_t _height_in_items) {
     *ret = (bool )ImGui::ListBox(_label, _current_item, _items_getter, _data, _items_count, _height_in_items);
 }
-extern "C" void __c__ListBoxHeader(bool *ret, char * _label, ImVec2 * _size) {
+extern "C" void __c__ListBoxHeader(bool *ret, const char * _label, ImVec2 * _size) {
     *ret = (bool )ImGui::ListBoxHeader(_label, *_size);
 }
-extern "C" void __c__ListBoxHeader_2(bool *ret, char * _label, int32_t _items_count, int32_t _height_in_items) {
+extern "C" void __c__ListBoxHeader_2(bool *ret, const char * _label, int32_t _items_count, int32_t _height_in_items) {
     *ret = (bool )ImGui::ListBoxHeader(_label, _items_count, _height_in_items);
 }
 extern "C" void __c__ListBoxFooter() {
     ImGui::ListBoxFooter();
 }
-extern "C" void __c__PlotLines(char * _label, float * _values, int32_t _values_count, int32_t _values_offset, char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size, int32_t _stride) {
+extern "C" void __c__PlotLines(const char * _label, const float * _values, int32_t _values_count, int32_t _values_offset, const char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size, int32_t _stride) {
     ImGui::PlotLines(_label, _values, _values_count, _values_offset, _overlay_text, _scale_min, _scale_max, *_graph_size, _stride);
 }
-extern "C" void __c__PlotLines_2(char * _label, float (*_values_getter)(void * , int32_t ), void * _data, int32_t _values_count, int32_t _values_offset, char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size) {
+extern "C" void __c__PlotLines_2(const char * _label, float (*_values_getter)(void * , int32_t ), void * _data, int32_t _values_count, int32_t _values_offset, const char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size) {
     ImGui::PlotLines(_label, _values_getter, _data, _values_count, _values_offset, _overlay_text, _scale_min, _scale_max, *_graph_size);
 }
-extern "C" void __c__PlotHistogram(char * _label, float * _values, int32_t _values_count, int32_t _values_offset, char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size, int32_t _stride) {
+extern "C" void __c__PlotHistogram(const char * _label, const float * _values, int32_t _values_count, int32_t _values_offset, const char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size, int32_t _stride) {
     ImGui::PlotHistogram(_label, _values, _values_count, _values_offset, _overlay_text, _scale_min, _scale_max, *_graph_size, _stride);
 }
-extern "C" void __c__PlotHistogram_2(char * _label, float (*_values_getter)(void * , int32_t ), void * _data, int32_t _values_count, int32_t _values_offset, char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size) {
+extern "C" void __c__PlotHistogram_2(const char * _label, float (*_values_getter)(void * , int32_t ), void * _data, int32_t _values_count, int32_t _values_offset, const char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _graph_size) {
     ImGui::PlotHistogram(_label, _values_getter, _data, _values_count, _values_offset, _overlay_text, _scale_min, _scale_max, *_graph_size);
 }
-extern "C" void __c__Value(char * _prefix, bool _b) {
+extern "C" void __c__Value(const char * _prefix, bool _b) {
     ImGui::Value(_prefix, _b);
 }
-extern "C" void __c__Value_2(char * _prefix, int32_t _v) {
+extern "C" void __c__Value_2(const char * _prefix, int32_t _v) {
     ImGui::Value(_prefix, _v);
 }
-extern "C" void __c__Value_3(char * _prefix, uint32_t _v) {
+extern "C" void __c__Value_3(const char * _prefix, uint32_t _v) {
     ImGui::Value(_prefix, _v);
 }
-extern "C" void __c__Value_4(char * _prefix, float _v, char * _float_format) {
+extern "C" void __c__Value_4(const char * _prefix, float _v, const char * _float_format) {
     ImGui::Value(_prefix, _v, _float_format);
 }
 extern "C" void __c__BeginMenuBar(bool *ret) {
@@ -1591,16 +1709,16 @@ extern "C" void __c__BeginMainMenuBar(bool *ret) {
 extern "C" void __c__EndMainMenuBar() {
     ImGui::EndMainMenuBar();
 }
-extern "C" void __c__BeginMenu(bool *ret, char * _label, bool _enabled) {
+extern "C" void __c__BeginMenu(bool *ret, const char * _label, bool _enabled) {
     *ret = (bool )ImGui::BeginMenu(_label, _enabled);
 }
 extern "C" void __c__EndMenu() {
     ImGui::EndMenu();
 }
-extern "C" void __c__MenuItem(bool *ret, char * _label, char * _shortcut, bool _selected, bool _enabled) {
+extern "C" void __c__MenuItem(bool *ret, const char * _label, const char * _shortcut, bool _selected, bool _enabled) {
     *ret = (bool )ImGui::MenuItem(_label, _shortcut, _selected, _enabled);
 }
-extern "C" void __c__MenuItem_2(bool *ret, char * _label, char * _shortcut, bool * _p_selected, bool _enabled) {
+extern "C" void __c__MenuItem_2(bool *ret, const char * _label, const char * _shortcut, bool * _p_selected, bool _enabled) {
     *ret = (bool )ImGui::MenuItem(_label, _shortcut, _p_selected, _enabled);
 }
 extern "C" void __c__BeginTooltip() {
@@ -1609,43 +1727,43 @@ extern "C" void __c__BeginTooltip() {
 extern "C" void __c__EndTooltip() {
     ImGui::EndTooltip();
 }
-extern "C" void __c__SetTooltip(char * _fmt) {
+extern "C" void __c__SetTooltip(const char * _fmt) {
     ImGui::SetTooltip(_fmt);
 }
-extern "C" void __c__SetTooltipV(char * _fmt, char * _args) {
+extern "C" void __c__SetTooltipV(const char * _fmt, char * _args) {
     ImGui::SetTooltipV(_fmt, _args);
 }
-extern "C" void __c__OpenPopup(char * _str_id) {
-    ImGui::OpenPopup(_str_id);
-}
-extern "C" void __c__BeginPopup(bool *ret, char * _str_id, int32_t _flags) {
+extern "C" void __c__BeginPopup(bool *ret, const char * _str_id, int32_t _flags) {
     *ret = (bool )ImGui::BeginPopup(_str_id, _flags);
 }
-extern "C" void __c__BeginPopupContextItem(bool *ret, char * _str_id, int32_t _mouse_button) {
-    *ret = (bool )ImGui::BeginPopupContextItem(_str_id, _mouse_button);
-}
-extern "C" void __c__BeginPopupContextWindow(bool *ret, char * _str_id, int32_t _mouse_button, bool _also_over_items) {
-    *ret = (bool )ImGui::BeginPopupContextWindow(_str_id, _mouse_button, _also_over_items);
-}
-extern "C" void __c__BeginPopupContextVoid(bool *ret, char * _str_id, int32_t _mouse_button) {
-    *ret = (bool )ImGui::BeginPopupContextVoid(_str_id, _mouse_button);
-}
-extern "C" void __c__BeginPopupModal(bool *ret, char * _name, bool * _p_open, int32_t _flags) {
+extern "C" void __c__BeginPopupModal(bool *ret, const char * _name, bool * _p_open, int32_t _flags) {
     *ret = (bool )ImGui::BeginPopupModal(_name, _p_open, _flags);
 }
 extern "C" void __c__EndPopup() {
     ImGui::EndPopup();
 }
-extern "C" void __c__OpenPopupOnItemClick(bool *ret, char * _str_id, int32_t _mouse_button) {
-    *ret = (bool )ImGui::OpenPopupOnItemClick(_str_id, _mouse_button);
+extern "C" void __c__OpenPopup(const char * _str_id, int32_t _popup_flags) {
+    ImGui::OpenPopup(_str_id, _popup_flags);
 }
-extern "C" void __c__IsPopupOpen(bool *ret, char * _str_id) {
-    *ret = (bool )ImGui::IsPopupOpen(_str_id);
+extern "C" void __c__OpenPopupContextItem(bool *ret, const char * _str_id, int32_t _popup_flags) {
+    *ret = (bool )ImGui::OpenPopupContextItem(_str_id, _popup_flags);
 }
 extern "C" void __c__CloseCurrentPopup() {
     ImGui::CloseCurrentPopup();
 }
-extern "C" void __c__Columns(int32_t _count, char * _id, bool _border) {
+extern "C" void __c__BeginPopupContextItem(bool *ret, const char * _str_id, int32_t _popup_flags) {
+    *ret = (bool )ImGui::BeginPopupContextItem(_str_id, _popup_flags);
+}
+extern "C" void __c__BeginPopupContextWindow(bool *ret, const char * _str_id, int32_t _popup_flags) {
+    *ret = (bool )ImGui::BeginPopupContextWindow(_str_id, _popup_flags);
+}
+extern "C" void __c__BeginPopupContextVoid(bool *ret, const char * _str_id, int32_t _popup_flags) {
+    *ret = (bool )ImGui::BeginPopupContextVoid(_str_id, _popup_flags);
+}
+extern "C" void __c__IsPopupOpen(bool *ret, const char * _str_id, int32_t _flags) {
+    *ret = (bool )ImGui::IsPopupOpen(_str_id, _flags);
+}
+extern "C" void __c__Columns(int32_t _count, const char * _id, bool _border) {
     ImGui::Columns(_count, _id, _border);
 }
 extern "C" void __c__NextColumn() {
@@ -1669,25 +1787,43 @@ extern "C" void __c__SetColumnOffset(int32_t _column_index, float _offset_x) {
 extern "C" void __c__GetColumnsCount(int32_t *ret) {
     *ret = (int32_t )ImGui::GetColumnsCount();
 }
-extern "C" void __c__BeginTabBar(bool *ret, char * _str_id, int32_t _flags) {
+extern "C" void __c__BeginTabBar(bool *ret, const char * _str_id, int32_t _flags) {
     *ret = (bool )ImGui::BeginTabBar(_str_id, _flags);
 }
 extern "C" void __c__EndTabBar() {
     ImGui::EndTabBar();
 }
-extern "C" void __c__BeginTabItem(bool *ret, char * _label, bool * _p_open, int32_t _flags) {
+extern "C" void __c__BeginTabItem(bool *ret, const char * _label, bool * _p_open, int32_t _flags) {
     *ret = (bool )ImGui::BeginTabItem(_label, _p_open, _flags);
 }
 extern "C" void __c__EndTabItem() {
     ImGui::EndTabItem();
 }
-extern "C" void __c__SetTabItemClosed(char * _tab_or_docked_window_label) {
+extern "C" void __c__SetTabItemClosed(const char * _tab_or_docked_window_label) {
     ImGui::SetTabItemClosed(_tab_or_docked_window_label);
+}
+extern "C" void __c__DockSpace(uint32_t _id, ImVec2 * _size, int32_t _flags, ImGuiWindowClass * _window_class) {
+    ImGui::DockSpace(_id, *_size, _flags, _window_class);
+}
+extern "C" void __c__DockSpaceOverViewport(ImGuiID *ret, ImGuiViewport * _viewport, int32_t _flags, ImGuiWindowClass * _window_class) {
+    *ret = (uint32_t )ImGui::DockSpaceOverViewport(_viewport, _flags, _window_class);
+}
+extern "C" void __c__SetNextWindowDockID(uint32_t _dock_id, int32_t _cond) {
+    ImGui::SetNextWindowDockID(_dock_id, _cond);
+}
+extern "C" void __c__SetNextWindowClass(ImGuiWindowClass * _window_class) {
+    ImGui::SetNextWindowClass(_window_class);
+}
+extern "C" void __c__GetWindowDockID(ImGuiID *ret) {
+    *ret = (uint32_t )ImGui::GetWindowDockID();
+}
+extern "C" void __c__IsWindowDocked(bool *ret) {
+    *ret = (bool )ImGui::IsWindowDocked();
 }
 extern "C" void __c__LogToTTY(int32_t _auto_open_depth) {
     ImGui::LogToTTY(_auto_open_depth);
 }
-extern "C" void __c__LogToFile(int32_t _auto_open_depth, char * _filename) {
+extern "C" void __c__LogToFile(int32_t _auto_open_depth, const char * _filename) {
     ImGui::LogToFile(_auto_open_depth, _filename);
 }
 extern "C" void __c__LogToClipboard(int32_t _auto_open_depth) {
@@ -1699,13 +1835,13 @@ extern "C" void __c__LogFinish() {
 extern "C" void __c__LogButtons() {
     ImGui::LogButtons();
 }
-extern "C" void __c__LogText(char * _fmt) {
+extern "C" void __c__LogText(const char * _fmt) {
     ImGui::LogText(_fmt);
 }
 extern "C" void __c__BeginDragDropSource(bool *ret, int32_t _flags) {
     *ret = (bool )ImGui::BeginDragDropSource(_flags);
 }
-extern "C" void __c__SetDragDropPayload(bool *ret, char * _type, void * _data, uint64_t _sz, int32_t _cond) {
+extern "C" void __c__SetDragDropPayload(bool *ret, const char * _type, void * _data, uint64_t _sz, int32_t _cond) {
     *ret = (bool )ImGui::SetDragDropPayload(_type, _data, _sz, _cond);
 }
 extern "C" void __c__EndDragDropSource() {
@@ -1714,7 +1850,7 @@ extern "C" void __c__EndDragDropSource() {
 extern "C" void __c__BeginDragDropTarget(bool *ret) {
     *ret = (bool )ImGui::BeginDragDropTarget();
 }
-extern "C" void __c__AcceptDragDropPayload(ImGuiPayload * *ret, char * _type, int32_t _flags) {
+extern "C" void __c__AcceptDragDropPayload(ImGuiPayload * *ret, const char * _type, int32_t _flags) {
     *ret = (ImGuiPayload * )ImGui::AcceptDragDropPayload(_type, _flags);
 }
 extern "C" void __c__EndDragDropTarget() {
@@ -1804,20 +1940,23 @@ extern "C" void __c__GetBackgroundDrawList(ImDrawList * *ret) {
 extern "C" void __c__GetForegroundDrawList(ImDrawList * *ret) {
     *ret = (ImDrawList * )ImGui::GetForegroundDrawList();
 }
+extern "C" void __c__GetBackgroundDrawList_2(ImDrawList * *ret, ImGuiViewport * _viewport) {
+    *ret = (ImDrawList * )ImGui::GetBackgroundDrawList(_viewport);
+}
+extern "C" void __c__GetForegroundDrawList_2(ImDrawList * *ret, ImGuiViewport * _viewport) {
+    *ret = (ImDrawList * )ImGui::GetForegroundDrawList(_viewport);
+}
 extern "C" void __c__GetDrawListSharedData(ImDrawListSharedData * *ret) {
     *ret = (ImDrawListSharedData * )ImGui::GetDrawListSharedData();
 }
-extern "C" void __c__GetStyleColorName(char * *ret, int32_t _idx) {
-    *ret = (char * )ImGui::GetStyleColorName(_idx);
+extern "C" void __c__GetStyleColorName(const char * *ret, int32_t _idx) {
+    *ret = (const char * )ImGui::GetStyleColorName(_idx);
 }
 extern "C" void __c__SetStateStorage(ImGuiStorage * _storage) {
     ImGui::SetStateStorage(_storage);
 }
 extern "C" void __c__GetStateStorage(ImGuiStorage * *ret) {
     *ret = (ImGuiStorage * )ImGui::GetStateStorage();
-}
-extern "C" void __c__CalcTextSize(ImVec2 *ret, char * _text, char * _text_end, bool _hide_text_after_double_hash, float _wrap_width) {
-    *ret = (ImVec2 )ImGui::CalcTextSize(_text, _text_end, _hide_text_after_double_hash, _wrap_width);
 }
 extern "C" void __c__CalcListClipping(int32_t _items_count, float _items_height, int32_t * _out_items_display_start, int32_t * _out_items_display_end) {
     ImGui::CalcListClipping(_items_count, _items_height, _out_items_display_start, _out_items_display_end);
@@ -1827,6 +1966,9 @@ extern "C" void __c__BeginChildFrame(bool *ret, uint32_t _id, ImVec2 * _size, in
 }
 extern "C" void __c__EndChildFrame() {
     ImGui::EndChildFrame();
+}
+extern "C" void __c__CalcTextSize(ImVec2 *ret, const char * _text, const char * _text_end, bool _hide_text_after_double_hash, float _wrap_width) {
+    *ret = (ImVec2 )ImGui::CalcTextSize(_text, _text_end, _hide_text_after_double_hash, _wrap_width);
 }
 extern "C" void __c__ColorConvertU32ToFloat4(ImVec4 *ret, uint32_t _in) {
     *ret = (ImVec4 )ImGui::ColorConvertU32ToFloat4(_in);
@@ -1903,23 +2045,26 @@ extern "C" void __c__SetMouseCursor(int32_t _cursor_type) {
 extern "C" void __c__CaptureMouseFromApp(bool _want_capture_mouse_value) {
     ImGui::CaptureMouseFromApp(_want_capture_mouse_value);
 }
-extern "C" void __c__GetClipboardText(char * *ret) {
-    *ret = (char * )ImGui::GetClipboardText();
+extern "C" void __c__GetClipboardText(const char * *ret) {
+    *ret = (const char * )ImGui::GetClipboardText();
 }
-extern "C" void __c__SetClipboardText(char * _text) {
+extern "C" void __c__SetClipboardText(const char * _text) {
     ImGui::SetClipboardText(_text);
 }
-extern "C" void __c__LoadIniSettingsFromDisk(char * _ini_filename) {
+extern "C" void __c__LoadIniSettingsFromDisk(const char * _ini_filename) {
     ImGui::LoadIniSettingsFromDisk(_ini_filename);
 }
-extern "C" void __c__LoadIniSettingsFromMemory(char * _ini_data, uint64_t _ini_size) {
+extern "C" void __c__LoadIniSettingsFromMemory(const char * _ini_data, uint64_t _ini_size) {
     ImGui::LoadIniSettingsFromMemory(_ini_data, _ini_size);
 }
-extern "C" void __c__SaveIniSettingsToDisk(char * _ini_filename) {
+extern "C" void __c__SaveIniSettingsToDisk(const char * _ini_filename) {
     ImGui::SaveIniSettingsToDisk(_ini_filename);
 }
-extern "C" void __c__SaveIniSettingsToMemory(char * *ret, size_t * _out_ini_size) {
-    *ret = (char * )ImGui::SaveIniSettingsToMemory(_out_ini_size);
+extern "C" void __c__SaveIniSettingsToMemory(const char * *ret, size_t * _out_ini_size) {
+    *ret = (const char * )ImGui::SaveIniSettingsToMemory(_out_ini_size);
+}
+extern "C" void __c__DebugCheckVersionAndDataLayout(bool *ret, const char * _version_str, uint64_t _sz_io, uint64_t _sz_style, uint64_t _sz_vec2, uint64_t _sz_vec4, uint64_t _sz_drawvert, uint64_t _sz_drawidx) {
+    *ret = (bool )ImGui::DebugCheckVersionAndDataLayout(_version_str, _sz_io, _sz_style, _sz_vec2, _sz_vec4, _sz_drawvert, _sz_drawidx);
 }
 extern "C" void __c__SetAllocatorFunctions(void * (*_alloc_func)(uint64_t , void * ), void (*_free_func)(void * , void * ), void * _user_data) {
     ImGui::SetAllocatorFunctions(_alloc_func, _free_func, _user_data);
@@ -1930,97 +2075,133 @@ extern "C" void __c__MemAlloc(void * *ret, uint64_t _size) {
 extern "C" void __c__MemFree(void * _ptr) {
     ImGui::MemFree(_ptr);
 }
-extern "C" void __c__InputFloat_2(bool *ret, char * _label, float * _v, float _step, float _step_fast, int32_t _decimal_precision, int32_t _flags) {
+extern "C" void __c__GetPlatformIO(ImGuiPlatformIO * *ret) {
+    *ret = (ImGuiPlatformIO * )&ImGui::GetPlatformIO();
+}
+extern "C" void __c__GetMainViewport(ImGuiViewport * *ret) {
+    *ret = (ImGuiViewport * )ImGui::GetMainViewport();
+}
+extern "C" void __c__UpdatePlatformWindows() {
+    ImGui::UpdatePlatformWindows();
+}
+extern "C" void __c__RenderPlatformWindowsDefault(void * _platform_render_arg, void * _renderer_render_arg) {
+    ImGui::RenderPlatformWindowsDefault(_platform_render_arg, _renderer_render_arg);
+}
+extern "C" void __c__DestroyPlatformWindows() {
+    ImGui::DestroyPlatformWindows();
+}
+extern "C" void __c__FindViewportByID(ImGuiViewport * *ret, uint32_t _id) {
+    *ret = (ImGuiViewport * )ImGui::FindViewportByID(_id);
+}
+extern "C" void __c__FindViewportByPlatformHandle(ImGuiViewport * *ret, void * _platform_handle) {
+    *ret = (ImGuiViewport * )ImGui::FindViewportByPlatformHandle(_platform_handle);
+}
+extern "C" void __c__DragScalar_2(bool *ret, const char * _label, int32_t _data_type, void * _p_data, float _v_speed, void * _p_min, void * _p_max, const char * _format, float _power) {
+    *ret = (bool )ImGui::DragScalar(_label, _data_type, _p_data, _v_speed, _p_min, _p_max, _format, _power);
+}
+extern "C" void __c__DragScalarN_2(bool *ret, const char * _label, int32_t _data_type, void * _p_data, int32_t _components, float _v_speed, void * _p_min, void * _p_max, const char * _format, float _power) {
+    *ret = (bool )ImGui::DragScalarN(_label, _data_type, _p_data, _components, _v_speed, _p_min, _p_max, _format, _power);
+}
+extern "C" void __c__SliderScalar_2(bool *ret, const char * _label, int32_t _data_type, void * _p_data, void * _p_min, void * _p_max, const char * _format, float _power) {
+    *ret = (bool )ImGui::SliderScalar(_label, _data_type, _p_data, _p_min, _p_max, _format, _power);
+}
+extern "C" void __c__SliderScalarN_2(bool *ret, const char * _label, int32_t _data_type, void * _p_data, int32_t _components, void * _p_min, void * _p_max, const char * _format, float _power) {
+    *ret = (bool )ImGui::SliderScalarN(_label, _data_type, _p_data, _components, _p_min, _p_max, _format, _power);
+}
+extern "C" void __c__InputFloat_2(bool *ret, const char * _label, float * _v, float _step, float _step_fast, int32_t _decimal_precision, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat(_label, _v, _step, _step_fast, _decimal_precision, _flags);
 }
-extern "C" void __c__InputFloat2_2(bool *ret, char * _label, float * _v, int32_t _decimal_precision, int32_t _flags) {
+extern "C" void __c__InputFloat2_2(bool *ret, const char * _label, float * _v, int32_t _decimal_precision, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat2(_label, _v, _decimal_precision, _flags);
 }
-extern "C" void __c__InputFloat3_2(bool *ret, char * _label, float * _v, int32_t _decimal_precision, int32_t _flags) {
+extern "C" void __c__InputFloat3_2(bool *ret, const char * _label, float * _v, int32_t _decimal_precision, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat3(_label, _v, _decimal_precision, _flags);
 }
-extern "C" void __c__InputFloat4_2(bool *ret, char * _label, float * _v, int32_t _decimal_precision, int32_t _flags) {
+extern "C" void __c__InputFloat4_2(bool *ret, const char * _label, float * _v, int32_t _decimal_precision, int32_t _flags) {
     *ret = (bool )ImGui::InputFloat4(_label, _v, _decimal_precision, _flags);
 }
 extern "C" void __c__ImHashData(ImU32 *ret, void * _data, uint64_t _data_size, uint32_t _seed) {
     *ret = (uint32_t )ImHashData(_data, _data_size, _seed);
 }
-extern "C" void __c__ImHashStr(ImU32 *ret, char * _data, uint64_t _data_size, uint32_t _seed) {
+extern "C" void __c__ImHashStr(ImU32 *ret, const char * _data, uint64_t _data_size, uint32_t _seed) {
     *ret = (uint32_t )ImHashStr(_data, _data_size, _seed);
 }
-extern "C" void __c__ImStricmp(int32_t *ret, char * _str1, char * _str2) {
+extern "C" void __c__ImAlphaBlendColors(ImU32 *ret, uint32_t _col_a, uint32_t _col_b) {
+    *ret = (uint32_t )ImAlphaBlendColors(_col_a, _col_b);
+}
+extern "C" void __c__ImStricmp(int32_t *ret, const char * _str1, const char * _str2) {
     *ret = (int32_t )ImStricmp(_str1, _str2);
 }
-extern "C" void __c__ImStrnicmp(int32_t *ret, char * _str1, char * _str2, uint64_t _count) {
+extern "C" void __c__ImStrnicmp(int32_t *ret, const char * _str1, const char * _str2, uint64_t _count) {
     *ret = (int32_t )ImStrnicmp(_str1, _str2, _count);
 }
-extern "C" void __c__ImStrncpy(char * _dst, char * _src, uint64_t _count) {
+extern "C" void __c__ImStrncpy(char * _dst, const char * _src, uint64_t _count) {
     ImStrncpy(_dst, _src, _count);
 }
-extern "C" void __c__ImStrdup(char * *ret, char * _str) {
+extern "C" void __c__ImStrdup(char * *ret, const char * _str) {
     *ret = (char * )ImStrdup(_str);
 }
-extern "C" void __c__ImStrdupcpy(char * *ret, char * _dst, size_t * _p_dst_size, char * _str) {
+extern "C" void __c__ImStrdupcpy(char * *ret, char * _dst, size_t * _p_dst_size, const char * _str) {
     *ret = (char * )ImStrdupcpy(_dst, _p_dst_size, _str);
 }
-extern "C" void __c__ImStrchrRange(char * *ret, char * _str_begin, char * _str_end, char _c) {
-    *ret = (char * )ImStrchrRange(_str_begin, _str_end, _c);
+extern "C" void __c__ImStrchrRange(const char * *ret, const char * _str_begin, const char * _str_end, char _c) {
+    *ret = (const char * )ImStrchrRange(_str_begin, _str_end, _c);
 }
 extern "C" void __c__ImStrlenW(int32_t *ret, const ImWchar * _str) {
     *ret = (int32_t )ImStrlenW(_str);
 }
-extern "C" void __c__ImStreolRange(char * *ret, char * _str, char * _str_end) {
-    *ret = (char * )ImStreolRange(_str, _str_end);
+extern "C" void __c__ImStreolRange(const char * *ret, const char * _str, const char * _str_end) {
+    *ret = (const char * )ImStreolRange(_str, _str_end);
 }
 extern "C" void __c__ImStrbolW(const ImWchar * *ret, const ImWchar * _buf_mid_line, const ImWchar * _buf_begin) {
     *ret = (const ImWchar * )ImStrbolW(_buf_mid_line, _buf_begin);
 }
-extern "C" void __c__ImStristr(char * *ret, char * _haystack, char * _haystack_end, char * _needle, char * _needle_end) {
-    *ret = (char * )ImStristr(_haystack, _haystack_end, _needle, _needle_end);
+extern "C" void __c__ImStristr(const char * *ret, const char * _haystack, const char * _haystack_end, const char * _needle, const char * _needle_end) {
+    *ret = (const char * )ImStristr(_haystack, _haystack_end, _needle, _needle_end);
 }
 extern "C" void __c__ImStrTrimBlanks(char * _str) {
     ImStrTrimBlanks(_str);
 }
-extern "C" void __c__ImStrSkipBlank(char * *ret, char * _str) {
-    *ret = (char * )ImStrSkipBlank(_str);
+extern "C" void __c__ImStrSkipBlank(const char * *ret, const char * _str) {
+    *ret = (const char * )ImStrSkipBlank(_str);
 }
-extern "C" void __c__ImFormatString(int32_t *ret, char * _buf, uint64_t _buf_size, char * _fmt) {
+extern "C" void __c__ImFormatString(int32_t *ret, char * _buf, uint64_t _buf_size, const char * _fmt) {
     *ret = (int32_t )ImFormatString(_buf, _buf_size, _fmt);
 }
-extern "C" void __c__ImFormatStringV(int32_t *ret, char * _buf, uint64_t _buf_size, char * _fmt, char * _args) {
+extern "C" void __c__ImFormatStringV(int32_t *ret, char * _buf, uint64_t _buf_size, const char * _fmt, char * _args) {
     *ret = (int32_t )ImFormatStringV(_buf, _buf_size, _fmt, _args);
 }
-extern "C" void __c__ImParseFormatFindStart(char * *ret, char * _format) {
-    *ret = (char * )ImParseFormatFindStart(_format);
+extern "C" void __c__ImParseFormatFindStart(const char * *ret, const char * _format) {
+    *ret = (const char * )ImParseFormatFindStart(_format);
 }
-extern "C" void __c__ImParseFormatFindEnd(char * *ret, char * _format) {
-    *ret = (char * )ImParseFormatFindEnd(_format);
+extern "C" void __c__ImParseFormatFindEnd(const char * *ret, const char * _format) {
+    *ret = (const char * )ImParseFormatFindEnd(_format);
 }
-extern "C" void __c__ImParseFormatTrimDecorations(char * *ret, char * _format, char * _buf, uint64_t _buf_size) {
-    *ret = (char * )ImParseFormatTrimDecorations(_format, _buf, _buf_size);
+extern "C" void __c__ImParseFormatTrimDecorations(const char * *ret, const char * _format, char * _buf, uint64_t _buf_size) {
+    *ret = (const char * )ImParseFormatTrimDecorations(_format, _buf, _buf_size);
 }
-extern "C" void __c__ImParseFormatPrecision(int32_t *ret, char * _format, int32_t _default_value) {
+extern "C" void __c__ImParseFormatPrecision(int32_t *ret, const char * _format, int32_t _default_value) {
     *ret = (int32_t )ImParseFormatPrecision(_format, _default_value);
 }
 extern "C" void __c__ImTextStrToUtf8(int32_t *ret, char * _buf, int32_t _buf_size, const ImWchar * _in_text, const ImWchar * _in_text_end) {
     *ret = (int32_t )ImTextStrToUtf8(_buf, _buf_size, _in_text, _in_text_end);
 }
-extern "C" void __c__ImTextCharFromUtf8(int32_t *ret, uint32_t * _out_char, char * _in_text, char * _in_text_end) {
+extern "C" void __c__ImTextCharFromUtf8(int32_t *ret, uint32_t * _out_char, const char * _in_text, const char * _in_text_end) {
     *ret = (int32_t )ImTextCharFromUtf8(_out_char, _in_text, _in_text_end);
 }
-extern "C" void __c__ImTextStrFromUtf8(int32_t *ret, ImWchar * _buf, int32_t _buf_size, char * _in_text, char * _in_text_end, const char * * _in_remaining) {
+extern "C" void __c__ImTextStrFromUtf8(int32_t *ret, ImWchar * _buf, int32_t _buf_size, const char * _in_text, const char * _in_text_end, const char * * _in_remaining) {
     *ret = (int32_t )ImTextStrFromUtf8(_buf, _buf_size, _in_text, _in_text_end, _in_remaining);
 }
-extern "C" void __c__ImTextCountCharsFromUtf8(int32_t *ret, char * _in_text, char * _in_text_end) {
+extern "C" void __c__ImTextCountCharsFromUtf8(int32_t *ret, const char * _in_text, const char * _in_text_end) {
     *ret = (int32_t )ImTextCountCharsFromUtf8(_in_text, _in_text_end);
 }
-extern "C" void __c__ImTextCountUtf8BytesFromChar(int32_t *ret, char * _in_text, char * _in_text_end) {
+extern "C" void __c__ImTextCountUtf8BytesFromChar(int32_t *ret, const char * _in_text, const char * _in_text_end) {
     *ret = (int32_t )ImTextCountUtf8BytesFromChar(_in_text, _in_text_end);
 }
 extern "C" void __c__ImTextCountUtf8BytesFromStr(int32_t *ret, const ImWchar * _in_text, const ImWchar * _in_text_end) {
     *ret = (int32_t )ImTextCountUtf8BytesFromStr(_in_text, _in_text_end);
 }
-extern "C" void __c__ImFileOpen(ImFileHandle *ret, char * _filename, char * _mode) {
+extern "C" void __c__ImFileOpen(ImFileHandle *ret, const char * _filename, const char * _mode) {
     *ret = (FILE * )ImFileOpen(_filename, _mode);
 }
 extern "C" void __c__ImFileClose(bool *ret, FILE * _file) {
@@ -2035,7 +2216,7 @@ extern "C" void __c__ImFileRead(ImU64 *ret, void * _data, uint64_t _size, uint64
 extern "C" void __c__ImFileWrite(ImU64 *ret, void * _data, uint64_t _size, uint64_t _count, FILE * _file) {
     *ret = (uint64_t )ImFileWrite(_data, _size, _count, _file);
 }
-extern "C" void __c__ImFileLoadToMemory(void * *ret, char * _filename, char * _mode, size_t * _out_file_size, int32_t _padding_bytes) {
+extern "C" void __c__ImFileLoadToMemory(void * *ret, const char * _filename, const char * _mode, size_t * _out_file_size, int32_t _padding_bytes) {
     *ret = (void * )ImFileLoadToMemory(_filename, _mode, _out_file_size, _padding_bytes);
 }
 extern "C" void __c__ImBezierCalc(ImVec2 *ret, ImVec2 * _p1, ImVec2 * _p2, ImVec2 * _p3, ImVec2 * _p4, float _t) {
@@ -2065,23 +2246,8 @@ extern "C" void __c__ImGetDirQuadrantFromDelta(ImGuiDir *ret, float _dx, float _
 extern "C" void __c__FindWindowByID(ImGuiWindow * *ret, uint32_t _id) {
     *ret = (ImGuiWindow * )ImGui::FindWindowByID(_id);
 }
-extern "C" void __c__FindWindowByName(ImGuiWindow * *ret, char * _name) {
+extern "C" void __c__FindWindowByName(ImGuiWindow * *ret, const char * _name) {
     *ret = (ImGuiWindow * )ImGui::FindWindowByName(_name);
-}
-extern "C" void __c__FocusWindow(ImGuiWindow * _window) {
-    ImGui::FocusWindow(_window);
-}
-extern "C" void __c__FocusTopMostWindowUnderOne(ImGuiWindow * _under_this_window, ImGuiWindow * _ignore_window) {
-    ImGui::FocusTopMostWindowUnderOne(_under_this_window, _ignore_window);
-}
-extern "C" void __c__BringWindowToFocusFront(ImGuiWindow * _window) {
-    ImGui::BringWindowToFocusFront(_window);
-}
-extern "C" void __c__BringWindowToDisplayFront(ImGuiWindow * _window) {
-    ImGui::BringWindowToDisplayFront(_window);
-}
-extern "C" void __c__BringWindowToDisplayBack(ImGuiWindow * _window) {
-    ImGui::BringWindowToDisplayBack(_window);
 }
 extern "C" void __c__UpdateWindowParentAndRootLinks(ImGuiWindow * _window, int32_t _flags, ImGuiWindow * _parent_window) {
     ImGui::UpdateWindowParentAndRootLinks(_window, _flags, _parent_window);
@@ -2107,11 +2273,23 @@ extern "C" void __c__SetWindowSize_3(ImGuiWindow * _window, ImVec2 * _size, int3
 extern "C" void __c__SetWindowCollapsed_3(ImGuiWindow * _window, bool _collapsed, int32_t _cond) {
     ImGui::SetWindowCollapsed(_window, _collapsed, _cond);
 }
-extern "C" void __c__GcCompactTransientWindowBuffers(ImGuiWindow * _window) {
-    ImGui::GcCompactTransientWindowBuffers(_window);
+extern "C" void __c__SetWindowHitTestHole(ImGuiWindow * _window, ImVec2 * _pos, ImVec2 * _size) {
+    ImGui::SetWindowHitTestHole(_window, *_pos, *_size);
 }
-extern "C" void __c__GcAwakeTransientWindowBuffers(ImGuiWindow * _window) {
-    ImGui::GcAwakeTransientWindowBuffers(_window);
+extern "C" void __c__FocusWindow(ImGuiWindow * _window) {
+    ImGui::FocusWindow(_window);
+}
+extern "C" void __c__FocusTopMostWindowUnderOne(ImGuiWindow * _under_this_window, ImGuiWindow * _ignore_window) {
+    ImGui::FocusTopMostWindowUnderOne(_under_this_window, _ignore_window);
+}
+extern "C" void __c__BringWindowToFocusFront(ImGuiWindow * _window) {
+    ImGui::BringWindowToFocusFront(_window);
+}
+extern "C" void __c__BringWindowToDisplayFront(ImGuiWindow * _window) {
+    ImGui::BringWindowToDisplayFront(_window);
+}
+extern "C" void __c__BringWindowToDisplayBack(ImGuiWindow * _window) {
+    ImGui::BringWindowToDisplayBack(_window);
 }
 extern "C" void __c__SetCurrentFont(ImFont * _font) {
     ImGui::SetCurrentFont(_font);
@@ -2128,11 +2306,26 @@ extern "C" void __c__UpdateHoveredWindowAndCaptureFlags() {
 extern "C" void __c__StartMouseMovingWindow(ImGuiWindow * _window) {
     ImGui::StartMouseMovingWindow(_window);
 }
+extern "C" void __c__StartMouseMovingWindowOrNode(ImGuiWindow * _window, ImGuiDockNode * _node, bool _undock_floating_node) {
+    ImGui::StartMouseMovingWindowOrNode(_window, _node, _undock_floating_node);
+}
 extern "C" void __c__UpdateMouseMovingWindowNewFrame() {
     ImGui::UpdateMouseMovingWindowNewFrame();
 }
 extern "C" void __c__UpdateMouseMovingWindowEndFrame() {
     ImGui::UpdateMouseMovingWindowEndFrame();
+}
+extern "C" void __c__TranslateWindowsInViewport(ImGuiViewportP * _viewport, ImVec2 * _old_pos, ImVec2 * _new_pos) {
+    ImGui::TranslateWindowsInViewport(_viewport, *_old_pos, *_new_pos);
+}
+extern "C" void __c__ScaleWindowsInViewport(ImGuiViewportP * _viewport, float _scale) {
+    ImGui::ScaleWindowsInViewport(_viewport, _scale);
+}
+extern "C" void __c__DestroyPlatformWindow(ImGuiViewportP * _viewport) {
+    ImGui::DestroyPlatformWindow(_viewport);
+}
+extern "C" void __c__ShowViewportThumbnails() {
+    ImGui::ShowViewportThumbnails();
 }
 extern "C" void __c__MarkIniSettingsDirty() {
     ImGui::MarkIniSettingsDirty();
@@ -2140,23 +2333,29 @@ extern "C" void __c__MarkIniSettingsDirty() {
 extern "C" void __c__MarkIniSettingsDirty_2(ImGuiWindow * _window) {
     ImGui::MarkIniSettingsDirty(_window);
 }
-extern "C" void __c__CreateNewWindowSettings(ImGuiWindowSettings * *ret, char * _name) {
+extern "C" void __c__ClearIniSettings() {
+    ImGui::ClearIniSettings();
+}
+extern "C" void __c__CreateNewWindowSettings(ImGuiWindowSettings * *ret, const char * _name) {
     *ret = (ImGuiWindowSettings * )ImGui::CreateNewWindowSettings(_name);
 }
 extern "C" void __c__FindWindowSettings(ImGuiWindowSettings * *ret, uint32_t _id) {
     *ret = (ImGuiWindowSettings * )ImGui::FindWindowSettings(_id);
 }
-extern "C" void __c__FindOrCreateWindowSettings(ImGuiWindowSettings * *ret, char * _name) {
+extern "C" void __c__FindOrCreateWindowSettings(ImGuiWindowSettings * *ret, const char * _name) {
     *ret = (ImGuiWindowSettings * )ImGui::FindOrCreateWindowSettings(_name);
 }
-extern "C" void __c__FindSettingsHandler(ImGuiSettingsHandler * *ret, char * _type_name) {
+extern "C" void __c__FindSettingsHandler(ImGuiSettingsHandler * *ret, const char * _type_name) {
     *ret = (ImGuiSettingsHandler * )ImGui::FindSettingsHandler(_type_name);
 }
-extern "C" void __c__SetScrollX_2(ImGuiWindow * _window, float _new_scroll_x) {
-    ImGui::SetScrollX(_window, _new_scroll_x);
+extern "C" void __c__SetNextWindowScroll(ImVec2 * _scroll) {
+    ImGui::SetNextWindowScroll(*_scroll);
 }
-extern "C" void __c__SetScrollY_2(ImGuiWindow * _window, float _new_scroll_y) {
-    ImGui::SetScrollY(_window, _new_scroll_y);
+extern "C" void __c__SetScrollX_2(ImGuiWindow * _window, float _scroll_x) {
+    ImGui::SetScrollX(_window, _scroll_x);
+}
+extern "C" void __c__SetScrollY_2(ImGuiWindow * _window, float _scroll_y) {
+    ImGui::SetScrollY(_window, _scroll_y);
 }
 extern "C" void __c__SetScrollFromPosX_2(ImGuiWindow * _window, float _local_x, float _center_x_ratio) {
     ImGui::SetScrollFromPosX(_window, _local_x, _center_x_ratio);
@@ -2206,6 +2405,9 @@ extern "C" void __c__ItemHoverable(bool *ret, ImRect * _bb, uint32_t _id) {
 extern "C" void __c__IsClippedEx(bool *ret, ImRect * _bb, uint32_t _id, bool _clip_even_when_logged) {
     *ret = (bool )ImGui::IsClippedEx(*_bb, _id, _clip_even_when_logged);
 }
+extern "C" void __c__SetLastItemData(ImGuiWindow * _window, uint32_t _item_id, int32_t _status_flags, ImRect * _item_rect) {
+    ImGui::SetLastItemData(_window, _item_id, _status_flags, *_item_rect);
+}
 extern "C" void __c__FocusableItemRegister(bool *ret, ImGuiWindow * _window, uint32_t _id) {
     *ret = (bool )ImGui::FocusableItemRegister(_window, _id);
 }
@@ -2242,8 +2444,11 @@ extern "C" void __c__LogBegin(ImGuiLogType _type, int32_t _auto_open_depth) {
 extern "C" void __c__LogToBuffer(int32_t _auto_open_depth) {
     ImGui::LogToBuffer(_auto_open_depth);
 }
-extern "C" void __c__OpenPopupEx(uint32_t _id) {
-    ImGui::OpenPopupEx(_id);
+extern "C" void __c__BeginChildEx(bool *ret, const char * _name, uint32_t _id, ImVec2 * _size_arg, bool _border, int32_t _flags) {
+    *ret = (bool )ImGui::BeginChildEx(_name, _id, *_size_arg, _border, _flags);
+}
+extern "C" void __c__OpenPopupEx(uint32_t _id, int32_t _popup_flags) {
+    ImGui::OpenPopupEx(_id, _popup_flags);
 }
 extern "C" void __c__ClosePopupToLevel(int32_t _remaining, bool _restore_focus_to_window_under_popup) {
     ImGui::ClosePopupToLevel(_remaining, _restore_focus_to_window_under_popup);
@@ -2251,14 +2456,14 @@ extern "C" void __c__ClosePopupToLevel(int32_t _remaining, bool _restore_focus_t
 extern "C" void __c__ClosePopupsOverWindow(ImGuiWindow * _ref_window, bool _restore_focus_to_window_under_popup) {
     ImGui::ClosePopupsOverWindow(_ref_window, _restore_focus_to_window_under_popup);
 }
-extern "C" void __c__IsPopupOpen_2(bool *ret, uint32_t _id) {
-    *ret = (bool )ImGui::IsPopupOpen(_id);
+extern "C" void __c__IsPopupOpen_2(bool *ret, uint32_t _id, int32_t _popup_flags) {
+    *ret = (bool )ImGui::IsPopupOpen(_id, _popup_flags);
 }
 extern "C" void __c__BeginPopupEx(bool *ret, uint32_t _id, int32_t _extra_flags) {
     *ret = (bool )ImGui::BeginPopupEx(_id, _extra_flags);
 }
-extern "C" void __c__BeginTooltipEx(int32_t _extra_flags, bool _override_previous_tooltip) {
-    ImGui::BeginTooltipEx(_extra_flags, _override_previous_tooltip);
+extern "C" void __c__BeginTooltipEx(int32_t _extra_flags, int32_t _tooltip_flags) {
+    ImGui::BeginTooltipEx(_extra_flags, _tooltip_flags);
 }
 extern "C" void __c__GetTopMostPopupModal(ImGuiWindow * *ret) {
     *ret = (ImGuiWindow * )ImGui::GetTopMostPopupModal();
@@ -2296,14 +2501,110 @@ extern "C" void __c__CalcTypematicRepeatAmount(int32_t *ret, float _t0, float _t
 extern "C" void __c__ActivateItem(uint32_t _id) {
     ImGui::ActivateItem(_id);
 }
-extern "C" void __c__SetNavID(uint32_t _id, int32_t _nav_layer) {
-    ImGui::SetNavID(_id, _nav_layer);
+extern "C" void __c__SetNavID(uint32_t _id, int32_t _nav_layer, uint32_t _focus_scope_id) {
+    ImGui::SetNavID(_id, _nav_layer, _focus_scope_id);
 }
-extern "C" void __c__SetNavIDWithRectRel(uint32_t _id, int32_t _nav_layer, ImRect * _rect_rel) {
-    ImGui::SetNavIDWithRectRel(_id, _nav_layer, *_rect_rel);
+extern "C" void __c__SetNavIDWithRectRel(uint32_t _id, int32_t _nav_layer, uint32_t _focus_scope_id, ImRect * _rect_rel) {
+    ImGui::SetNavIDWithRectRel(_id, _nav_layer, _focus_scope_id, *_rect_rel);
+}
+extern "C" void __c__PushFocusScope(uint32_t _id) {
+    ImGui::PushFocusScope(_id);
+}
+extern "C" void __c__PopFocusScope() {
+    ImGui::PopFocusScope();
 }
 extern "C" void __c__IsMouseDragPastThreshold(bool *ret, int32_t _button, float _lock_threshold) {
     *ret = (bool )ImGui::IsMouseDragPastThreshold(_button, _lock_threshold);
+}
+extern "C" void __c__GetMergedKeyModFlags(ImGuiKeyModFlags *ret) {
+    *ret = (int32_t )ImGui::GetMergedKeyModFlags();
+}
+extern "C" void __c__DockContextInitialize(ImGuiContext * _ctx) {
+    ImGui::DockContextInitialize(_ctx);
+}
+extern "C" void __c__DockContextShutdown(ImGuiContext * _ctx) {
+    ImGui::DockContextShutdown(_ctx);
+}
+extern "C" void __c__DockContextClearNodes(ImGuiContext * _ctx, uint32_t _root_id, bool _clear_settings_refs) {
+    ImGui::DockContextClearNodes(_ctx, _root_id, _clear_settings_refs);
+}
+extern "C" void __c__DockContextRebuildNodes(ImGuiContext * _ctx) {
+    ImGui::DockContextRebuildNodes(_ctx);
+}
+extern "C" void __c__DockContextUpdateUndocking(ImGuiContext * _ctx) {
+    ImGui::DockContextUpdateUndocking(_ctx);
+}
+extern "C" void __c__DockContextUpdateDocking(ImGuiContext * _ctx) {
+    ImGui::DockContextUpdateDocking(_ctx);
+}
+extern "C" void __c__DockContextGenNodeID(ImGuiID *ret, ImGuiContext * _ctx) {
+    *ret = (uint32_t )ImGui::DockContextGenNodeID(_ctx);
+}
+extern "C" void __c__DockContextQueueDock(ImGuiContext * _ctx, ImGuiWindow * _target, ImGuiDockNode * _target_node, ImGuiWindow * _payload, int32_t _split_dir, float _split_ratio, bool _split_outer) {
+    ImGui::DockContextQueueDock(_ctx, _target, _target_node, _payload, _split_dir, _split_ratio, _split_outer);
+}
+extern "C" void __c__DockContextQueueUndockWindow(ImGuiContext * _ctx, ImGuiWindow * _window) {
+    ImGui::DockContextQueueUndockWindow(_ctx, _window);
+}
+extern "C" void __c__DockContextQueueUndockNode(ImGuiContext * _ctx, ImGuiDockNode * _node) {
+    ImGui::DockContextQueueUndockNode(_ctx, _node);
+}
+extern "C" void __c__DockContextCalcDropPosForDocking(bool *ret, ImGuiWindow * _target, ImGuiDockNode * _target_node, ImGuiWindow * _payload, int32_t _split_dir, bool _split_outer, ImVec2 * _out_pos) {
+    *ret = (bool )ImGui::DockContextCalcDropPosForDocking(_target, _target_node, _payload, _split_dir, _split_outer, _out_pos);
+}
+extern "C" void __c__GetWindowAlwaysWantOwnTabBar(bool *ret, ImGuiWindow * _window) {
+    *ret = (bool )ImGui::GetWindowAlwaysWantOwnTabBar(_window);
+}
+extern "C" void __c__BeginDocked(ImGuiWindow * _window, bool * _p_open) {
+    ImGui::BeginDocked(_window, _p_open);
+}
+extern "C" void __c__BeginDockableDragDropSource(ImGuiWindow * _window) {
+    ImGui::BeginDockableDragDropSource(_window);
+}
+extern "C" void __c__BeginDockableDragDropTarget(ImGuiWindow * _window) {
+    ImGui::BeginDockableDragDropTarget(_window);
+}
+extern "C" void __c__SetWindowDock(ImGuiWindow * _window, uint32_t _dock_id, int32_t _cond) {
+    ImGui::SetWindowDock(_window, _dock_id, _cond);
+}
+extern "C" void __c__DockBuilderDockWindow(const char * _window_name, uint32_t _node_id) {
+    ImGui::DockBuilderDockWindow(_window_name, _node_id);
+}
+extern "C" void __c__DockBuilderGetNode(ImGuiDockNode * *ret, uint32_t _node_id) {
+    *ret = (ImGuiDockNode * )ImGui::DockBuilderGetNode(_node_id);
+}
+extern "C" void __c__DockBuilderAddNode(ImGuiID *ret, uint32_t _node_id, int32_t _flags) {
+    *ret = (uint32_t )ImGui::DockBuilderAddNode(_node_id, _flags);
+}
+extern "C" void __c__DockBuilderRemoveNode(uint32_t _node_id) {
+    ImGui::DockBuilderRemoveNode(_node_id);
+}
+extern "C" void __c__DockBuilderRemoveNodeDockedWindows(uint32_t _node_id, bool _clear_settings_refs) {
+    ImGui::DockBuilderRemoveNodeDockedWindows(_node_id, _clear_settings_refs);
+}
+extern "C" void __c__DockBuilderRemoveNodeChildNodes(uint32_t _node_id) {
+    ImGui::DockBuilderRemoveNodeChildNodes(_node_id);
+}
+extern "C" void __c__DockBuilderSetNodePos(uint32_t _node_id, ImVec2* _pos) {
+    ImGui::DockBuilderSetNodePos(_node_id, *_pos);
+}
+extern "C" void __c__DockBuilderSetNodeSize(uint32_t _node_id, ImVec2* _size) {
+    ImGui::DockBuilderSetNodeSize(_node_id, *_size);
+}
+extern "C" void __c__DockBuilderSplitNode(ImGuiID *ret, uint32_t _node_id, int32_t _split_dir, float _size_ratio_for_node_at_dir, ImGuiID * _out_id_at_dir, ImGuiID * _out_id_at_opposite_dir) {
+    *ret = (uint32_t )ImGui::DockBuilderSplitNode(_node_id, _split_dir, _size_ratio_for_node_at_dir, _out_id_at_dir, _out_id_at_opposite_dir);
+}
+extern "C" void __c__DockBuilderCopyDockSpace(uint32_t _src_dockspace_id, uint32_t _dst_dockspace_id, ImVector<const char *> * _in_window_remap_pairs) {
+    ImGui::DockBuilderCopyDockSpace(_src_dockspace_id, _dst_dockspace_id, _in_window_remap_pairs);
+}
+extern "C" void __c__DockBuilderCopyNode(uint32_t _src_node_id, uint32_t _dst_node_id, ImVector<ImGuiID> * _out_node_remap_pairs) {
+    ImGui::DockBuilderCopyNode(_src_node_id, _dst_node_id, _out_node_remap_pairs);
+}
+extern "C" void __c__DockBuilderCopyWindowSettings(const char * _src_name, const char * _dst_name) {
+    ImGui::DockBuilderCopyWindowSettings(_src_name, _dst_name);
+}
+extern "C" void __c__DockBuilderFinish(uint32_t _node_id) {
+    ImGui::DockBuilderFinish(_node_id);
 }
 extern "C" void __c__BeginDragDropTargetCustom(bool *ret, ImRect * _bb, uint32_t _id) {
     *ret = (bool )ImGui::BeginDragDropTargetCustom(*_bb, _id);
@@ -2314,7 +2615,10 @@ extern "C" void __c__ClearDragDrop() {
 extern "C" void __c__IsDragDropPayloadBeingAccepted(bool *ret) {
     *ret = (bool )ImGui::IsDragDropPayloadBeingAccepted();
 }
-extern "C" void __c__BeginColumns(char * _str_id, int32_t _count, int32_t _flags) {
+extern "C" void __c__SetWindowClipRectBeforeSetChannel(ImGuiWindow * _window, ImRect * _clip_rect) {
+    ImGui::SetWindowClipRectBeforeSetChannel(_window, *_clip_rect);
+}
+extern "C" void __c__BeginColumns(const char * _str_id, int32_t _count, int32_t _flags) {
     ImGui::BeginColumns(_str_id, _count, _flags);
 }
 extern "C" void __c__EndColumns() {
@@ -2329,7 +2633,7 @@ extern "C" void __c__PushColumnsBackground() {
 extern "C" void __c__PopColumnsBackground() {
     ImGui::PopColumnsBackground();
 }
-extern "C" void __c__GetColumnsID(ImGuiID *ret, char * _str_id, int32_t _count) {
+extern "C" void __c__GetColumnsID(ImGuiID *ret, const char * _str_id, int32_t _count) {
     *ret = (uint32_t )ImGui::GetColumnsID(_str_id, _count);
 }
 extern "C" void __c__FindOrCreateColumns(ImGuiColumns * *ret, ImGuiWindow * _window, uint32_t _id) {
@@ -2341,11 +2645,17 @@ extern "C" void __c__GetColumnOffsetFromNorm(float *ret, ImGuiColumns * _columns
 extern "C" void __c__GetColumnNormFromOffset(float *ret, ImGuiColumns * _columns, float _offset) {
     *ret = (float )ImGui::GetColumnNormFromOffset(_columns, _offset);
 }
-extern "C" void __c__BeginTabBarEx(bool *ret, ImGuiTabBar * _tab_bar, ImRect * _bb, int32_t _flags) {
-    *ret = (bool )ImGui::BeginTabBarEx(_tab_bar, *_bb, _flags);
+extern "C" void __c__BeginTabBarEx(bool *ret, ImGuiTabBar * _tab_bar, ImRect * _bb, int32_t _flags, ImGuiDockNode * _dock_node) {
+    *ret = (bool )ImGui::BeginTabBarEx(_tab_bar, *_bb, _flags, _dock_node);
 }
 extern "C" void __c__TabBarFindTabByID(ImGuiTabItem * *ret, ImGuiTabBar * _tab_bar, uint32_t _tab_id) {
     *ret = (ImGuiTabItem * )ImGui::TabBarFindTabByID(_tab_bar, _tab_id);
+}
+extern "C" void __c__TabBarFindMostRecentlySelectedTabForActiveWindow(ImGuiTabItem * *ret, ImGuiTabBar * _tab_bar) {
+    *ret = (ImGuiTabItem * )ImGui::TabBarFindMostRecentlySelectedTabForActiveWindow(_tab_bar);
+}
+extern "C" void __c__TabBarAddTab(ImGuiTabBar * _tab_bar, int32_t _tab_flags, ImGuiWindow * _window) {
+    ImGui::TabBarAddTab(_tab_bar, _tab_flags, _window);
 }
 extern "C" void __c__TabBarRemoveTab(ImGuiTabBar * _tab_bar, uint32_t _tab_id) {
     ImGui::TabBarRemoveTab(_tab_bar, _tab_id);
@@ -2353,34 +2663,37 @@ extern "C" void __c__TabBarRemoveTab(ImGuiTabBar * _tab_bar, uint32_t _tab_id) {
 extern "C" void __c__TabBarCloseTab(ImGuiTabBar * _tab_bar, ImGuiTabItem * _tab) {
     ImGui::TabBarCloseTab(_tab_bar, _tab);
 }
-extern "C" void __c__TabBarQueueChangeTabOrder(ImGuiTabBar * _tab_bar, ImGuiTabItem * _tab, int32_t _dir) {
-    ImGui::TabBarQueueChangeTabOrder(_tab_bar, _tab, _dir);
+extern "C" void __c__TabBarQueueReorder(ImGuiTabBar * _tab_bar, ImGuiTabItem * _tab, int32_t _dir) {
+    ImGui::TabBarQueueReorder(_tab_bar, _tab, _dir);
 }
-extern "C" void __c__TabItemEx(bool *ret, ImGuiTabBar * _tab_bar, char * _label, bool * _p_open, int32_t _flags) {
-    *ret = (bool )ImGui::TabItemEx(_tab_bar, _label, _p_open, _flags);
+extern "C" void __c__TabBarProcessReorder(bool *ret, ImGuiTabBar * _tab_bar) {
+    *ret = (bool )ImGui::TabBarProcessReorder(_tab_bar);
 }
-extern "C" void __c__TabItemCalcSize(ImVec2 *ret, char * _label, bool _has_close_button) {
+extern "C" void __c__TabItemEx(bool *ret, ImGuiTabBar * _tab_bar, const char * _label, bool * _p_open, int32_t _flags, ImGuiWindow * _docked_window) {
+    *ret = (bool )ImGui::TabItemEx(_tab_bar, _label, _p_open, _flags, _docked_window);
+}
+extern "C" void __c__TabItemCalcSize(ImVec2 *ret, const char * _label, bool _has_close_button) {
     *ret = (ImVec2 )ImGui::TabItemCalcSize(_label, _has_close_button);
 }
 extern "C" void __c__TabItemBackground(ImDrawList * _draw_list, ImRect * _bb, int32_t _flags, uint32_t _col) {
     ImGui::TabItemBackground(_draw_list, *_bb, _flags, _col);
 }
-extern "C" void __c__TabItemLabelAndCloseButton(bool *ret, ImDrawList * _draw_list, ImRect * _bb, int32_t _flags, ImVec2* _frame_padding, char * _label, uint32_t _tab_id, uint32_t _close_button_id) {
-    *ret = (bool )ImGui::TabItemLabelAndCloseButton(_draw_list, *_bb, _flags, *_frame_padding, _label, _tab_id, _close_button_id);
+extern "C" void __c__TabItemLabelAndCloseButton(bool *ret, ImDrawList * _draw_list, ImRect * _bb, int32_t _flags, ImVec2* _frame_padding, const char * _label, uint32_t _tab_id, uint32_t _close_button_id, bool _is_contents_visible) {
+    *ret = (bool )ImGui::TabItemLabelAndCloseButton(_draw_list, *_bb, _flags, *_frame_padding, _label, _tab_id, _close_button_id, _is_contents_visible);
 }
-extern "C" void __c__RenderText(ImVec2* _pos, char * _text, char * _text_end, bool _hide_text_after_hash) {
+extern "C" void __c__RenderText(ImVec2* _pos, const char * _text, const char * _text_end, bool _hide_text_after_hash) {
     ImGui::RenderText(*_pos, _text, _text_end, _hide_text_after_hash);
 }
-extern "C" void __c__RenderTextWrapped(ImVec2* _pos, char * _text, char * _text_end, float _wrap_width) {
+extern "C" void __c__RenderTextWrapped(ImVec2* _pos, const char * _text, const char * _text_end, float _wrap_width) {
     ImGui::RenderTextWrapped(*_pos, _text, _text_end, _wrap_width);
 }
-extern "C" void __c__RenderTextClipped(ImVec2 * _pos_min, ImVec2 * _pos_max, char * _text, char * _text_end, ImVec2 * _text_size_if_known, ImVec2 * _align, ImRect * _clip_rect) {
+extern "C" void __c__RenderTextClipped(ImVec2 * _pos_min, ImVec2 * _pos_max, const char * _text, const char * _text_end, ImVec2 * _text_size_if_known, ImVec2 * _align, ImRect * _clip_rect) {
     ImGui::RenderTextClipped(*_pos_min, *_pos_max, _text, _text_end, _text_size_if_known, *_align, _clip_rect);
 }
-extern "C" void __c__RenderTextClippedEx(ImDrawList * _draw_list, ImVec2 * _pos_min, ImVec2 * _pos_max, char * _text, char * _text_end, ImVec2 * _text_size_if_known, ImVec2 * _align, ImRect * _clip_rect) {
+extern "C" void __c__RenderTextClippedEx(ImDrawList * _draw_list, ImVec2 * _pos_min, ImVec2 * _pos_max, const char * _text, const char * _text_end, ImVec2 * _text_size_if_known, ImVec2 * _align, ImRect * _clip_rect) {
     ImGui::RenderTextClippedEx(_draw_list, *_pos_min, *_pos_max, _text, _text_end, _text_size_if_known, *_align, _clip_rect);
 }
-extern "C" void __c__RenderTextEllipsis(ImDrawList * _draw_list, ImVec2 * _pos_min, ImVec2 * _pos_max, float _clip_max_x, float _ellipsis_max_x, char * _text, char * _text_end, ImVec2 * _text_size_if_known) {
+extern "C" void __c__RenderTextEllipsis(ImDrawList * _draw_list, ImVec2 * _pos_min, ImVec2 * _pos_max, float _clip_max_x, float _ellipsis_max_x, const char * _text, const char * _text_end, ImVec2 * _text_size_if_known) {
     ImGui::RenderTextEllipsis(_draw_list, *_pos_min, *_pos_max, _clip_max_x, _ellipsis_max_x, _text, _text_end, _text_size_if_known);
 }
 extern "C" void __c__RenderFrame(ImVec2* _p_min, ImVec2* _p_max, uint32_t _fill_col, bool _border, float _rounding) {
@@ -2389,19 +2702,16 @@ extern "C" void __c__RenderFrame(ImVec2* _p_min, ImVec2* _p_max, uint32_t _fill_
 extern "C" void __c__RenderFrameBorder(ImVec2* _p_min, ImVec2* _p_max, float _rounding) {
     ImGui::RenderFrameBorder(*_p_min, *_p_max, _rounding);
 }
-extern "C" void __c__RenderColorRectWithAlphaCheckerboard(ImVec2* _p_min, ImVec2* _p_max, uint32_t _fill_col, float _grid_step, ImVec2* _grid_off, float _rounding, int32_t _rounding_corners_flags) {
-    ImGui::RenderColorRectWithAlphaCheckerboard(*_p_min, *_p_max, _fill_col, _grid_step, *_grid_off, _rounding, _rounding_corners_flags);
-}
-extern "C" void __c__RenderCheckMark(ImVec2* _pos, uint32_t _col, float _sz) {
-    ImGui::RenderCheckMark(*_pos, _col, _sz);
+extern "C" void __c__RenderColorRectWithAlphaCheckerboard(ImDrawList * _draw_list, ImVec2* _p_min, ImVec2* _p_max, uint32_t _fill_col, float _grid_step, ImVec2* _grid_off, float _rounding, int32_t _rounding_corners_flags) {
+    ImGui::RenderColorRectWithAlphaCheckerboard(_draw_list, *_p_min, *_p_max, _fill_col, _grid_step, *_grid_off, _rounding, _rounding_corners_flags);
 }
 extern "C" void __c__RenderNavHighlight(ImRect * _bb, uint32_t _id, int32_t _flags) {
     ImGui::RenderNavHighlight(*_bb, _id, _flags);
 }
-extern "C" void __c__FindRenderedTextEnd(char * *ret, char * _text, char * _text_end) {
-    *ret = (char * )ImGui::FindRenderedTextEnd(_text, _text_end);
+extern "C" void __c__FindRenderedTextEnd(const char * *ret, const char * _text, const char * _text_end) {
+    *ret = (const char * )ImGui::FindRenderedTextEnd(_text, _text_end);
 }
-extern "C" void __c__LogRenderedText(ImVec2 * _ref_pos, char * _text, char * _text_end) {
+extern "C" void __c__LogRenderedText(ImVec2 * _ref_pos, const char * _text, const char * _text_end) {
     ImGui::LogRenderedText(_ref_pos, _text, _text_end);
 }
 extern "C" void __c__RenderArrow(ImDrawList * _draw_list, ImVec2* _pos, uint32_t _col, int32_t _dir, float _scale) {
@@ -2410,28 +2720,37 @@ extern "C" void __c__RenderArrow(ImDrawList * _draw_list, ImVec2* _pos, uint32_t
 extern "C" void __c__RenderBullet(ImDrawList * _draw_list, ImVec2* _pos, uint32_t _col) {
     ImGui::RenderBullet(_draw_list, *_pos, _col);
 }
+extern "C" void __c__RenderCheckMark(ImDrawList * _draw_list, ImVec2* _pos, uint32_t _col, float _sz) {
+    ImGui::RenderCheckMark(_draw_list, *_pos, _col, _sz);
+}
 extern "C" void __c__RenderMouseCursor(ImDrawList * _draw_list, ImVec2* _pos, float _scale, int32_t _mouse_cursor, uint32_t _col_fill, uint32_t _col_border, uint32_t _col_shadow) {
     ImGui::RenderMouseCursor(_draw_list, *_pos, _scale, _mouse_cursor, _col_fill, _col_border, _col_shadow);
 }
 extern "C" void __c__RenderArrowPointingAt(ImDrawList * _draw_list, ImVec2* _pos, ImVec2* _half_sz, int32_t _direction, uint32_t _col) {
     ImGui::RenderArrowPointingAt(_draw_list, *_pos, *_half_sz, _direction, _col);
 }
+extern "C" void __c__RenderArrowDockMenu(ImDrawList * _draw_list, ImVec2* _p_min, float _sz, uint32_t _col) {
+    ImGui::RenderArrowDockMenu(_draw_list, *_p_min, _sz, _col);
+}
 extern "C" void __c__RenderRectFilledRangeH(ImDrawList * _draw_list, ImRect * _rect, uint32_t _col, float _x_start_norm, float _x_end_norm, float _rounding) {
     ImGui::RenderRectFilledRangeH(_draw_list, *_rect, _col, _x_start_norm, _x_end_norm, _rounding);
 }
-extern "C" void __c__TextEx(char * _text, char * _text_end, int32_t _flags) {
+extern "C" void __c__RenderRectFilledWithHole(ImDrawList * _draw_list, ImRect* _outer, ImRect* _inner, uint32_t _col, float _rounding) {
+    ImGui::RenderRectFilledWithHole(_draw_list, *_outer, *_inner, _col, _rounding);
+}
+extern "C" void __c__TextEx(const char * _text, const char * _text_end, int32_t _flags) {
     ImGui::TextEx(_text, _text_end, _flags);
 }
-extern "C" void __c__ButtonEx(bool *ret, char * _label, ImVec2 * _size_arg, int32_t _flags) {
+extern "C" void __c__ButtonEx(bool *ret, const char * _label, ImVec2 * _size_arg, int32_t _flags) {
     *ret = (bool )ImGui::ButtonEx(_label, *_size_arg, _flags);
 }
 extern "C" void __c__CloseButton(bool *ret, uint32_t _id, ImVec2 * _pos) {
     *ret = (bool )ImGui::CloseButton(_id, *_pos);
 }
-extern "C" void __c__CollapseButton(bool *ret, uint32_t _id, ImVec2 * _pos) {
-    *ret = (bool )ImGui::CollapseButton(_id, *_pos);
+extern "C" void __c__CollapseButton(bool *ret, uint32_t _id, ImVec2 * _pos, ImGuiDockNode * _dock_node) {
+    *ret = (bool )ImGui::CollapseButton(_id, *_pos, _dock_node);
 }
-extern "C" void __c__ArrowButtonEx(bool *ret, char * _str_id, int32_t _dir, ImVec2* _size_arg, int32_t _flags) {
+extern "C" void __c__ArrowButtonEx(bool *ret, const char * _str_id, int32_t _dir, ImVec2* _size_arg, int32_t _flags) {
     *ret = (bool )ImGui::ArrowButtonEx(_str_id, _dir, *_size_arg, _flags);
 }
 extern "C" void __c__Scrollbar(ImGuiAxis _axis) {
@@ -2439,6 +2758,12 @@ extern "C" void __c__Scrollbar(ImGuiAxis _axis) {
 }
 extern "C" void __c__ScrollbarEx(bool *ret, ImRect * _bb, uint32_t _id, ImGuiAxis _axis, float * _p_scroll_v, float _avail_v, float _contents_v, int32_t _rounding_corners) {
     *ret = (bool )ImGui::ScrollbarEx(*_bb, _id, _axis, _p_scroll_v, _avail_v, _contents_v, _rounding_corners);
+}
+extern "C" void __c__ImageButtonEx(bool *ret, uint32_t _id, void * _texture_id, ImVec2 * _size, ImVec2 * _uv0, ImVec2 * _uv1, ImVec2 * _padding, ImVec4 * _bg_col, ImVec4 * _tint_col) {
+    *ret = (bool )ImGui::ImageButtonEx(_id, _texture_id, *_size, *_uv0, *_uv1, *_padding, *_bg_col, *_tint_col);
+}
+extern "C" void __c__GetWindowScrollbarRect(ImRect *ret, ImGuiWindow * _window, ImGuiAxis _axis) {
+    *ret = (ImRect )ImGui::GetWindowScrollbarRect(_window, _axis);
 }
 extern "C" void __c__GetWindowScrollbarID(ImGuiID *ret, ImGuiWindow * _window, ImGuiAxis _axis) {
     *ret = (uint32_t )ImGui::GetWindowScrollbarID(_window, _axis);
@@ -2452,16 +2777,16 @@ extern "C" void __c__SeparatorEx(int32_t _flags) {
 extern "C" void __c__ButtonBehavior(bool *ret, ImRect * _bb, uint32_t _id, bool * _out_hovered, bool * _out_held, int32_t _flags) {
     *ret = (bool )ImGui::ButtonBehavior(*_bb, _id, _out_hovered, _out_held, _flags);
 }
-extern "C" void __c__DragBehavior(bool *ret, uint32_t _id, int32_t _data_type, void * _p_v, float _v_speed, void * _p_min, void * _p_max, char * _format, float _power, int32_t _flags) {
-    *ret = (bool )ImGui::DragBehavior(_id, _data_type, _p_v, _v_speed, _p_min, _p_max, _format, _power, _flags);
+extern "C" void __c__DragBehavior(bool *ret, uint32_t _id, int32_t _data_type, void * _p_v, float _v_speed, void * _p_min, void * _p_max, const char * _format, int32_t _flags) {
+    *ret = (bool )ImGui::DragBehavior(_id, _data_type, _p_v, _v_speed, _p_min, _p_max, _format, _flags);
 }
-extern "C" void __c__SliderBehavior(bool *ret, ImRect * _bb, uint32_t _id, int32_t _data_type, void * _p_v, void * _p_min, void * _p_max, char * _format, float _power, int32_t _flags, ImRect * _out_grab_bb) {
-    *ret = (bool )ImGui::SliderBehavior(*_bb, _id, _data_type, _p_v, _p_min, _p_max, _format, _power, _flags, _out_grab_bb);
+extern "C" void __c__SliderBehavior(bool *ret, ImRect * _bb, uint32_t _id, int32_t _data_type, void * _p_v, void * _p_min, void * _p_max, const char * _format, int32_t _flags, ImRect * _out_grab_bb) {
+    *ret = (bool )ImGui::SliderBehavior(*_bb, _id, _data_type, _p_v, _p_min, _p_max, _format, _flags, _out_grab_bb);
 }
 extern "C" void __c__SplitterBehavior(bool *ret, ImRect * _bb, uint32_t _id, ImGuiAxis _axis, float * _size1, float * _size2, float _min_size1, float _min_size2, float _hover_extend, float _hover_visibility_delay) {
     *ret = (bool )ImGui::SplitterBehavior(*_bb, _id, _axis, _size1, _size2, _min_size1, _min_size2, _hover_extend, _hover_visibility_delay);
 }
-extern "C" void __c__TreeNodeBehavior(bool *ret, uint32_t _id, int32_t _flags, char * _label, char * _label_end) {
+extern "C" void __c__TreeNodeBehavior(bool *ret, uint32_t _id, int32_t _flags, const char * _label, const char * _label_end) {
     *ret = (bool )ImGui::TreeNodeBehavior(_id, _flags, _label, _label_end);
 }
 extern "C" void __c__TreeNodeBehaviorIsOpen(bool *ret, uint32_t _id, int32_t _flags) {
@@ -2473,32 +2798,41 @@ extern "C" void __c__TreePushOverrideID(uint32_t _id) {
 extern "C" void __c__DataTypeGetInfo(ImGuiDataTypeInfo * *ret, int32_t _data_type) {
     *ret = (ImGuiDataTypeInfo * )ImGui::DataTypeGetInfo(_data_type);
 }
-extern "C" void __c__DataTypeFormatString(int32_t *ret, char * _buf, int32_t _buf_size, int32_t _data_type, void * _p_data, char * _format) {
+extern "C" void __c__DataTypeFormatString(int32_t *ret, char * _buf, int32_t _buf_size, int32_t _data_type, void * _p_data, const char * _format) {
     *ret = (int32_t )ImGui::DataTypeFormatString(_buf, _buf_size, _data_type, _p_data, _format);
 }
 extern "C" void __c__DataTypeApplyOp(int32_t _data_type, int32_t _op, void * _output, void * _arg_1, void * _arg_2) {
     ImGui::DataTypeApplyOp(_data_type, _op, _output, _arg_1, _arg_2);
 }
-extern "C" void __c__DataTypeApplyOpFromText(bool *ret, char * _buf, char * _initial_value_buf, int32_t _data_type, void * _p_data, char * _format) {
+extern "C" void __c__DataTypeApplyOpFromText(bool *ret, const char * _buf, const char * _initial_value_buf, int32_t _data_type, void * _p_data, const char * _format) {
     *ret = (bool )ImGui::DataTypeApplyOpFromText(_buf, _initial_value_buf, _data_type, _p_data, _format);
 }
-extern "C" void __c__InputTextEx(bool *ret, char * _label, char * _hint, char * _buf, int32_t _buf_size, ImVec2 * _size_arg, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
+extern "C" void __c__DataTypeCompare(int32_t *ret, int32_t _data_type, void * _arg_1, void * _arg_2) {
+    *ret = (int32_t )ImGui::DataTypeCompare(_data_type, _arg_1, _arg_2);
+}
+extern "C" void __c__DataTypeClamp(bool *ret, int32_t _data_type, void * _p_data, void * _p_min, void * _p_max) {
+    *ret = (bool )ImGui::DataTypeClamp(_data_type, _p_data, _p_min, _p_max);
+}
+extern "C" void __c__InputTextEx(bool *ret, const char * _label, const char * _hint, char * _buf, int32_t _buf_size, ImVec2 * _size_arg, int32_t _flags, ImGuiInputTextCallback _callback, void * _user_data) {
     *ret = (bool )ImGui::InputTextEx(_label, _hint, _buf, _buf_size, *_size_arg, _flags, _callback, _user_data);
 }
-extern "C" void __c__TempInputTextScalar(bool *ret, ImRect * _bb, uint32_t _id, char * _label, int32_t _data_type, void * _p_data, char * _format) {
-    *ret = (bool )ImGui::TempInputTextScalar(*_bb, _id, _label, _data_type, _p_data, _format);
+extern "C" void __c__TempInputText(bool *ret, ImRect * _bb, uint32_t _id, const char * _label, char * _buf, int32_t _buf_size, int32_t _flags) {
+    *ret = (bool )ImGui::TempInputText(*_bb, _id, _label, _buf, _buf_size, _flags);
 }
-extern "C" void __c__ColorTooltip(char * _text, float * _col, int32_t _flags) {
+extern "C" void __c__TempInputScalar(bool *ret, ImRect * _bb, uint32_t _id, const char * _label, int32_t _data_type, void * _p_data, const char * _format, void * _p_clamp_min, void * _p_clamp_max) {
+    *ret = (bool )ImGui::TempInputScalar(*_bb, _id, _label, _data_type, _p_data, _format, _p_clamp_min, _p_clamp_max);
+}
+extern "C" void __c__ColorTooltip(const char * _text, const float * _col, int32_t _flags) {
     ImGui::ColorTooltip(_text, _col, _flags);
 }
-extern "C" void __c__ColorEditOptionsPopup(float * _col, int32_t _flags) {
+extern "C" void __c__ColorEditOptionsPopup(const float * _col, int32_t _flags) {
     ImGui::ColorEditOptionsPopup(_col, _flags);
 }
-extern "C" void __c__ColorPickerOptionsPopup(float * _ref_col, int32_t _flags) {
+extern "C" void __c__ColorPickerOptionsPopup(const float * _ref_col, int32_t _flags) {
     ImGui::ColorPickerOptionsPopup(_ref_col, _flags);
 }
-extern "C" void __c__PlotEx(ImGuiPlotType _plot_type, char * _label, float (*_values_getter)(void * , int32_t ), void * _data, int32_t _values_count, int32_t _values_offset, char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _frame_size) {
-    ImGui::PlotEx(_plot_type, _label, _values_getter, _data, _values_count, _values_offset, _overlay_text, _scale_min, _scale_max, *_frame_size);
+extern "C" void __c__PlotEx(int32_t *ret, ImGuiPlotType _plot_type, const char * _label, float (*_values_getter)(void * , int32_t ), void * _data, int32_t _values_count, int32_t _values_offset, const char * _overlay_text, float _scale_min, float _scale_max, ImVec2* _frame_size) {
+    *ret = (int32_t )ImGui::PlotEx(_plot_type, _label, _values_getter, _data, _values_count, _values_offset, _overlay_text, _scale_min, _scale_max, *_frame_size);
 }
 extern "C" void __c__ShadeVertsLinearColorGradientKeepAlpha(ImDrawList * _draw_list, int32_t _vert_start_idx, int32_t _vert_end_idx, ImVec2* _gradient_p0, ImVec2* _gradient_p1, uint32_t _col0, uint32_t _col1) {
     ImGui::ShadeVertsLinearColorGradientKeepAlpha(_draw_list, _vert_start_idx, _vert_end_idx, *_gradient_p0, *_gradient_p1, _col0, _col1);
@@ -2506,11 +2840,17 @@ extern "C" void __c__ShadeVertsLinearColorGradientKeepAlpha(ImDrawList * _draw_l
 extern "C" void __c__ShadeVertsLinearUV(ImDrawList * _draw_list, int32_t _vert_start_idx, int32_t _vert_end_idx, ImVec2 * _a, ImVec2 * _b, ImVec2 * _uv_a, ImVec2 * _uv_b, bool _clamp) {
     ImGui::ShadeVertsLinearUV(_draw_list, _vert_start_idx, _vert_end_idx, *_a, *_b, *_uv_a, *_uv_b, _clamp);
 }
+extern "C" void __c__GcCompactTransientWindowBuffers(ImGuiWindow * _window) {
+    ImGui::GcCompactTransientWindowBuffers(_window);
+}
+extern "C" void __c__GcAwakeTransientWindowBuffers(ImGuiWindow * _window) {
+    ImGui::GcAwakeTransientWindowBuffers(_window);
+}
 extern "C" void __c__ImFontAtlasBuildWithStbTruetype(bool *ret, ImFontAtlas * _atlas) {
     *ret = (bool )ImFontAtlasBuildWithStbTruetype(_atlas);
 }
-extern "C" void __c__ImFontAtlasBuildRegisterDefaultCustomRects(ImFontAtlas * _atlas) {
-    ImFontAtlasBuildRegisterDefaultCustomRects(_atlas);
+extern "C" void __c__ImFontAtlasBuildInit(ImFontAtlas * _atlas) {
+    ImFontAtlasBuildInit(_atlas);
 }
 extern "C" void __c__ImFontAtlasBuildSetupFont(ImFontAtlas * _atlas, ImFont * _font, ImFontConfig * _font_config, float _ascent, float _descent) {
     ImFontAtlasBuildSetupFont(_atlas, _font, _font_config, _ascent, _descent);
@@ -2521,118 +2861,16 @@ extern "C" void __c__ImFontAtlasBuildPackCustomRects(ImFontAtlas * _atlas, void 
 extern "C" void __c__ImFontAtlasBuildFinish(ImFontAtlas * _atlas) {
     ImFontAtlasBuildFinish(_atlas);
 }
+extern "C" void __c__ImFontAtlasBuildRender1bppRectFromString(ImFontAtlas * _atlas, int32_t _atlas_x, int32_t _atlas_y, int32_t _w, int32_t _h, const char * _in_str, char _in_marker_char, uint8_t _in_marker_pixel_value) {
+    ImFontAtlasBuildRender1bppRectFromString(_atlas, _atlas_x, _atlas_y, _w, _h, _in_str, _in_marker_char, _in_marker_pixel_value);
+}
 extern "C" void __c__ImFontAtlasBuildMultiplyCalcLookupTable(uint8_t * _out_table, float _in_multiply_factor) {
     ImFontAtlasBuildMultiplyCalcLookupTable(_out_table, _in_multiply_factor);
 }
-extern "C" void __c__ImFontAtlasBuildMultiplyRectAlpha8(uint8_t * _table, uint8_t * _pixels, int32_t _x, int32_t _y, int32_t _w, int32_t _h, int32_t _stride) {
+extern "C" void __c__ImFontAtlasBuildMultiplyRectAlpha8(const uint8_t * _table, uint8_t * _pixels, int32_t _x, int32_t _y, int32_t _w, int32_t _h, int32_t _stride) {
     ImFontAtlasBuildMultiplyRectAlpha8(_table, _pixels, _x, _y, _w, _h, _stride);
 }
-extern "C" void __c__SetCurrentWindow(ImGuiWindow * _window) {
-    SetCurrentWindow(_window);
-}
-extern "C" void __c__FindHoveredWindow() {
-    FindHoveredWindow();
-}
-extern "C" void __c__CreateNewWindow(ImGuiWindow * *ret, char * _name, ImVec2* _size, int32_t _flags) {
-    *ret = (ImGuiWindow * )CreateNewWindow(_name, *_size, _flags);
-}
-extern "C" void __c__CalcNextScrollFromScrollTargetAndClamp(ImVec2 *ret, ImGuiWindow * _window, bool _snap_on_edges) {
-    *ret = (ImVec2 )CalcNextScrollFromScrollTargetAndClamp(_window, _snap_on_edges);
-}
-extern "C" void __c__AddDrawListToDrawData(ImVector<ImDrawList*> * _out_list, ImDrawList * _draw_list) {
-    AddDrawListToDrawData(_out_list, _draw_list);
-}
-extern "C" void __c__AddWindowToSortBuffer(ImVector<ImGuiWindow*> * _out_sorted_windows, ImGuiWindow * _window) {
-    AddWindowToSortBuffer(_out_sorted_windows, _window);
-}
-extern "C" void __c__GetViewportRect(ImRect *ret) {
-    *ret = (ImRect )GetViewportRect();
-}
-extern "C" void __c__WindowSettingsHandler_ReadOpen(void * *ret, ImGuiContext * _0, ImGuiSettingsHandler * _1, char * _name) {
-    *ret = (void * )WindowSettingsHandler_ReadOpen(_0, _1, _name);
-}
-extern "C" void __c__WindowSettingsHandler_ReadLine(ImGuiContext * _0, ImGuiSettingsHandler * _1, void * _entry, char * _line) {
-    WindowSettingsHandler_ReadLine(_0, _1, _entry, _line);
-}
-extern "C" void __c__WindowSettingsHandler_WriteAll(ImGuiContext * _0, ImGuiSettingsHandler * _1, ImGuiTextBuffer * _buf) {
-    WindowSettingsHandler_WriteAll(_0, _1, _buf);
-}
-extern "C" void __c__GetClipboardTextFn_DefaultImpl(char * *ret, void * _user_data) {
-    *ret = (char * )GetClipboardTextFn_DefaultImpl(_user_data);
-}
-extern "C" void __c__SetClipboardTextFn_DefaultImpl(void * _user_data, char * _text) {
-    SetClipboardTextFn_DefaultImpl(_user_data, _text);
-}
-extern "C" void __c__ImeSetInputScreenPosFn_DefaultImpl(int32_t _x, int32_t _y) {
-    ImeSetInputScreenPosFn_DefaultImpl(_x, _y);
-}
-extern "C" void __c__BeginChildEx(bool *ret, char * _name, uint32_t _id, ImVec2 * _size_arg, bool _border, int32_t _flags) {
-    *ret = (bool )ImGui::BeginChildEx(_name, _id, *_size_arg, _border, _flags);
-}
-extern "C" void __c__NavUpdate() {
-    ImGui::NavUpdate();
-}
-extern "C" void __c__NavUpdateWindowing() {
-    ImGui::NavUpdateWindowing();
-}
-extern "C" void __c__NavUpdateWindowingOverlay() {
-    ImGui::NavUpdateWindowingOverlay();
-}
-extern "C" void __c__NavUpdateMoveResult() {
-    ImGui::NavUpdateMoveResult();
-}
-extern "C" void __c__NavUpdatePageUpPageDown(float *ret) {
-    *ret = (float )ImGui::NavUpdatePageUpPageDown();
-}
-extern "C" void __c__NavUpdateAnyRequestFlag() {
-    ImGui::NavUpdateAnyRequestFlag();
-}
-extern "C" void __c__NavScoreItem(bool *ret, ImGuiNavMoveResult * _result, ImRect* _cand) {
-    *ret = (bool )ImGui::NavScoreItem(_result, *_cand);
-}
-extern "C" void __c__NavProcessItem(ImGuiWindow * _window, ImRect * _nav_bb, uint32_t _id) {
-    ImGui::NavProcessItem(_window, *_nav_bb, _id);
-}
-extern "C" void __c__NavCalcPreferredRefPos(ImVec2 *ret) {
-    *ret = (ImVec2 )ImGui::NavCalcPreferredRefPos();
-}
-extern "C" void __c__NavSaveLastChildNavWindowIntoParent(ImGuiWindow * _nav_window) {
-    ImGui::NavSaveLastChildNavWindowIntoParent(_nav_window);
-}
-extern "C" void __c__NavRestoreLastChildNavWindow(ImGuiWindow * *ret, ImGuiWindow * _window) {
-    *ret = (ImGuiWindow * )ImGui::NavRestoreLastChildNavWindow(_window);
-}
-extern "C" void __c__FindWindowFocusIndex(int32_t *ret, ImGuiWindow * _window) {
-    *ret = (int32_t )ImGui::FindWindowFocusIndex(_window);
-}
-extern "C" void __c__ErrorCheckEndFrame() {
-    ImGui::ErrorCheckEndFrame();
-}
-extern "C" void __c__ErrorCheckBeginEndCompareStacksSize(ImGuiWindow * _window, bool _write) {
-    ImGui::ErrorCheckBeginEndCompareStacksSize(_window, _write);
-}
-extern "C" void __c__UpdateMouseInputs() {
-    ImGui::UpdateMouseInputs();
-}
-extern "C" void __c__UpdateMouseWheel() {
-    ImGui::UpdateMouseWheel();
-}
-extern "C" void __c__UpdateManualResize(bool *ret, ImGuiWindow * _window, ImVec2 * _size_auto_fit, int32_t * _border_held, int32_t _resize_grip_count, ImU32 * _resize_grip_col) {
-    *ret = (bool )ImGui::UpdateManualResize(_window, *_size_auto_fit, _border_held, _resize_grip_count, _resize_grip_col);
-}
-extern "C" void __c__UpdateDebugToolItemPicker() {
-    ImGui::UpdateDebugToolItemPicker();
-}
-extern "C" void __c__RenderWindowOuterBorders(ImGuiWindow * _window) {
-    ImGui::RenderWindowOuterBorders(_window);
-}
-extern "C" void __c__RenderWindowDecorations(ImGuiWindow * _window, ImRect * _title_bar_rect, bool _title_bar_is_highlight, int32_t _resize_grip_count, const ImU32 * _resize_grip_col, float _resize_grip_draw_size) {
-    ImGui::RenderWindowDecorations(_window, *_title_bar_rect, _title_bar_is_highlight, _resize_grip_count, _resize_grip_col, _resize_grip_draw_size);
-}
-extern "C" void __c__RenderWindowTitleBarContents(ImGuiWindow * _window, ImRect * _title_bar_rect, char * _name, bool * _p_open) {
-    ImGui::RenderWindowTitleBarContents(_window, *_title_bar_rect, _name, _p_open);
-}
-extern "C" void __c__ImGui_ImplOpenGL3_Init(bool *ret, char * _glsl_version) {
+extern "C" void __c__ImGui_ImplOpenGL3_Init(bool *ret, const char * _glsl_version) {
     *ret = (bool )ImGui_ImplOpenGL3_Init(_glsl_version);
 }
 extern "C" void __c__ImGui_ImplOpenGL3_Shutdown() {
@@ -2679,4 +2917,7 @@ extern "C" void __c__ImGui_ImplGlfw_KeyCallback(GLFWwindow * _window, int32_t _k
 }
 extern "C" void __c__ImGui_ImplGlfw_CharCallback(GLFWwindow * _window, uint32_t _c) {
     ImGui_ImplGlfw_CharCallback(_window, _c);
+}
+extern "C" void __c__ImGui_ImplGlfw_MonitorCallback(GLFWmonitor * _monitor, int32_t _event) {
+    ImGui_ImplGlfw_MonitorCallback(_monitor, _event);
 }

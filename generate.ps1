@@ -4,4 +4,4 @@ New-Item -ItemType Directory -Path "int" -Force
 Write-Host ""
 Copy-Item "./int/imgui.che" "./src/imgui.che" -Force
 
-# ./compile.ps1
+./compile.ps1
