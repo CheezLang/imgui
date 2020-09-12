@@ -1,0 +1,8 @@
+*.o
+*.obj
+*.out
+int/*.o
+int/*.lib
+int/*.che
+bin
+lib
