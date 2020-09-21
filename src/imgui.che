@@ -3763,13 +3763,13 @@ GetFrameHeightWithSpacing :: () -> f32 {
 PushID :: (_str_id: ^char8) {
     __c__PushID(_str_id)
 }
-PushID_2 :: (_str_id_begin: ^char8, _str_id_end: ^char8) {
+PushID2 :: (_str_id_begin: ^char8, _str_id_end: ^char8) {
     __c__PushID_2(_str_id_begin, _str_id_end)
 }
-PushID_3 :: (_ptr_id: ^mut void) {
+PushIDPtr :: (_ptr_id: ^mut void) {
     __c__PushID_3(_ptr_id)
 }
-PushID_4 :: (_int_id: i32) {
+PushIDInt :: (_int_id: i32) {
     __c__PushID_4(_int_id)
 }
 PopID :: () {
